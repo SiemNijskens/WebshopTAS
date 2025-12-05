@@ -3,7 +3,7 @@
 const Router = () => {
     return(
         <>
-            routes here
+            routes
         </>
     )
 }

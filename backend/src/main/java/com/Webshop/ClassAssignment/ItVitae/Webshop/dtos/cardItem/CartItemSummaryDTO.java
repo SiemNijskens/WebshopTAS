@@ -1,6 +1,6 @@
-package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.item;
+package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem;
 
-public record ItemSummaryDTO(
+public record CartItemSummaryDTO(
 
 ) {
 }

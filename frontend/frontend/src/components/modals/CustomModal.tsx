@@ -1,7 +1,7 @@
 import "./CustomModal.css";
 import Modal from "react-modal";
 import type { ReactNode } from "react";
-import type { ModalSize, OverlayStyle } from "../modals/ModalContext"
+import type { ModalSize, OverlayStyle } from "./ModalContext.tsx"
 
 interface CustomModalProps {
   isOpen: boolean;

@@ -8,14 +8,22 @@ public record UserDTO(
         Long id,
         String firstName,
         String lastName,
-        List<String> roles
+        List<String> roles,
+        String email,
+        String zipCode,
+        String houseNumber,
+        String streetName
 ) {
     public static UserDTO fromEntity(User user) {
         return new UserDTO(
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
-                user.getRoles()
+                user.getRoles(),
+                user.getEmail(),
+                user.getZipCode(),
+                user.getHouseNumber(),
+                user.getStreetName()
         );
     }
 }

@@ -1,6 +1,7 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.user;
 
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.User;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ public record UserCreateDTO(
         List<String> roles,
         String email,
         String password,
+
+        @Size(min=6, max=6)
         String zipCode,
         String houseNumber,
         String streetName

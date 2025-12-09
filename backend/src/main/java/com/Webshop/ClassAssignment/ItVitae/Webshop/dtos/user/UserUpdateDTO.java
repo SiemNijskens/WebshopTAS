@@ -2,28 +2,20 @@ package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.user;
 
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.User;
 
-import java.util.List;
-
-public record UserCreateDTO(
+public record UserUpdateDTO(
         String firstName,
         String lastName,
-        List<String> roles,
         String email,
-        String password,
         String zipCode,
         String houseNumber,
         String streetName
 ) {
-    public User toEntity() {
-        User user = new User();
+    public void updateEntity(User user) {
         user.setFirstName(this.firstName);
         user.setLastName(this.lastName);
-        user.setRoles(this.roles);
         user.setEmail(this.email);
-        user.setPassword(this.password);
         user.setZipCode(this.zipCode);
         user.setHouseNumber(this.houseNumber);
         user.setStreetName(this.streetName);
-        return user;
     }
 }

@@ -1,5 +1,6 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models;
 
+import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.Product;
 import jakarta.persistence.*;
 
 import java.util.List;

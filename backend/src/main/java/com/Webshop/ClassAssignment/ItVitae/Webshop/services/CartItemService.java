@@ -4,7 +4,9 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemCreateD
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemUpdateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.CartItem;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.CartItemRepository;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,12 @@ import java.util.List;
 public class    CartItemService {
 
     private final CartItemRepository cartItemRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public CartItemService(CartItemRepository cartItemRepository) {
+    public CartItemService(CartItemRepository cartItemRepository, ProductRepository productRepository) {
         this.cartItemRepository = cartItemRepository;
+        this.productRepository = productRepository;
     }
 
     public CartItemDTO findById(Long id) {
@@ -32,7 +36,10 @@ public class    CartItemService {
     }
 
     public CartItemDTO createCartItem(CartItemCreateDTO cartItemCreateDTO) {
-        CartItem savedItem =cartItemRepository.save(cartItemCreateDTO.toEntity());
+        Product product = productRepository.findById(cartItemCreateDTO.productId()).orElseThrow(() -> new RuntimeException("Entity not found"));
+        CartItem cartItem = cartItemCreateDTO.toEntity();
+        cartItem.setProduct(product);
+        CartItem savedItem = cartItemRepository.save(cartItem);
         return CartItemDTO.fromEntity(savedItem);
     }
 

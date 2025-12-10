@@ -1,11 +1,8 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import java.util.HashMap;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -14,22 +11,27 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
-    private String description;
-
-    private String brand;
-
     private String productCode;
 
     private float price;
-
-    private int stock;
 
     private boolean sale;
 
     private float salePercentage;
 
-    private HashMap<String, String> properties = new HashMap<>();
+    private int stock;
 
+    private ProductBase product;
+
+    @ManyToMany
+    private List<ProductAttribute> variant;
 }
+
+//- id: Long
+//- productCode: String
+//- price: Float
+//- sale: Boolean
+//- salePercentage: int
+//- stock int
+//- product ProductBase
+//- variant: List<ProductAttribute>

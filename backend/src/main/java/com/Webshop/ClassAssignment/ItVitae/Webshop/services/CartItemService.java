@@ -4,7 +4,7 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemCreateD
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemUpdateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.CartItem;
-import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.Product;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.CartItemRepository;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.ProductRepository;
 import jakarta.transaction.Transactional;

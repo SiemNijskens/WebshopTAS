@@ -93,4 +93,11 @@ public class User {
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
+
+    public List<ShoppingCart> getShoppingCarts() {
+        return shoppingCarts;
+    }
+    public void addShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCarts.add(shoppingCart);
+    }
 }

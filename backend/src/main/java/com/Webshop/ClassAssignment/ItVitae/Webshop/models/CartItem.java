@@ -37,4 +37,12 @@ public class CartItem {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
 }

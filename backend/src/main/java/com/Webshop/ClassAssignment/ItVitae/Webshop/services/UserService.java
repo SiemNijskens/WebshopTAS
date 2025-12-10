@@ -25,10 +25,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserSummaryDTO getById(Long id) {
+    public UserDTO getById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with " + id + " not found"));
-        return UserSummaryDTO.fromEntity(user);
+        return UserDTO.fromEntity(user);
     }
 
     public List<UserSummaryDTO> getAllUsers() {

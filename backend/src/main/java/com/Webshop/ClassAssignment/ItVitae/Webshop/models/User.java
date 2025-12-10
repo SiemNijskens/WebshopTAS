@@ -31,6 +31,9 @@ public class User {
     private String houseNumber;
     private String streetName;
 
+    @OneToMany(mappedBy = "user")
+    private List<ShoppingCart> shoppingCarts;
+
     public Long getId() {
         return id;
     }

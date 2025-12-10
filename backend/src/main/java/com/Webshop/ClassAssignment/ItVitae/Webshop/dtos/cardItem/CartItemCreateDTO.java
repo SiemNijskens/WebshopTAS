@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 public record CartItemCreateDTO(
         @JsonAlias("product_id")
         Long productId,
-    int amount
+        int amount
 ) {
     public CartItem toEntity() {
         CartItem cartItem = new CartItem();

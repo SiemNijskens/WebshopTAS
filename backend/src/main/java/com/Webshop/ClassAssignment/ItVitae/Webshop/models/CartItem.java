@@ -2,6 +2,8 @@ package com.Webshop.ClassAssignment.ItVitae.Webshop.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class CartItem {
 
@@ -12,7 +14,9 @@ public class CartItem {
     @JoinColumn
     private Product product;
     private int amount;
-    //veld voor link met shoppingcart hier
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private ShoppingCart shoppingCart;
 
     public Long getId() {
         return id;

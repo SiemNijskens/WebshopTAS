@@ -30,6 +30,13 @@ public class CartItemController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newCartItem);
     }
 
+    //voor testing purposes
+    @GetMapping
+    public ResponseEntity<List<CartItemDTO>> getAllCartItems() {
+        List<CartItemDTO> cartItemDTOList = cartItemService.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(cartItemDTOList);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<CartItemDTO> getCartItemById(@PathVariable Long id) {
         CartItemDTO cartItem = cartItemService.findById(id);

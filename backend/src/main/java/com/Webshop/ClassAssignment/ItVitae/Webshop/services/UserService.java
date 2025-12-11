@@ -10,6 +10,7 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.models.User;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +21,12 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public UserDTO getById(Long id) {
@@ -44,11 +47,7 @@ public class UserService {
         }
 
         User user = userCreateDTO.toEntity();
-        // TODO: insert "User" role?
-        String password = user.getPassword();
-        // TODO: implement passwordEncoder
-//        String encodedPassword = passwordEncoder.encode(password);
-//        user.setPassword(encodedPassword);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
         return UserDTO.fromEntity(savedUser);
     }

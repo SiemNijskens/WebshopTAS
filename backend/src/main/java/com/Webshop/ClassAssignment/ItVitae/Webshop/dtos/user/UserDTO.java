@@ -12,7 +12,8 @@ public record UserDTO(
         String email,
         String zipCode,
         String houseNumber,
-        String streetName
+        String streetName,
+        String city
 ) {
     public static UserDTO fromEntity(User user) {
         return new UserDTO(
@@ -23,7 +24,8 @@ public record UserDTO(
                 user.getEmail(),
                 user.getZipCode(),
                 user.getHouseNumber(),
-                user.getStreetName()
+                user.getStreetName(),
+                user.getCity()
         );
     }
 }

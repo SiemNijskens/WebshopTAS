@@ -1,18 +1,18 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem;
 
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.CartItem;
-import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
+//import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
 public record CartItemDTO(
     Long id,
-    Product product,
+//    Product product,
     int amount
 ) {
     public static CartItemDTO fromEntity(CartItem cartItem) {
 
         return new CartItemDTO(
                 cartItem.getId(),
-                cartItem.getProduct(),
+//                cartItem.getProduct(),
                 cartItem.getAmount()
         );
     }

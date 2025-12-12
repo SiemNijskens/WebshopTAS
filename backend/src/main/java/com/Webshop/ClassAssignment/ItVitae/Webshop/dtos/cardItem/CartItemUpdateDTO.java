@@ -4,11 +4,11 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.models.CartItem;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.Product;
 
 public record CartItemUpdateDTO(
-        Product product,
+//        Product product,
         int amount
 ) {
     public void updateEntity(CartItem cartItem) {
-        cartItem.setProduct(this.product);
+//        cartItem.setProduct(this.product);
         cartItem.setAmount(this.amount);
     }
 }

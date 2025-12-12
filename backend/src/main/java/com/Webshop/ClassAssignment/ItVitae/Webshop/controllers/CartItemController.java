@@ -3,7 +3,9 @@ package com.Webshop.ClassAssignment.ItVitae.Webshop.controllers;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemUpdateDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart.ShoppingCartDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.CartItem;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.models.ShoppingCart;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.services.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,12 @@ public class CartItemController {
     public ResponseEntity<CartItemDTO> createCartItem(@RequestBody CartItemCreateDTO cartItemCreateDTO) {
         CartItemDTO newCartItem = cartItemService.createCartItem(cartItemCreateDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newCartItem);
+    }
+
+    @PostMapping("/{shoppingCartId}")
+    public ResponseEntity<ShoppingCartDTO> addCartItemToShoppingCart(@RequestBody CartItemCreateDTO cartItemCreateDTO, Long shoppingCartId) {
+        ShoppingCartDTO shoppingCartDTO = cartItemService.addCartItemToShoppingCart(cartItemCreateDTO, shoppingCartId);
+        return ResponseEntity.status(HttpStatus.OK).body(shoppingCartDTO);
     }
 
     //voor testing purposes

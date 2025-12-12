@@ -1,5 +1,7 @@
+// components/modal/ModalRenderer.tsx
+
 import CustomModal from "./CustomModal";
-import type { ModalState } from "../../../frontend/src/types/modal.types";
+import type { ModalState } from "../../types/modal.types";
 
 interface ModalRendererProps {
   modal: ModalState | null;

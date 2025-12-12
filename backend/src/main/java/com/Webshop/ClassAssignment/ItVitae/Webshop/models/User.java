@@ -30,6 +30,7 @@ public class User {
     private String zipCode;
     private String houseNumber;
     private String streetName;
+    private String city;
 
     @OneToMany(mappedBy = "user")
     private List<ShoppingCart> shoppingCarts;
@@ -92,5 +93,19 @@ public class User {
     }
     public void setStreetName(String streetName) {
         this.streetName = streetName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public List<ShoppingCart> getShoppingCarts() {
+        return shoppingCarts;
+    }
+    public void addShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCarts.add(shoppingCart);
     }
 }

@@ -1,7 +1,9 @@
+// components/modal/CustomModal.tsx
+
 import "./CustomModal.css";
 import Modal from "react-modal";
 import type { ReactNode } from "react";
-import type { ModalSize, OverlayStyle } from "./ModalContext.tsx"
+import type { ModalSize, OverlayStyle } from "../../types/modal.types";
 
 interface CustomModalProps {
   isOpen: boolean;
@@ -13,8 +15,12 @@ interface CustomModalProps {
   children: ReactNode;
 }
 
-// Extracted naar aparte component - SRP
-function ModalHeader({ title, onClose }: { title?: string; onClose: () => void }) {
+interface ModalHeaderProps {
+  title?: string;
+  onClose: () => void;
+}
+
+function ModalHeader({ title, onClose }: ModalHeaderProps) {
   return (
     <div className="custom-modal-header">
       {title && <h2 className="custom-modal-title">{title}</h2>}
@@ -45,7 +51,7 @@ export default function CustomModal({
       onRequestClose={onClose}
       overlayClassName={`custom-modal-overlay overlay-${overlayStyle}`}
       className={`custom-modal-content size-${size}`}
-      ariaHideApp={false} // Of configureer appElement
+      ariaHideApp={false}
     >
       <ModalHeader title={title} onClose={onClose} />
       <div className="custom-modal-body">{children}</div>

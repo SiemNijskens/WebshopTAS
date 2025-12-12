@@ -15,7 +15,8 @@ public record UserCreateDTO(
         @Size(min=6, max=6)
         String zipCode,
         String houseNumber,
-        String streetName
+        String streetName,
+        String city
 ) {
     public User toEntity() {
         User user = new User();
@@ -27,6 +28,7 @@ public record UserCreateDTO(
         user.setZipCode(this.zipCode);
         user.setHouseNumber(this.houseNumber);
         user.setStreetName(this.streetName);
+        user.setCity(this.city);
         return user;
     }
 }

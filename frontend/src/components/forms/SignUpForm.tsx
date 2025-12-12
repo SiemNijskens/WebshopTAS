@@ -1,15 +1,8 @@
-import { useState } from "react";
+// components/forms/SignUpForm.tsx
 
-interface SignUpFormData {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  zipcode: string;
-  streetcode: string;
-  houseNumber: string;
-  streetname: string;
-}
+import { useState } from "react";
+import { FormField } from "./FormField";
+import type { SignUpFormData, SignUpFormProps } from "../../types/form.types";
 
 const initialFormData: SignUpFormData = {
   name: "",
@@ -21,11 +14,6 @@ const initialFormData: SignUpFormData = {
   houseNumber: "",
   streetname: "",
 };
-
-interface SignUpFormProps {
-  onSubmit: (data: SignUpFormData) => void;
-  onCancel?: () => void;
-}
 
 export function SignUpForm({ onSubmit, onCancel }: SignUpFormProps) {
   const [formData, setFormData] = useState<SignUpFormData>(initialFormData);

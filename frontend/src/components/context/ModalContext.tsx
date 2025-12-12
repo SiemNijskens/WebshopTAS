@@ -1,17 +1,13 @@
+// context/ModalContext.tsx
+
 import { createContext, useState, useCallback, useContext, useEffect } from "react";
 import type { ReactNode } from "react";
 import { useLocation } from "react-router-dom";
-import type { ModalOptions, ModalState } from "../types/modal.types";
-
-interface ModalContextValue {
-  showModal: (options: ModalOptions) => void;
-  hideModal: () => void;
-  isOpen: boolean;
-}
+import { ModalRenderer } from "../components/modal/ModalRenderer";
+import type { ModalOptions, ModalState, ModalContextValue } from "../types/modal.types";
 
 const ModalContext = createContext<ModalContextValue | undefined>(undefined);
 
-// Custom hook voor de context - SRP
 export const useModal = (): ModalContextValue => {
   const context = useContext(ModalContext);
   if (!context) {
@@ -20,7 +16,6 @@ export const useModal = (): ModalContextValue => {
   return context;
 };
 
-// Interne hook voor state - scheiden van provider ipv samen renderen, scheelt tijd in UI betreft laden components.
 function useModalState() {
   const [modal, setModal] = useState<ModalState | null>(null);
   const location = useLocation();
@@ -36,7 +31,6 @@ function useModalState() {
     setModal(null);
   }, []);
 
-  // Close modal on route change
   useEffect(() => {
     hideModal();
   }, [location.pathname, hideModal]);
@@ -50,7 +44,6 @@ export function ModalProvider({ children }: { children: ReactNode }) {
   return (
     <ModalContext.Provider value={{ showModal, hideModal, isOpen: !!modal?.isOpen }}>
       {children}
-      {/* Modal rendering verplaatst naar apart component */}
       <ModalRenderer modal={modal} onClose={hideModal} />
     </ModalContext.Provider>
   );

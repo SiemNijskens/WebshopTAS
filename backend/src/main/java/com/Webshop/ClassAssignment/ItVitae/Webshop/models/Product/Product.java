@@ -1,35 +1,32 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.List;
 
-import java.util.HashMap;
-
+@Table(name="Product")
 @Entity
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
-    private String name;
-
-    private String description;
-
-    private String brand;
-
-    private String productCode;
-
     private float price;
-
-    private int stock;
 
     private boolean sale;
 
     private float salePercentage;
 
-    private HashMap<String, String> properties = new HashMap<>();
+    private int stock;
 
+    @ManyToOne
+    private ProductBase product;
+
+    @ManyToMany
+    @JoinTable(
+            name = "product_variant_attributes",
+            joinColumns = @JoinColumn(name = "product_attribute_id"),
+            inverseJoinColumns = @JoinColumn(name = "variant_id")
+    )
+    private List<ProductAttribute> productVariantAttributes;
 }

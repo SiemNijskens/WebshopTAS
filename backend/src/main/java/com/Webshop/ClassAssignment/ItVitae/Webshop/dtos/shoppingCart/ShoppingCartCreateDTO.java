@@ -1,6 +1,5 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart;
 
-import com.Webshop.ClassAssignment.ItVitae.Webshop.models.CartItem;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.ShoppingCart;
 import com.fasterxml.jackson.annotation.JsonAlias;
 

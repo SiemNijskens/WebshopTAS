@@ -1,17 +1,15 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
+@Table(name="Product")
 @Entity
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
-
-    private String productCode;
 
     private float price;
 
@@ -21,17 +19,14 @@ public class Product {
 
     private int stock;
 
+    @ManyToOne
     private ProductBase product;
 
     @ManyToMany
-    private List<ProductAttribute> variant;
+    @JoinTable(
+            name = "product_variant_attributes",
+            joinColumns = @JoinColumn(name = "product_attribute_id"),
+            inverseJoinColumns = @JoinColumn(name = "variant_id")
+    )
+    private List<ProductAttribute> productVariantAttributes;
 }
-
-//- id: Long
-//- productCode: String
-//- price: Float
-//- sale: Boolean
-//- salePercentage: int
-//- stock int
-//- product ProductBase
-//- variant: List<ProductAttribute>

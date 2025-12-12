@@ -1,12 +1,9 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-
+import jakarta.persistence.*;
 import java.util.List;
 
+@Table(name="BaseProduct")
 @Entity
 public class ProductBase {
 
@@ -14,13 +11,23 @@ public class ProductBase {
     @Id
     private Long id;
 
+    private String productCode;
+
     private String name;
 
     private String description;
 
     private String productBrand;
 
-    @ManyToMany
-    private List<ProductAttribute> productAttributes;
+    // misschien kan deze tabel mapped by worden door "private ProductBase product" in Product.java
+    @OneToMany
+    private List<Product> productVariants;
 
+    @ManyToMany
+    @JoinTable(
+            name = "base_product_attribute",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "attribute_id")
+    )
+    private List<ProductAttribute> productAttributes;
 }

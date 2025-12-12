@@ -5,8 +5,7 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemUpdateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart.ShoppingCartDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.CartItem;
-import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
-import com.Webshop.ClassAssignment.ItVitae.Webshop.models.ShoppingCart;
+//import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.CartItemRepository;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.ProductRepository;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.ShoppingCartRepository;
@@ -41,9 +40,9 @@ public class    CartItemService {
     }
 
     public CartItemDTO createCartItem(CartItemCreateDTO cartItemCreateDTO) {
-        Product product = productRepository.findById(cartItemCreateDTO.productId()).orElseThrow(() -> new RuntimeException("Entity not found"));
+//        Product product = productRepository.findById(cartItemCreateDTO.productId()).orElseThrow(() -> new RuntimeException("Entity not found"));
         CartItem cartItem = cartItemCreateDTO.toEntity();
-        cartItem.setProduct(product);
+//        cartItem.setProduct(product);
         CartItem savedItem = cartItemRepository.save(cartItem);
         return CartItemDTO.fromEntity(savedItem);
     }

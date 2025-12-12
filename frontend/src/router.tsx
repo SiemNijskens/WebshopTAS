@@ -1,10 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router";
 import LandingPage from "./pages/landingPage";
 import CheckoutPage from "./pages/checkoutPage";
 import ProductDetailPage from "./pages/productDetailPage";
 import ShoppingcartPage from "./pages/shoppingcartPage";
 import UserPage from "./pages/userPage";
-
 
 const Router = () => {
     return(

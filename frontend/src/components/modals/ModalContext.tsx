@@ -1,7 +1,7 @@
 import { createContext, useState, useCallback, useContext, useEffect } from "react";
 import type { ReactNode } from "react";
 import CustomModal from "./CustomModal.tsx"
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 type ModalSize = "small" | "medium" | "large";
 type OverlayStyle = "light" | "dark";

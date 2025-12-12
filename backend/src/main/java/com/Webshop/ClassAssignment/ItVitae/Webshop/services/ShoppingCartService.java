@@ -2,6 +2,7 @@ package com.Webshop.ClassAssignment.ItVitae.Webshop.services;
 
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart.ShoppingCartCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart.ShoppingCartDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart.ShoppingCartUpdateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.ShoppingCart;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.User;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.ShoppingCartRepository;
@@ -42,5 +43,13 @@ public class ShoppingCartService {
         shoppingCart.setUser(user);
         ShoppingCart savedCart = shoppingCartRepository.save(shoppingCart);
         return ShoppingCartDTO.fromEntity(savedCart);
+    }
+
+    @Transactional
+    public ShoppingCartDTO updateShoppingCart(ShoppingCartUpdateDTO shoppingCartUpdateDTO) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartUpdateDTO.id()).orElseThrow(() -> new RuntimeException("Entity not found"));
+        shoppingCartUpdateDTO.updateEntity(shoppingCart);
+        ShoppingCart updatedShoppingCart = shoppingCartRepository.save(shoppingCart);
+        return ShoppingCartDTO.fromEntity(shoppingCart);
     }
 }

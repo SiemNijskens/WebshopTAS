@@ -8,12 +8,13 @@ const NavBar = () => {
         <SidebarLandingPage/>
         <>SVG aanpassen naar 3 stripes</>
             <nav className="navbar">
-                <NavLink to="/" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Landingpage</NavLink>
-                <NavLink to="/adminPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Admin</NavLink>
-                <NavLink to="/shoppingCartPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Shoppingcart    
+                <NavLink to="/" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> Landingpage </NavLink>
+                <NavLink to="/adminPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> AdminPage </NavLink>
+                <NavLink to="/shoppingCartPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> ShoppingcartPage 
                 </NavLink>
-                <NavLink to="/userPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>User page </NavLink>
-                <NavLink to="/checkOutPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>User </NavLink>
+                <NavLink to="/productDetailPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> ProductDetailPage </NavLink>
+                <NavLink to="/userPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> UserPage </NavLink>
+                <NavLink to="/checkOutPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> CheckoutPage </NavLink>
             </ nav>
         </>
     )

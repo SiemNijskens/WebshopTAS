@@ -2,7 +2,7 @@
 
 import { createContext, useState, useCallback, useContext, useEffect } from "react";
 import type { ReactNode } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { ModalRenderer } from "../components/modal/ModalRenderer";
 import type { ModalOptions, ModalState, ModalContextValue } from "../types/modal.types";
 

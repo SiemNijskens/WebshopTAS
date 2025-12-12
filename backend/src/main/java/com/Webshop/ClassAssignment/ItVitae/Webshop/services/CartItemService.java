@@ -3,10 +3,12 @@ package com.Webshop.ClassAssignment.ItVitae.Webshop.services;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemUpdateDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart.ShoppingCartDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.CartItem;
 //import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.CartItemRepository;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.ProductRepository;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.ShoppingCartRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +21,13 @@ public class    CartItemService {
 
     private final CartItemRepository cartItemRepository;
     private final ProductRepository productRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
 
     @Autowired
-    public CartItemService(CartItemRepository cartItemRepository, ProductRepository productRepository) {
+    public CartItemService(CartItemRepository cartItemRepository, ProductRepository productRepository, ShoppingCartRepository shoppingCartRepository) {
         this.cartItemRepository = cartItemRepository;
         this.productRepository = productRepository;
+        this.shoppingCartRepository = shoppingCartRepository;
     }
 
     public CartItemDTO findById(Long id) {
@@ -55,12 +59,15 @@ public class    CartItemService {
     }
 
     @Transactional
-    public void addCartItemToShoppingCart(CartItemCreateDTO cartItemCreateDTO) {
-    // die shoppingCart bestaat nog niet
-        // get product by id
-        // get shoppingcart by id
+    public ShoppingCartDTO addCartItemToShoppingCart(CartItemCreateDTO cartItemCreateDTO, Long shoppingCartId) {
+        Product product = productRepository.findById(cartItemCreateDTO.productId()).orElseThrow(() -> new RuntimeException("Entity not found"));
+        ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartId).orElseThrow(() -> new RuntimeException("Entity not found"));
         CartItem newCartItem = cartItemCreateDTO.toEntity();
-        // cartitem.setshoppingcart
-        // shoppingcart.addCartItem
+        newCartItem.setProduct(product);
+        newCartItem.setShoppingCart(shoppingCart);
+        shoppingCart.addCartItem(newCartItem);
+        cartItemRepository.save(newCartItem);
+        shoppingCartRepository.save(shoppingCart);
+        return ShoppingCartDTO.fromEntity(shoppingCart);
     }
 }

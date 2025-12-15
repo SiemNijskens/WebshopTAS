@@ -1,14 +1,18 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.controllers;
 
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductCreateDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseCreateDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService productService;
@@ -18,5 +22,9 @@ public class ProductController {
         this.productService = productService;
     }
 
-
+    @PostMapping
+    public ResponseEntity<ProductBaseDTO> createProduct(@RequestBody ProductBaseCreateDTO productBaseCreateDTO) {
+        ProductBaseDTO productBase = productService.createProduct(productBaseCreateDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(productBase);
+    }
 }

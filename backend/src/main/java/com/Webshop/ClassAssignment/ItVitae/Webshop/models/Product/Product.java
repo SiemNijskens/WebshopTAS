@@ -1,9 +1,11 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
-@Table(name="Product")
+//@Table(name="Product")
 @Entity
 public class Product {
 
@@ -20,28 +22,29 @@ public class Product {
     private int stock;
 
     @ManyToOne
-    private ProductBase product;
+    private ProductBase productBase;
 
-    @ManyToMany
-    @JoinTable(
-            name = "product_variant_attributes",
-            joinColumns = @JoinColumn(name = "product_attribute_id"),
-            inverseJoinColumns = @JoinColumn(name = "variant_id")
-    )
-    private List<ProductAttribute> productVariantAttributes;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "product_variant_attributes",
+//            joinColumns = @JoinColumn(name = "product_attribute_id"),
+//            inverseJoinColumns = @JoinColumn(name = "variant_id")
+//    )
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductAttribute> productAttributes = new ArrayList<>();
 
-    public Product(Long id, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
-        this.id = id;
-        this.price = price;
-        this.sale = sale;
-        this.salePercentage = salePercentage;
-        this.stock = stock;
-        this.product = product;
-        this.productVariantAttributes = productVariantAttributes;
-    }
-
-    public Product() {
-    }
+//    public Product(Long id, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
+//        this.id = id;
+//        this.price = price;
+//        this.sale = sale;
+//        this.salePercentage = salePercentage;
+//        this.stock = stock;
+//        this.product = product;
+//        this.productVariantAttributes = productVariantAttributes;
+//    }
+//
+//    public Product() {
+//    }
 
     public Long getId() {
         return id;
@@ -50,7 +53,6 @@ public class Product {
     public float getPrice() {
         return price;
     }
-
     public void setPrice(float price) {
         this.price = price;
     }
@@ -58,7 +60,6 @@ public class Product {
     public boolean isSale() {
         return sale;
     }
-
     public void setSale(boolean sale) {
         this.sale = sale;
     }
@@ -66,7 +67,6 @@ public class Product {
     public float getSalePercentage() {
         return salePercentage;
     }
-
     public void setSalePercentage(float salePercentage) {
         this.salePercentage = salePercentage;
     }
@@ -74,28 +74,37 @@ public class Product {
     public int getStock() {
         return stock;
     }
-
     public void setStock(int stock) {
         this.stock = stock;
     }
 
     public ProductBase getProduct() {
-        return product;
+        return productBase;
+    }
+    public void setProduct(ProductBase productBase) {
+        this.productBase = productBase;
     }
 
-    public void setProduct(ProductBase product) {
-        this.product = product;
+    public List<ProductAttribute> getProductAttributes() {
+        return productAttributes;
+    }
+    public void setProductAttributes(List<ProductAttribute> productAttributes) {
+        this.productAttributes = productAttributes;
     }
 
-    public List<ProductAttribute> getProductVariantAttributes() {
-        return productVariantAttributes;
+//    public void addProductVariantAttribute(ProductAttribute productAttribute) {
+//        this.productVariantAttributes.add(productAttribute);
+//    }
+
+    public ProductBase getProductBase() {
+        return productBase;
+    }
+    public void setProductBase(ProductBase productBase) {
+        this.productBase = productBase;
     }
 
-    public void setProductVariantAttributes(List<ProductAttribute> productVariantAttributes) {
-        this.productVariantAttributes = productVariantAttributes;
-    }
-
-    public void addProductVariantAttribute(ProductAttribute productAttribute) {
-        this.productVariantAttributes.add(productAttribute);
+    public void addProductAttribute(ProductAttribute productAttribute) {
+        productAttribute.setProduct(this);
+        productAttributes.add(productAttribute);
     }
 }

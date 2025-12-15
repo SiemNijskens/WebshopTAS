@@ -13,7 +13,7 @@ public record ProductBaseSummaryDTO(
         String description,
         String productBrand,
         List<Product> productVariants,
-        List<ProductAttribute> productAttributes
+        List<ProductAttribute> attributes
 ) {
     public ProductBaseSummaryDTO fromEntity(ProductBase productBase) {
         return new ProductBaseSummaryDTO(

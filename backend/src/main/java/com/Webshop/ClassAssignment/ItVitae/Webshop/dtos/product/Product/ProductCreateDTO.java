@@ -1,5 +1,7 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product;
 
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeCreateDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.Product;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductAttribute;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductBase;
@@ -10,8 +12,7 @@ public record ProductCreateDTO(
         boolean sale,
         float salePercentage,
         int stock,
-        ProductBase product,
-        List<ProductAttribute> productVariantAttributes
+        List<ProductAttributeCreateDTO> attributes
 
 ) {
     public Product toEntity(){

@@ -12,8 +12,8 @@ public record ProductSummaryDTO(
         boolean sale,
         float salePercentage,
         int stock,
-        ProductBase product,
-        List<ProductAttribute> productVariantAttributes
+        ProductBase product
+//        List<ProductAttribute> productVariantAttributes
 ) {
     public ProductSummaryDTO fromEntity(Product product) {
         return new ProductSummaryDTO(
@@ -22,8 +22,8 @@ public record ProductSummaryDTO(
                 product.isSale(),
                 product.getSalePercentage(),
                 product.getStock(),
-                product.getProduct(),
-                product.getProductVariantAttributes()
+                product.getProduct()
+//                product.getProductVariantAttributes()
         );
     }
 }

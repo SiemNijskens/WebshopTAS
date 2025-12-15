@@ -48,7 +48,7 @@ public class AuthService {
                 .orElseThrow(() -> new InvalidCredentialsException("Wrong email or password!"));
 
         if (!passwordEncoder.matches(loginDTO.password(), user.getPassword())) {
-            throw new InvalidCredentialsException("Wrong email or password");
+            throw new InvalidCredentialsException("Wrong email or password!");
         }
 
         return UserDTO.fromEntity(user);

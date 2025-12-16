@@ -11,7 +11,6 @@ import java.util.List;
 public record ProductDTO(
         Long id,
         float price,
-        boolean sale,
         float salePercentage,
         int stock,
         List<ProductAttributeDTO> attributes
@@ -20,7 +19,6 @@ public record ProductDTO(
         return new ProductDTO(
                 product.getId(),
                 product.getPrice(),
-                product.isSale(),
                 product.getSalePercentage(),
                 product.getStock(),
                 product.getProductAttributes().stream()

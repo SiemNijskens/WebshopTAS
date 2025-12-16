@@ -13,7 +13,7 @@ public record ProductBaseCreateDTO(
         String description,
         String productBrand,
         List<ProductCreateDTO> products,
-        List<ProductAttributeCreateDTO> attributes
+        List<ProductAttributeCreateDTO> productAttributes
 ) {
     public ProductBase toEntity() {
         ProductBase productBase = new ProductBase();

@@ -15,8 +15,6 @@ public class Product {
 
     private float price;
 
-    private boolean sale;
-
     private float salePercentage;
 
     private int stock;
@@ -55,13 +53,6 @@ public class Product {
     }
     public void setPrice(float price) {
         this.price = price;
-    }
-
-    public boolean isSale() {
-        return sale;
-    }
-    public void setSale(boolean sale) {
-        this.sale = sale;
     }
 
     public float getSalePercentage() {

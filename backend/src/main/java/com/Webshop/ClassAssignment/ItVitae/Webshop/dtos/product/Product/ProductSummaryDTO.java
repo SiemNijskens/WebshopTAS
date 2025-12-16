@@ -9,7 +9,6 @@ import java.util.List;
 public record ProductSummaryDTO(
         Long id,
         float price,
-        boolean sale,
         float salePercentage,
         int stock,
         ProductBase product
@@ -19,7 +18,6 @@ public record ProductSummaryDTO(
         return new ProductSummaryDTO(
                 product.getId(),
                 product.getPrice(),
-                product.isSale(),
                 product.getSalePercentage(),
                 product.getStock(),
                 product.getProduct()

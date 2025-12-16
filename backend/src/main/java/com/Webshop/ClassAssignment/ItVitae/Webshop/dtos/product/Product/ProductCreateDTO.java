@@ -9,7 +9,6 @@ import java.util.List;
 
 public record ProductCreateDTO(
         float price,
-        boolean sale,
         float salePercentage,
         int stock,
         List<ProductAttributeCreateDTO> attributes
@@ -18,7 +17,6 @@ public record ProductCreateDTO(
     public Product toEntity(){
         Product product = new Product();
         product.setPrice(this.price);
-        product.setSale(this.sale);
         product.setSalePercentage(this.salePercentage);
         product.setStock(this.stock);
         return product;

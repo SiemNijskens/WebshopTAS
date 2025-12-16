@@ -9,7 +9,7 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long productId;
 
     private float price;
 
@@ -31,7 +31,7 @@ public class Product {
     private List<ProductAttribute> productVariantAttributes;
 
     public Product(Long id, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
-        this.id = id;
+        this.productId = id;
         this.price = price;
         this.sale = sale;
         this.salePercentage = salePercentage;
@@ -43,8 +43,8 @@ public class Product {
     public Product() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getProductId() {
+        return productId;
     }
 
     public float getPrice() {

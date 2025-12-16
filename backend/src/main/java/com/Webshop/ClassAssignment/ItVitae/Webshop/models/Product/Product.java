@@ -11,6 +11,8 @@ public class Product {
     @GeneratedValue
     private Long productId;
 
+    private String imageURL;
+
     private float price;
 
     private boolean sale;
@@ -30,7 +32,7 @@ public class Product {
     )
     private List<ProductAttribute> productVariantAttributes;
 
-    public Product(Long id, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
+    public Product(Long id, String imageURL, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
         this.productId = id;
         this.price = price;
         this.sale = sale;
@@ -45,6 +47,14 @@ public class Product {
 
     public Long getProductId() {
         return productId;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public float getPrice() {

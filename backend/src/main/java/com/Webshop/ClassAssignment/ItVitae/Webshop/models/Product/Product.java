@@ -9,7 +9,9 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long productId;
+
+    private String imageURL;
 
     private float price;
 
@@ -30,8 +32,8 @@ public class Product {
     )
     private List<ProductAttribute> productVariantAttributes;
 
-    public Product(Long id, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
-        this.id = id;
+    public Product(Long id, String imageURL, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
+        this.productId = id;
         this.price = price;
         this.sale = sale;
         this.salePercentage = salePercentage;
@@ -43,8 +45,16 @@ public class Product {
     public Product() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getProductId() {
+        return productId;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public float getPrice() {

@@ -1,5 +1,6 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
+import com.Webshop.ClassAssignment.ItVitae.Webshop.enums.productType;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -12,6 +13,11 @@ public class ProductBase {
     private Long id;
 
     private String productCode;
+
+    private String defaultImageURL;
+
+    @Enumerated (EnumType.STRING)
+    private productType type;
 
     private String name;
 
@@ -31,9 +37,11 @@ public class ProductBase {
     )
     private List<ProductAttribute> productAttributes;
 
-    public ProductBase(Long id, String productCode, String name, String description, String productBrand, List<Product> productVariants, List<ProductAttribute> productAttributes) {
+    public ProductBase(Long id, String productCode, String defaultImageURL, productType type, String name, String description, String productBrand, List<Product> productVariants, List<ProductAttribute> productAttributes) {
         this.id = id;
         this.productCode = productCode;
+        this.defaultImageURL = defaultImageURL;
+        this.type = type;
         this.name = name;
         this.description = description;
         this.productBrand = productBrand;
@@ -54,6 +62,22 @@ public class ProductBase {
 
     public void setProductCode(String productCode) {
         this.productCode = productCode;
+    }
+
+    public String getDefaultImageURL() {
+        return defaultImageURL;
+    }
+
+    public void setDefaultImageURL(String defaultImageURL) {
+        this.defaultImageURL = defaultImageURL;
+    }
+
+    public productType getType() {
+        return type;
+    }
+
+    public void setType(productType type) {
+        this.type = type;
     }
 
     public String getName() {
@@ -88,6 +112,10 @@ public class ProductBase {
         this.productVariants = productVariants;
     }
 
+    public void addProductVariants(Product productVariant){
+        this.productVariants.add(productVariant);
+    }
+
     public List<ProductAttribute> getProductAttributes() {
         return productAttributes;
     }
@@ -95,4 +123,9 @@ public class ProductBase {
     public void setProductAttributes(List<ProductAttribute> productAttributes) {
         this.productAttributes = productAttributes;
     }
+
+    public void addProductAttribute(ProductAttribute productAttribute){
+        this.productAttributes.add(productAttribute);
+    }
+
 }

@@ -17,7 +17,7 @@ public record ProductDTO(
 ) {
     public ProductDTO fromEntity(Product product) {
         return new ProductDTO(
-                product.getId(),
+                product.getProductId(),
                 product.getPrice(),
                 product.isSale(),
                 product.getSalePercentage(),

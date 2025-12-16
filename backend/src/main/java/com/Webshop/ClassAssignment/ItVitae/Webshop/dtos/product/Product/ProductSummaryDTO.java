@@ -16,7 +16,7 @@ public record ProductSummaryDTO(
 ) {
     public ProductSummaryDTO fromEntity(Product product) {
         return new ProductSummaryDTO(
-                product.getId(),
+                product.getProductId(),
                 product.getPrice(),
                 product.getSalePercentage(),
                 product.getStock(),

@@ -17,7 +17,7 @@ public record ProductDTO(
 ) {
     public static ProductDTO fromEntity(Product product) {
         return new ProductDTO(
-                product.getId(),
+                product.getProductId(),
                 product.getPrice(),
                 product.getSalePercentage(),
                 product.getStock(),

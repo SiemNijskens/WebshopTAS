@@ -5,13 +5,15 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Table(name="Product")
+@Table(name="Product")
 @Entity
 public class Product {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long productId;
+
+    private String imageURL;
 
     private float price;
 
@@ -31,21 +33,29 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductAttribute> productAttributes = new ArrayList<>();
 
-//    public Product(Long id, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
-//        this.id = id;
-//        this.price = price;
-//        this.sale = sale;
-//        this.salePercentage = salePercentage;
-//        this.stock = stock;
-//        this.product = product;
-//        this.productVariantAttributes = productVariantAttributes;
-//    }
-//
-//    public Product() {
-//    }
+    public Product(Long id, String imageURL, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
+        this.productId = id;
+        this.price = price;
+        this.sale = sale;
+        this.salePercentage = salePercentage;
+        this.stock = stock;
+        this.product = product;
+        this.productVariantAttributes = productVariantAttributes;
+    }
 
-    public Long getId() {
-        return id;
+    public Product() {
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public float getPrice() {
@@ -58,6 +68,7 @@ public class Product {
     public float getSalePercentage() {
         return salePercentage;
     }
+
     public void setSalePercentage(float salePercentage) {
         this.salePercentage = salePercentage;
     }
@@ -65,6 +76,7 @@ public class Product {
     public int getStock() {
         return stock;
     }
+
     public void setStock(int stock) {
         this.stock = stock;
     }

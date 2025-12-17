@@ -86,6 +86,65 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>cz.habarta.typescript-generator</groupId>-->
+<!--				<artifactId>typescript-generator-maven-plugin</artifactId>-->
+<!--				<version>3.2.1263</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>generate</id>-->
+<!--						<phase>compile</phase>-->
+<!--						<goals>-->
+<!--							<goal>generate</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--				<configuration>-->
+<!--					&lt;!&ndash; Java packages to scan &ndash;&gt;-->
+<!--					<classPatterns>-->
+<!--						<classPattern>com.Webshop.ClassAssignment.ItVitae.Webshop.dtos..*</classPattern>-->
+<!--					</classPatterns>-->
+<!--					&lt;!&ndash; Where to write TS file &ndash;&gt;-->
+<!--					<outputFile>../frontend/src/types/models.d.ts</outputFile>-->
+<!--					&lt;!&ndash; Options &ndash;&gt;-->
+<!--					<jsonLibrary>jackson2</jsonLibrary>-->
+<!--					<outputKind>module</outputKind>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--			</plugin>-->
+			<plugin>
+				<groupId>cz.habarta.typescript-generator</groupId>
+				<artifactId>typescript-generator-maven-plugin</artifactId>
+				<version>3.2.1263</version>
+				<executions>
+					<execution>
+						<id>generate</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+
+					<!-- Java packages to scan -->
+					<classPatterns>
+						<classPattern>com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.*</classPattern>
+						<classPattern>com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.*.*</classPattern>
+					</classPatterns>
+
+					<!-- Where to write TS file -->
+					<outputFile>..frontend/src/types/models.d.ts</outputFile>
+
+					<!-- Options -->
+
+					<jsonLibrary>jackson2</jsonLibrary>
+					<outputKind>module</outputKind>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

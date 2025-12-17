@@ -13,6 +13,7 @@ public record ProductDTO(
         float price,
         float salePercentage,
         int stock,
+        String color,
         List<ProductAttributeDTO> attributes
 ) {
     public static ProductDTO fromEntity(Product product) {
@@ -21,6 +22,7 @@ public record ProductDTO(
                 product.getPrice(),
                 product.getSalePercentage(),
                 product.getStock(),
+                product.getColor(),
                 product.getProductAttributes().stream()
                         .filter(atr -> atr.getType() == AttributeType.VARIANT)
                         .map(ProductAttributeDTO::fromEntity)

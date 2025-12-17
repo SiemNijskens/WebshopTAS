@@ -19,6 +19,8 @@ public class Product {
 
     private int stock;
 
+    private String color;
+
     @ManyToOne
     private ProductBase productBase;
 
@@ -67,6 +69,13 @@ public class Product {
     }
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public ProductBase getProduct() {

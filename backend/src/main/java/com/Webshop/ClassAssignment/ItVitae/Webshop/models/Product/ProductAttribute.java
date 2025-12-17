@@ -1,8 +1,7 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.enums.AttributeType;
+import jakarta.persistence.*;
 
 @Entity
 public class ProductAttribute {
@@ -15,14 +14,23 @@ public class ProductAttribute {
 
     private String value;
 
-    public ProductAttribute(Long id, String attribute, String value) {
-        this.id = id;
-        this.attribute = attribute;
-        this.value = value;
-    }
+    @Enumerated(EnumType.STRING)
+    private AttributeType type;
 
-    public ProductAttribute() {
-    }
+//    public ProductAttribute(Long id, String attribute, String value) {
+//        this.id = id;
+//        this.attribute = attribute;
+//        this.value = value;
+//    }
+//
+//    public ProductAttribute() {
+//    }
+
+    @ManyToOne
+    private ProductBase productBase;
+
+    @ManyToOne
+    private Product product;
 
     public Long getId() {
         return id;
@@ -31,7 +39,6 @@ public class ProductAttribute {
     public String getAttribute() {
         return attribute;
     }
-
     public void setAttribute(String attribute) {
         this.attribute = attribute;
     }
@@ -39,8 +46,28 @@ public class ProductAttribute {
     public String getValue() {
         return value;
     }
-
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public AttributeType getType() {
+        return type;
+    }
+    public void setType(AttributeType type) {
+        this.type = type;
+    }
+
+    public ProductBase getProductBase() {
+        return productBase;
+    }
+    public void setProductBase(ProductBase productBase) {
+        this.productBase = productBase;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

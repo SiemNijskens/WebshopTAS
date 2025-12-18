@@ -67,7 +67,6 @@ public class ProductBase {
     public String getDefaultImageURL() {
         return defaultImageURL;
     }
-
     public void setDefaultImageURL(String defaultImageURL) {
         this.defaultImageURL = defaultImageURL;
     }
@@ -75,7 +74,6 @@ public class ProductBase {
     public ProductType getType() {
         return type;
     }
-
     public void setType(ProductType type) {
         this.type = type;
     }

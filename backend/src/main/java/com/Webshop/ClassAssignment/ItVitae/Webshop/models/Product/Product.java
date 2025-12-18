@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Table(name="Product")
+@Table(name="Product")
 @Entity
 public class Product {
 
@@ -20,8 +20,6 @@ public class Product {
     private float salePercentage;
 
     private int stock;
-
-    private String color;
 
     @ManyToOne
     private ProductBase productBase;
@@ -55,7 +53,6 @@ public class Product {
     public String getImageURL() {
         return imageURL;
     }
-
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }

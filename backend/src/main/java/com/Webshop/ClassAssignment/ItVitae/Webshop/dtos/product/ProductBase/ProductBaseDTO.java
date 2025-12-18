@@ -12,6 +12,7 @@ import java.util.List;
 public record ProductBaseDTO(
         Long id,
         String productCode,
+        String defaultImageURL,
         String name,
         String description,
         String productBrand,
@@ -22,6 +23,7 @@ public record ProductBaseDTO(
         return new ProductBaseDTO(
                 productBase.getId(),
                 productBase.getProductCode(),
+                productBase.getDefaultImageURL(),
                 productBase.getName(),
                 productBase.getDescription(),
                 productBase.getProductBrand(),

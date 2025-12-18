@@ -8,6 +8,7 @@ import java.util.List;
 
 public record ProductSummaryDTO(
         Long id,
+        String imageURL,
         float price,
         float salePercentage,
         int stock,
@@ -17,6 +18,7 @@ public record ProductSummaryDTO(
     public ProductSummaryDTO fromEntity(Product product) {
         return new ProductSummaryDTO(
                 product.getId(),
+                product.getImageURL(),
                 product.getPrice(),
                 product.getSalePercentage(),
                 product.getStock(),

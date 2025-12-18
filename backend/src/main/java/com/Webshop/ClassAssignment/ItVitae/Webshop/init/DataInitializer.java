@@ -43,6 +43,7 @@ public class DataInitializer {
         for (String size : sizes) {
             for (String color : colors ) {
                 ProductCreateDTO variant = new ProductCreateDTO(
+                        "XXX",
                         19.99f,
                         1.0f,
                         10,
@@ -62,6 +63,7 @@ public class DataInitializer {
 
         ProductBaseCreateDTO tShirtBase = new ProductBaseCreateDTO(
                 "TS-100",
+                "XXX",
                 "Basic T-Shirt",
                 "100% Cotton",
                 "Generic",
@@ -78,6 +80,7 @@ public class DataInitializer {
         for (String pantsSize : sizes) {
             for (String pantsColor : pantsColors ) {
                 ProductCreateDTO variant = new ProductCreateDTO(
+                        "XXX",
                         39.99f,
                         1.0f,
                         20,
@@ -97,6 +100,7 @@ public class DataInitializer {
 
         ProductBaseCreateDTO pantsBase = new ProductBaseCreateDTO(
                 "P-200",
+                "XXX",
                 "Basic Pants",
                 "100% Denim",
                 "Generic",

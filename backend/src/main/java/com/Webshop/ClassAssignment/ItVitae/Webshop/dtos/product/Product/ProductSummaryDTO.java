@@ -11,7 +11,6 @@ public record ProductSummaryDTO(
         float price,
         float salePercentage,
         int stock,
-        String color,
         ProductBase product
 //        List<ProductAttribute> productVariantAttributes
 ) {
@@ -21,7 +20,6 @@ public record ProductSummaryDTO(
                 product.getPrice(),
                 product.getSalePercentage(),
                 product.getStock(),
-                product.getColor(),
                 product.getProduct()
 //                product.getProductVariantAttributes()
         );

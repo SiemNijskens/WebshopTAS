@@ -25,7 +25,7 @@ const LoginForm = () => {
       onSuccess: (user) => {
         login(user);
         alert("Hi " + user.firstName + "!");
-        navigate(-1);
+        navigate("/");
       },
   });
 

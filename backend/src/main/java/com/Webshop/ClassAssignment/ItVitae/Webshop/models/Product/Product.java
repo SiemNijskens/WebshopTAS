@@ -13,6 +13,8 @@ public class Product {
     @GeneratedValue
     private Long id;
 
+    private String imageURL;
+
     private float price;
 
     private float salePercentage;
@@ -50,6 +52,14 @@ public class Product {
         return id;
     }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
     public float getPrice() {
         return price;
     }
@@ -69,13 +79,6 @@ public class Product {
     }
     public void setStock(int stock) {
         this.stock = stock;
-    }
-
-    public String getColor() {
-        return color;
-    }
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public ProductBase getProduct() {

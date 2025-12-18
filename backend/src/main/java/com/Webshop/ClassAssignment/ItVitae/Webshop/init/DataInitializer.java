@@ -2,7 +2,6 @@ package com.Webshop.ClassAssignment.ItVitae.Webshop.init;
 
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeCreateDTO;
-import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.user.UserCreateDTO;
@@ -47,9 +46,9 @@ public class DataInitializer {
                         19.99f,
                         1.0f,
                         10,
-                        color,
                         List.of(
-                                new ProductAttributeCreateDTO(null, "Size", size, AttributeType.VARIANT)
+                                new ProductAttributeCreateDTO(null, "Size", size, AttributeType.VARIANT),
+                                new ProductAttributeCreateDTO(null, "Color", color, AttributeType.VARIANT)
                         )
                 );
                 products.add((variant));
@@ -82,9 +81,9 @@ public class DataInitializer {
                         39.99f,
                         1.0f,
                         20,
-                        pantsColor,
                         List.of(
-                                new ProductAttributeCreateDTO(null, "Size", pantsSize, AttributeType.VARIANT)
+                                new ProductAttributeCreateDTO(null, "Size", pantsSize, AttributeType.VARIANT),
+                                new ProductAttributeCreateDTO(null, "Color", pantsColor, AttributeType.VARIANT)
                         )
                 );
                 variants.add((variant));

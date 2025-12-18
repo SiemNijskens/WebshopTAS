@@ -11,7 +11,6 @@ public record ProductCreateDTO(
         float price,
         float salePercentage,
         int stock,
-        String color,
         List<ProductAttributeCreateDTO> attributes
 
 ) {
@@ -20,7 +19,6 @@ public record ProductCreateDTO(
         product.setPrice(this.price);
         product.setSalePercentage(this.salePercentage);
         product.setStock(this.stock);
-        product.setColor(this.color);
         return product;
     }
 }

@@ -1,5 +1,7 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product;
 
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.enums.AttributeType;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.Product;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductAttribute;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductBase;
@@ -8,22 +10,23 @@ import java.util.List;
 
 public record ProductDTO(
         Long id,
+        String imageURL,
         float price,
-        boolean sale,
         float salePercentage,
         int stock,
-        ProductBase product,
-        List<ProductAttribute> productVariantAttributes
+        List<ProductAttributeDTO> attributes
 ) {
-    public ProductDTO fromEntity(Product product) {
+    public static ProductDTO fromEntity(Product product) {
         return new ProductDTO(
-                product.getProductId(),
+                product.getId(),
+                product.getImageURL(),
                 product.getPrice(),
-                product.isSale(),
                 product.getSalePercentage(),
                 product.getStock(),
-                product.getProduct(),
-                product.getProductVariantAttributes()
+                product.getProductAttributes().stream()
+                        .filter(atr -> atr.getType() == AttributeType.VARIANT)
+                        .map(ProductAttributeDTO::fromEntity)
+                        .toList()
         );
     }
 }

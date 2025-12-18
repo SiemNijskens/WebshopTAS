@@ -1,17 +1,20 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute;
 
+import com.Webshop.ClassAssignment.ItVitae.Webshop.enums.AttributeType;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductAttribute;
 
 public record ProductAttributeDTO(
         Long id,
         String attribute,
-        String value
+        String value,
+        AttributeType type
 ) {
-    public ProductAttributeDTO fromEntity(ProductAttribute productAttribute){
+    public static ProductAttributeDTO fromEntity(ProductAttribute productAttribute){
         return new ProductAttributeDTO(
                 productAttribute.getId(),
                 productAttribute.getAttribute(),
-                productAttribute.getValue()
+                productAttribute.getValue(),
+                productAttribute.getType()
         );
     }
 }

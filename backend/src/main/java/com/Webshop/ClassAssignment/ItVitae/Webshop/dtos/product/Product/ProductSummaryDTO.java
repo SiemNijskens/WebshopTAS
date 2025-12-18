@@ -8,22 +8,22 @@ import java.util.List;
 
 public record ProductSummaryDTO(
         Long id,
+        String imageURL,
         float price,
-        boolean sale,
         float salePercentage,
         int stock,
-        ProductBase product,
-        List<ProductAttribute> productVariantAttributes
+        ProductBase product
+//        List<ProductAttribute> productVariantAttributes
 ) {
     public ProductSummaryDTO fromEntity(Product product) {
         return new ProductSummaryDTO(
-                product.getProductId(),
+                product.getId(),
+                product.getImageURL(),
                 product.getPrice(),
-                product.isSale(),
                 product.getSalePercentage(),
                 product.getStock(),
-                product.getProduct(),
-                product.getProductVariantAttributes()
+                product.getProduct()
+//                product.getProductVariantAttributes()
         );
     }
 }

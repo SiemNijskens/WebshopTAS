@@ -29,6 +29,7 @@ public record RegisterDTO(
         user.setFirstName(this.firstName);
         user.setLastName(this.lastName);
         user.setEmail(this.email);
+        user.setPassword(this.password);
         user.setZipCode(this.zipCode);
         user.setHouseNumber(this.houseNumber);
         user.setStreetName(this.streetName);

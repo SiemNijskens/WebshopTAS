@@ -4,9 +4,16 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.auth.LoginDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.auth.RegisterDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.user.UserDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.services.AuthService;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,7 +34,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDTO> login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<UserDTO> login(
+            @RequestBody LoginDTO loginDTO) {
         return ResponseEntity.ok(authService.loginUser(loginDTO));
     }
 }

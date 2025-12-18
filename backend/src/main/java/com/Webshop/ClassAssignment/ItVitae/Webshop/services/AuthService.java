@@ -8,10 +8,17 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.exceptions.InvalidCredentials
 import com.Webshop.ClassAssignment.ItVitae.Webshop.exceptions.UserNotFoundException;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.User;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,7 +50,9 @@ public class AuthService {
         return UserDTO.fromEntity(savedUser);
     }
 
+
     public UserDTO loginUser(LoginDTO loginDTO) {
+
         User user = userRepository.findByEmail(loginDTO.email())
                 .orElseThrow(() -> new InvalidCredentialsException("Wrong email or password!"));
 

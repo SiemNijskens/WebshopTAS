@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.css'
-import Router from './router'
+import Router from './components/routes/router'
 
 export const API_URL = "http://localhost:8080";
 

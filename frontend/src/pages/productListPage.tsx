@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { ProductBaseDTO, ProductDTO } from "../types/models.d";
+import type { ProductBaseDTO, ProductDTO } from "../types/models";
 import { API_URL } from "../App";
 
 

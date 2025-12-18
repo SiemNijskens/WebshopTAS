@@ -5,7 +5,7 @@ import ProductDetailPage from "../../pages/productDetailPage";
 import ShoppingcartPage from "../../pages/shoppingcartPage";
 import UserPage from "../../pages/userPage";
 import AdminPage from "../../pages/adminPage";
-import ProductList from "../../pages/productListPage";
+import ProductList from "../../pages/productOverviewPage";
 import LoginForm from "../forms/LoginForm";
 import { AdminRoute } from "./adminRoute";
 import { AuthRoute } from "./authRoute";
@@ -24,7 +24,7 @@ const Router = () => {
                     </Route>
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/products" element={<ProductList />} />
-                <Route path="productDetailPage" element={<ProductDetailPage />} /> 
+                {/* <Route path="/productDetailPage" element={<ProductDetailPage />} />  */}
                 <Route path="/shoppingcart" element={<ShoppingcartPage />} />
                     <Route element={<AuthRoute />}>
                         <Route path="users/me" element={<UserPage />} />

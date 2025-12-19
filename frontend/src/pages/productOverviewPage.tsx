@@ -3,6 +3,7 @@ import type { ProductBaseDTO } from "../types/models";
 import { API_URL } from "../App";
 import { useState } from "react";
 import ProductDetailPage from "./productDetailPage";
+import '../styles/card.css';
  
  
 const productOverviewPage = () => {

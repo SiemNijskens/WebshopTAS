@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { ProductBaseDTO } from "../types/models";
 import { API_URL } from "../App";
 import { useState } from "react";
- 
+
 interface ProductDetailProps {
     productId: number;
     setProductId: (id: number) => void;

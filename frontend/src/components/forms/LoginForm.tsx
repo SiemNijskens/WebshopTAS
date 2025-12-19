@@ -68,6 +68,10 @@ const LoginForm = () => {
       <button type="button" onClick={() => navigate(-1) }>Back</button>
       </div>
     </form>
+
+    <div>
+      <button onClick={() => navigate("/signup")}>Sign Up</button>
+    </div>
     </div>
   )
 

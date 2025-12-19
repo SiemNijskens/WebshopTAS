@@ -1,10 +1,9 @@
-import NavBar from "../components/NavBar";
+
 
 const UserPage = () => {
 
     return (
         <>
-            <NavBar />
             <>
                 username
                 address

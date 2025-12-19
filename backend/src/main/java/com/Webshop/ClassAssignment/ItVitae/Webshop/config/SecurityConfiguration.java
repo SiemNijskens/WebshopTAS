@@ -28,6 +28,8 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/products/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/cartitems/**").permitAll()
                         .requestMatchers("/users/me").authenticated()
                         .requestMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
                         .anyRequest().authenticated()

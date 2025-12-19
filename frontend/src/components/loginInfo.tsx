@@ -16,7 +16,7 @@ const LoginIfno = () => {
 
     return (
         <div>
-            <span>Hello, {user.firstName}</span>
+            <span>Hello, <b>{user.firstName}</b> </span>
             <button onClick={logout}>
                 Logout
             </button>

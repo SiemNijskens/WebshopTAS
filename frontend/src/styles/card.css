@@ -19,3 +19,11 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
+
+.small {
+  border-radius: 5px;
+  padding: 6px;
+  height: 200px;
+  width: 150px;
+  line-height: 4px
+}

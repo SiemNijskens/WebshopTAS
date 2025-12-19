@@ -37,6 +37,7 @@ export interface ShoppingCartUpdateDTO {
 export interface ProductBaseDTO {
     id: number,
     productCode: string,
+    defaultImageURL: string,
     name: string,
     description: string,
     productBrand: string,

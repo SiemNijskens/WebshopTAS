@@ -24,7 +24,7 @@ const LoginForm = () => {
       },
       onSuccess: (user) => {
         login(user);
-        alert("Hi " + user.firstName + "!");
+        // alert("Hi " + user.firstName + "!");
         navigate("/");
       },
   });
@@ -36,8 +36,11 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <div>
+    // <div className="login-box">
+    //   <h2>Login</h2>
+    <div>
+    <form className="form" onSubmit={handleFormSubmit}>
+      <div className="form-field">
         <label htmlFor="email">Email: </label>
         <input
           type="text"
@@ -48,7 +51,7 @@ const LoginForm = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div>
+      <div className="form-field">
         <label htmlFor="password">Password: </label>
         <input
           type="password"
@@ -58,13 +61,18 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPasword(e.target.value)}
         />
+        <span className="forgot-password">Forgot password?</span>
       </div>
+      <div className="form-actions">
       <button type="submit">Login</button>
       <button type="button" onClick={() => navigate(-1) }>Back</button>
-      <span>
-        Forgot password?
-      </span>
+      </div>
     </form>
+
+    <div>
+      <button onClick={() => navigate("/signup")}>Sign Up</button>
+    </div>
+    </div>
   )
 
 }

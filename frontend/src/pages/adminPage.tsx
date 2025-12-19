@@ -1,10 +1,9 @@
-import NavBar from "../components/NavBar";
+
 
 const AdminPage = () => {
 
     return (
         <>
-            <NavBar />
             <>
                 <li>
                     username

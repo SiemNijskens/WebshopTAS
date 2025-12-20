@@ -13,7 +13,8 @@ const NavBar = () => {
         <nav className="navbar">
             <div className="navbar-left">
                 <SidebarLandingPage/>
-                <>SVG = 3 stripes</>
+                {/* <>SVG = 3 stripes</> */}
+                <img src="pngtree-a-krabby-parry-png-image_13066983.PNG" width="50" height="50"/>
             </div>
         
             <div className="navbar-center">

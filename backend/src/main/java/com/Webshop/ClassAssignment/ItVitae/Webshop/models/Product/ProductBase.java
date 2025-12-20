@@ -106,6 +106,10 @@ public class ProductBase {
         this.productVariants = productVariants;
     }
 
+    public void addProductVariants(Product productVariant){
+        this.productVariants.add(productVariant);
+    }
+
     public List<ProductAttribute> getProductAttributes() {
         return productAttributes;
     }

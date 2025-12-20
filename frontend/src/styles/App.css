@@ -212,3 +212,22 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.centerImage {
+  display: block;
+  margin: auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns:max-content max-content ;
+  place-content: center;
+  padding: 10px;
+}
+
+.container div {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 3px;
+  text-align:left;
+}

@@ -35,7 +35,7 @@ const ProductDetailPage = ({ productId, setProductId }: ProductDetailProps) => {
                         <h3>{product.name} from {product.productBrand} </h3>
  
                         <p><span style={{ fontWeight: "bold" }}>Productcode:</span> {product.productCode}</p>
-                    </><br></br>
+                    </>
                     <>product.img</>
                     <>
                         {product.attributes.map(attribute => (
@@ -51,16 +51,15 @@ const ProductDetailPage = ({ productId, setProductId }: ProductDetailProps) => {
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
                         {product.productVariants.map(productVariant => (
                             <div key={productVariant.id} className="small card"   >
-                                <p><span style={{ fontWeight: "bold" }}>Color:</span> {productVariant.color}</p>
-                                <p><span style={{ fontWeight: "bold" }}>Price: </span>€{productVariant.price}</p>
-                                <p><span style={{ fontWeight: "bold" }}>Sale:</span>{productVariant.salePercentage}%</p>
-                                <p><span style={{ fontWeight: "bold" }}>In Stock:</span>{productVariant.stock}</p>
                                 <div>{productVariant.attributes.map(attribute => (
                                     <div key={attribute.id}>
                                         <p>{productVariant.color}</p>
                                         <p><span style={{ fontWeight: "bold" }}>{attribute.attribute}: </span>{attribute.value}</p>
                                     </div>
                                 ))}</div>
+                                <p><span style={{ fontWeight: "bold" }}>Price: </span>€{productVariant.price}</p>
+                                <p><span style={{ fontWeight: "bold" }}>Sale:</span>{productVariant.salePercentage}%</p>
+                                <p><span style={{ fontWeight: "bold" }}>In Stock:</span>{productVariant.stock}</p>
                                 <button>substract </button>
                                 <> amount</>
                                 <button>add </button>

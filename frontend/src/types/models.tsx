@@ -5,7 +5,7 @@ export interface CartItemCreateDTO {
 
 export interface CartItemDTO {
     id: number;
-    product: Product;
+    productSummaryDTO: Product;
     amount: number;
 }
 
@@ -22,8 +22,7 @@ export interface ShoppingCartCreateDTO {
 
 export interface ShoppingCartDTO {
     id: number;
-    user: User;
-    cartItems: CartItem[];
+    cartItems: CartItemDTO[];
 }
 
 export interface ShoppingCartSummaryDTO {
@@ -67,6 +66,7 @@ export interface LoginDTO {
 }
 
 export interface UserSummaryDTO {
+    id: number,
     firstName: string,
     lastName: string,
     roles: string[],
@@ -82,6 +82,7 @@ export interface UserDTO {
     houseNumber: string,
     streetName: string,
     city: string,
+    shoppingCarts: ShoppingCartDTO[],
 }
 
 export interface UserCreateDTO {

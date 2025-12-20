@@ -4,10 +4,12 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductC
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart.ShoppingCartCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.user.UserCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.enums.AttributeType;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.UserRepository;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.services.ProductService;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.services.ShoppingCartService;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.services.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
@@ -21,11 +23,13 @@ public class DataInitializer {
     private final UserService userService;
     private final UserRepository userRepository;
     private final ProductService productService;
+    private final ShoppingCartService shoppingCartService;
 
-    public DataInitializer(UserService userService, UserRepository userRepository, ProductService productService) {
+    public DataInitializer(UserService userService, UserRepository userRepository, ProductService productService, ShoppingCartService shoppingCartService) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.productService = productService;
+        this.shoppingCartService = shoppingCartService;
     }
 
     @PostConstruct
@@ -34,6 +38,11 @@ public class DataInitializer {
         userService.registerUser(new UserCreateDTO("Siem","Webshop",List.of("ROLE_USER"), "siem_webshop@webshop.nl","password123","3000XX","80","Surinamestraat", "Amersfoort"));
         userService.registerUser(new UserCreateDTO("Stefan","Webshop",List.of("ROLE_USER"), "stefan_webshop@webshop.nl","password123","4000XX","63","Borneolaan", "Amersfoort"));
         userService.registerUser(new UserCreateDTO("Arne","Webshop",List.of("ROLE_ADMIN", "ROLE_USER"), "arne_webshop@webshop.nl","password123","5000XX","419","Curacaogracht", "Amersfoort"));
+
+        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(1L));
+        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(2L));
+        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(3L));
+        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(4L));
 
         List<String> sizes = List.of("S","M","L");
         List<String> colors = List.of("Red", "White", "Blue", "Green");

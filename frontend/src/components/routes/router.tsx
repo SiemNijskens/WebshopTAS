@@ -12,8 +12,11 @@ import { AuthRoute } from "./authRoute";
 import UserDetailPage from "../../pages/UserDetail";
 import NavBar from "../NavBar";
 import { SignUpForm } from "../forms/SignUpForm";
+import useCart from "../queries/cartQuery";
 
 const Router = () => {
+    useCart();
+    
     return(
         <BrowserRouter>
         <NavBar />

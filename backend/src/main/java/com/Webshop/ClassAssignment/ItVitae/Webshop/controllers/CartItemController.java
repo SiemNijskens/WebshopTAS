@@ -33,7 +33,9 @@ public class CartItemController {
     }
 
     @PostMapping("/{shoppingCartId}")
-    public ResponseEntity<ShoppingCartDTO> addCartItemToShoppingCart(@RequestBody CartItemCreateDTO cartItemCreateDTO, Long shoppingCartId) {
+    public ResponseEntity<ShoppingCartDTO> addCartItemToShoppingCart(
+            @RequestBody CartItemCreateDTO cartItemCreateDTO,
+            @PathVariable Long shoppingCartId) {
         ShoppingCartDTO shoppingCartDTO = cartItemService.addCartItemToShoppingCart(cartItemCreateDTO, shoppingCartId);
         return ResponseEntity.status(HttpStatus.OK).body(shoppingCartDTO);
     }

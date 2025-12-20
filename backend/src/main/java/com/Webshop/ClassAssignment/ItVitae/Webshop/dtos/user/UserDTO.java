@@ -1,5 +1,7 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.user;
 
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart.ShoppingCartDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.models.ShoppingCart;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.User;
 
 import java.util.List;
@@ -13,7 +15,8 @@ public record UserDTO(
         String zipCode,
         String houseNumber,
         String streetName,
-        String city
+        String city,
+        List<ShoppingCartDTO> shoppingCarts
 ) {
     public static UserDTO fromEntity(User user) {
         return new UserDTO(
@@ -25,7 +28,9 @@ public record UserDTO(
                 user.getZipCode(),
                 user.getHouseNumber(),
                 user.getStreetName(),
-                user.getCity()
+                user.getCity(),
+                user.getShoppingCarts().stream().map(ShoppingCartDTO::fromEntity)
+                        .toList()
         );
     }
 }

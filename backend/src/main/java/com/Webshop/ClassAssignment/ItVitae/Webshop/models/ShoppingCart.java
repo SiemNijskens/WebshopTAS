@@ -1,7 +1,9 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,10 +13,13 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id")
     private User user;
+
     @OneToMany(mappedBy = "shoppingCart")
-    private List<CartItem> cartItemList;
+    @JsonIgnore
+    private List<CartItem> cartItemList = new ArrayList<>();
 
     public Long getId() {
         return id;

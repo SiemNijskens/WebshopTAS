@@ -33,7 +33,7 @@ public class User {
     private String city;
 
     @OneToMany(mappedBy = "user")
-    private List<ShoppingCart> shoppingCarts;
+    private List<ShoppingCart> shoppingCarts = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -105,6 +105,10 @@ public class User {
     public List<ShoppingCart> getShoppingCarts() {
         return shoppingCarts;
     }
+    public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
+        this.shoppingCarts = shoppingCarts;
+    }
+
     public void addShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCarts.add(shoppingCart);
     }

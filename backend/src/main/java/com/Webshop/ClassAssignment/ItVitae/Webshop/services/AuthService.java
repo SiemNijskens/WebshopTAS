@@ -61,10 +61,10 @@ public class AuthService {
     public UserDTO loginUser(LoginDTO loginDTO) {
 
         User user = userRepository.findByEmail(loginDTO.email())
-                .orElseThrow(() -> new InvalidCredentialsException("Wrong email or password!"));
+                .orElseThrow(() -> new InvalidCredentialsException("Invalid credentials"));
 
         if (!passwordEncoder.matches(loginDTO.password(), user.getPassword())) {
-            throw new InvalidCredentialsException("Wrong email or password!");
+            throw new InvalidCredentialsException("Invalid credentials");
         }
 
         return UserDTO.fromEntity(user);

@@ -1,13 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import type { LoginDTO } from "../../types/models";
+import type { LoginDTO, MutationError} from "../../types/models";
 import { API_URL } from "../../App";
 import { login } from "../stores/authStore";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("thomas_webshop@webshop.nl");
   const [password, setPasword] = useState("password123");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const loginMutation = useMutation({
@@ -18,7 +19,12 @@ const LoginForm = () => {
             body: JSON.stringify(userData),
           });
           if (!response.ok) {
-            throw new Error("Failed to fetch user");
+            const errorBody = await response.json();
+            
+            throw {
+              message: errorBody.message ?? "Registration failed.",
+              status: response.status,
+            } as MutationError;
           }
           return response.json();
       },
@@ -27,6 +33,9 @@ const LoginForm = () => {
         // alert("Hi " + user.firstName + "!");
         navigate("/");
       },
+      onError: (error) => {
+        setErrorMessage(error.message);
+      }
   });
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -40,6 +49,7 @@ const LoginForm = () => {
     //   <h2>Login</h2>
     <div>
     <form className="form" onSubmit={handleFormSubmit}>
+      {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
       <div className="form-field">
         <label htmlFor="email">Email: </label>
         <input
@@ -48,7 +58,9 @@ const LoginForm = () => {
           id="email"
           name="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setErrorMessage(null),
+            setEmail( e.target.value )}}
         />
       </div>
       <div className="form-field">
@@ -59,7 +71,9 @@ const LoginForm = () => {
           id="password"
           name="password"
           value={password}
-          onChange={(e) => setPasword(e.target.value)}
+          onChange={(e) => {
+            setErrorMessage(null),
+            setPasword( e.target.value )}}
         />
         <span className="forgot-password">Forgot password?</span>
       </div>

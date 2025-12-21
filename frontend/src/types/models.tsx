@@ -65,6 +65,17 @@ export interface LoginDTO {
     password: string,
 }
 
+export interface RegisterDTO {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    zipCode: string,
+    houseNumber: string,
+    streetName: string,
+    city: string,
+}
+
 export interface UserSummaryDTO {
     id: number,
     firstName: string,
@@ -164,3 +175,8 @@ export interface ShoppingCart {
 }
 
 export type AttributeType = "PRODUCT" | "VARIANT";
+
+export type MutationError = {
+    message: string,
+    status?: number,
+}

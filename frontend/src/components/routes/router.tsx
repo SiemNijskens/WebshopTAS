@@ -11,19 +11,19 @@ import { AdminRoute } from "./adminRoute";
 import { AuthRoute } from "./authRoute";
 import UserDetailPage from "../../pages/UserDetail";
 import NavBar from "../NavBar";
-import { SignUpForm } from "../forms/SignUpForm";
 import useCart from "../queries/cartQuery";
+import SignUpForm from "../forms/SignUpForm";
 
 const Router = () => {
     useCart();
-    
+
     return(
         <BrowserRouter>
         <NavBar />
             <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<LoginForm />} />
-                {/* <Route path="/signup" element={<SignUpForm />} /> */}
+                <Route path="/signup" element={<SignUpForm />} />
                     <Route element={<AdminRoute />}>
                         <Route path="/admin" element={<AdminPage />} />
                         <Route path="/users/:id" element={<UserDetailPage />} />

@@ -13,11 +13,18 @@
   /* margin: 0 auto; */
   max-height: 600px;
   overflow-y: auto;
+  position: relative;
 }
 
 .card:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .small {

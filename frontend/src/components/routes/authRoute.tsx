@@ -17,15 +17,10 @@ export const AuthRoute = () => {
         if (redirect) return <Navigate to="/login" replace />;
         return (
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                {/* <div className="spinner"/> */}
                 <div className="loader" />
-                {/* <div className="throbber" /> */}
-                {/* <div className="pulse" /> */}
                 <span>You must be logged in to access this page. You are being redirected...</span>
             </div>
         )
-        // return <p>You must be logged in to access this page. Redirecting...</p>
     }
-
     return <Outlet />;
 };

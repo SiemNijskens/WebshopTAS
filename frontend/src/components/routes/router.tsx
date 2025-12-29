@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import LandingPage from "../../pages/landingPage";
 import CheckoutPage from "../../pages/checkoutPage";
-import ProductDetailPage from "../../pages/productDetailPage";
+// import ProductDetailPage from "../../pages/productDetailPage";
 import ShoppingcartPage from "../../pages/shoppingcartPage";
 import UserPage from "../../pages/userPage";
 import AdminPage from "../../pages/adminPage";
@@ -13,6 +13,8 @@ import UserDetailPage from "../../pages/UserDetail";
 import NavBar from "../NavBar";
 import useCart from "../queries/cartQuery";
 import SignUpForm from "../forms/SignUpForm";
+import XPage from "../../pages/XPage";
+import YPage from "../../pages/YPage";
 
 const Router = () => {
     useCart();
@@ -29,7 +31,9 @@ const Router = () => {
                         <Route path="/users/:id" element={<UserDetailPage />} />
                     </Route>
                 <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/y" element={<YPage />} />
                 <Route path="/products" element={<ProductOverviewPage />} />
+                <Route path="/products/:productId" element={<XPage />} />
                 {/* <Route path="/productDetailPage" element={<ProductDetailPage />} />  */}
                 <Route path="/shoppingcart" element={<ShoppingcartPage />} />
                     <Route element={<AuthRoute />}>

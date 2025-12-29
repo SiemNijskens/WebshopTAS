@@ -45,14 +45,14 @@ public class DataInitializer {
         shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(4L));
 
         List<String> sizes = List.of("S","M","L");
-        List<String> colors = List.of("Red", "White", "Blue", "Green");
+        List<String> colors = List.of("White", "Blue", "Orange", "Black", "Red");
 
         List<ProductCreateDTO> products = new ArrayList<>();
 
         for (String size : sizes) {
             for (String color : colors ) {
                 ProductCreateDTO variant = new ProductCreateDTO(
-                        "XXX",
+                        "/images/products/generic_tshirt_print_HetIsFeest_" + color.toLowerCase() + ".png",
                         19.99f,
                         1.0f,
                         10,
@@ -72,7 +72,7 @@ public class DataInitializer {
 
         ProductBaseCreateDTO tShirtBase = new ProductBaseCreateDTO(
                 "TS-100",
-                "XXX",
+                "/images/products/generic_tshirt_print_HetIsFeest_white.png",
                 "Basic T-Shirt",
                 "100% Cotton",
                 "Generic",
@@ -86,12 +86,12 @@ public class DataInitializer {
 
         List<ProductCreateDTO> variants = new ArrayList<>();
 
-        for (String pantsSize : sizes) {
+        for (String pantsSize : pantsSizes) {
             for (String pantsColor : pantsColors ) {
                 ProductCreateDTO variant = new ProductCreateDTO(
                         "XXX",
                         39.99f,
-                        1.0f,
+                        0.7f,
                         20,
                         List.of(
                                 new ProductAttributeCreateDTO(null, "Size", pantsSize, AttributeType.VARIANT),

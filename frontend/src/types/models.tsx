@@ -46,6 +46,7 @@ export interface ProductBaseDTO {
 
 export interface ProductDTO {
     id: number,
+    imageURL: string,
     price: number,
     salePercentage: number,
     stock: number,

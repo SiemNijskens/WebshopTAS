@@ -4,11 +4,14 @@ import { API_URL } from "../App";
 import { useState } from "react";
 import ProductDetailPage from "./productDetailPage";
 import '../styles/card.css';
+import XPage from "./XPage";
+import { useNavigate } from "react-router";
  
  
 const productOverviewPage = () => {
     const [productId, setProductId] = useState(NaN);
     console.log("current productId " + productId);
+    const navigate = useNavigate();
  
     const { data: products, isLoading, error } = useQuery<ProductBaseDTO[]>({
         queryKey: ['products'],
@@ -37,9 +40,10 @@ const productOverviewPage = () => {
     if (error) { return <p>Error!</p> }
  
     if (productId) {
-        return (
-        <ProductDetailPage productId={productId} setProductId={setProductId}/>
-        )
+        // return (
+        // <ProductDetailPage productId={productId} setProductId={setProductId}/>
+        // )
+        navigate(`/products/${productId}`);
     }
  
     if (products !== undefined) {

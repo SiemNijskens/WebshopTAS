@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import type { ProductBaseDTO } from "../types/models";
+import type { ProductBaseDTO, SelectedAttributes } from "../types/models";
 import { API_URL } from "../App";
 import { useState } from "react";
 import '../styles/product.css'
@@ -45,7 +45,7 @@ const XPage = () => {
     }
 
     const allAttributes = product?.productVariants.flatMap(variants => variants.attributes);
-    console.log(allAttributes);
+    // console.log(allAttributes);
 
     const attributeMap = new Map<string, Set<string>>();
 
@@ -61,16 +61,31 @@ const XPage = () => {
 
     // console.log(attributeMap);
 
-    type SelectedAttributes = {
-    [attributeName: string]: string
-    }
-
     const [selectedAttributes, setSelectedAttributes] = useState<SelectedAttributes>({});
     const [quantity, setQuantity] = useState(1);
 
     const selectedVariant = product?.productVariants.find(variant =>
         variant.attributes.every(attr => selectedAttributes[attr.attribute] === attr.value)
     );
+
+    const lowStock = selectedVariant && selectedVariant.stock === 1;
+
+    const isOptionOutOfStock = (attributeName: string,  value: string) => {
+        return !product?.productVariants.some(variant => {
+            
+            const matchesSelected = Object.entries(selectedAttributes).every(
+                ([attr, val]) =>
+                    attr === attributeName ||
+                    variant.attributes.some(at => at.attribute === attr && at.value === val)
+            );
+
+            const matchesThisOption = variant.attributes.some(
+                a => a.attribute === attributeName && a.value === value
+            );
+
+            return matchesSelected && matchesThisOption && variant.stock > 0;
+        });
+    };
 
     // const attributeByName = allAttributes?.reduce((acc, attr) => {
     //     if (!acc[attr.attribute]) {
@@ -144,14 +159,14 @@ const XPage = () => {
                                 ...data,
                                 [attributeName]: e.target.value,
                             }))
-                            }
+                        }
                     >
                         <option value="" disabled>
                             -- Select {attributeName} --
                         </option>
                         {Array.from(values).map(value => (
-                            <option key={value} value={value}>
-                                {value}
+                            <option key={value} value={value} disabled={isOptionOutOfStock(attributeName, value)}>
+                                {value} {isOptionOutOfStock(attributeName, value) ? "(Sold out)" : ""}
                             </option>
                         ))}
                     </select>
@@ -166,11 +181,11 @@ const XPage = () => {
 
                     <p><b>Price: </b>
                         <div style={{ display: "inline-block" }} className={`price ${selectedVariant && selectedVariant.salePercentage < 1 ? "old-price" : ""}`}>
-                            {selectedVariant ? `€${selectedVariant.price}` : "select options to see price"}
+                            {selectedVariant ? `€${(selectedVariant.price * quantity).toFixed(2)}` : "select options to see price"}
                         </div>
                         <div style={{ display: "inline-block", textIndent: 5 }}>
                             {selectedVariant && selectedVariant.salePercentage < 1 && <div className="sale-price">
-                            €{Math.round(selectedVariant.price * selectedVariant.salePercentage * 100) / 100}</div>}
+                            €{(selectedVariant.price * selectedVariant.salePercentage * quantity).toFixed(2)}</div>}
                         </div>
                     </p>
                 </div>
@@ -210,9 +225,10 @@ const XPage = () => {
                         >
                             +
                         </button>
+                        {lowStock && <div style={{ display: "inline-block" }} className="low-stock">Only {selectedVariant.stock} left in stock!</div>}
                     </div>
                     <button
-                        disabled={!selectedVariant}
+                        disabled={!selectedVariant || selectedVariant.stock === 0}
                         className="add-to-cart"
                         style={{ width: 115 }}
                         onClick={handleAddToCart}

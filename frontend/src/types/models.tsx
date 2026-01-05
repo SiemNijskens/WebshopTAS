@@ -37,6 +37,7 @@ export interface ProductBaseDTO {
     id: number,
     productCode: string,
     defaultImageURL: string,
+    category: string,
     name: string,
     description: string,
     productBrand: string,
@@ -180,4 +181,16 @@ export type AttributeType = "PRODUCT" | "VARIANT";
 export type MutationError = {
     message: string,
     status?: number,
+}
+
+ export type SelectedAttributes = {
+    [attributeName: string]: string
+    }
+
+export type ProductFilters = {
+    categories: string[],
+    brands: string[],
+    // colors: string[],
+    sizes: string[],
+    onSale: boolean;
 }

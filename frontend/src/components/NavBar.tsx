@@ -1,20 +1,22 @@
 import { NavLink } from "react-router";
-import SidebarLandingPage from "./SidebarLandingPage";
 import LoginIfno from "./loginInfo";
 import { useAuthStore } from "./stores/authStore";
 import { useCartStore } from "./stores/cartStore";
 
-const NavBar = () => {
+interface BurgerProps {
+    showBurger: boolean;
+    onBurgerClick: () => void;
+}
+
+const NavBar = ( { showBurger, onBurgerClick }: BurgerProps) => {
     const { user } = useAuthStore();
     const { cart } = useCartStore();
     const isCartEmpty = !cart || cart.cartItems.length === 0;
-    
+
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <SidebarLandingPage/>
-                {/* <>SVG = 3 stripes</> */}
-                <img src="pngtree-a-krabby-parry-png-image_13066983.PNG" width="50" height="50"/>
+                {showBurger && <img src="pngtree-a-krabby-parry-png-image_13066983.PNG" width="50" height="50" onClick={onBurgerClick} style={{ cursor: "pointer" }}/>}
             </div>
         
             <div className="navbar-center">

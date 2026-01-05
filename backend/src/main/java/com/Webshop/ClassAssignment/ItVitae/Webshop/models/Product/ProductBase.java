@@ -18,8 +18,10 @@ public class ProductBase {
 
     private String defaultImageURL;
 
-    @Enumerated (EnumType.STRING)
-    private ProductType type;
+//    @Enumerated (EnumType.STRING)
+//    private ProductType type;
+
+    private String category;
 
     private String name;
 
@@ -71,11 +73,19 @@ public class ProductBase {
         this.defaultImageURL = defaultImageURL;
     }
 
-    public ProductType getType() {
-        return type;
+//    public ProductType getType() {
+//        return type;
+//    }
+//    public void setType(ProductType type) {
+//        this.type = type;
+//    }
+
+
+    public String getCategory() {
+        return category;
     }
-    public void setType(ProductType type) {
-        this.type = type;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getName() {

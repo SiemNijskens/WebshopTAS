@@ -1,7 +1,7 @@
 import HeroComponant from "../components/HeroComponant";
 
 const LandingPage = () => {
-
+    
     return (
         <>
             <>

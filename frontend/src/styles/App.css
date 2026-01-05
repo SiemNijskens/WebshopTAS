@@ -231,3 +231,11 @@
   padding: 3px;
   text-align:left;
 }
+
+.sale-overview {
+    position: absolute;
+    color: red;
+    font-weight: bold;
+    bottom: 10px;
+    right: 10px;
+}

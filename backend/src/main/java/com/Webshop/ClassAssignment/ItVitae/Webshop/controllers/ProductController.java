@@ -40,4 +40,10 @@ public class ProductController {
     public ResponseEntity<ProductBaseDTO> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.findById(id));
     }
+
+    @PatchMapping("/{variantId}/stock")
+    public ResponseEntity<ProductDTO> updateStock(@PathVariable Long variantId, @RequestParam int stock) {
+        ProductDTO stockUpdate = productService.updateStock(variantId, stock);
+        return ResponseEntity.ok(stockUpdate);
+    }
 }

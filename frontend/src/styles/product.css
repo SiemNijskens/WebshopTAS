@@ -87,6 +87,11 @@
     text-align: center;
 }
 
+.low-stock {
+    color: #b00020;
+    font-weight: bold;
+}
+
 .sale {
     position: absolute;
     color: red;

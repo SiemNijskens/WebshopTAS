@@ -1,6 +1,7 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.services;
 
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductCreateDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseDTO;
@@ -67,4 +68,13 @@ public class ProductService {
         return ProductBaseDTO.fromEntity(productBase);
     }
 
+    public ProductDTO updateStock(Long variantId, int stock) {
+        Product product = productRepository.findById(variantId)
+                .orElseThrow(() -> new ProductNotFoundException("Product not found with ID: " + variantId));
+
+        product.setStock(stock);
+        Product savedProduct = productRepository.save(product);
+
+        return  ProductDTO.fromEntity(savedProduct);
+    }
 }

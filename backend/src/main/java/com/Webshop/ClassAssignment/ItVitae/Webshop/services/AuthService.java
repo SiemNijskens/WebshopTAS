@@ -2,10 +2,12 @@ package com.Webshop.ClassAssignment.ItVitae.Webshop.services;
 
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.auth.LoginDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.auth.RegisterDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart.ShoppingCartCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.user.UserDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.exceptions.EmailAlreadyInUseException;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.exceptions.InvalidCredentialsException;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.exceptions.UserNotFoundException;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.models.ShoppingCart;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.User;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,12 +32,15 @@ public class AuthService {
     private final UserRepository userRepository;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final ShoppingCartService shoppingCartService;
 
     @Autowired
-    public AuthService(UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder,
+                       ShoppingCartService shoppingCartService) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.shoppingCartService = shoppingCartService;
     }
 
     public UserDTO registerUser(RegisterDTO registerDTO) {
@@ -47,6 +52,8 @@ public class AuthService {
         user.setRoles(List.of("ROLE_USER"));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
+        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(user.getId()));
+        userRepository.save(savedUser);
         return UserDTO.fromEntity(savedUser);
     }
 
@@ -54,10 +61,10 @@ public class AuthService {
     public UserDTO loginUser(LoginDTO loginDTO) {
 
         User user = userRepository.findByEmail(loginDTO.email())
-                .orElseThrow(() -> new InvalidCredentialsException("Wrong email or password!"));
+                .orElseThrow(() -> new InvalidCredentialsException("Invalid credentials"));
 
         if (!passwordEncoder.matches(loginDTO.password(), user.getPassword())) {
-            throw new InvalidCredentialsException("Wrong email or password!");
+            throw new InvalidCredentialsException("Invalid credentials");
         }
 
         return UserDTO.fromEntity(user);

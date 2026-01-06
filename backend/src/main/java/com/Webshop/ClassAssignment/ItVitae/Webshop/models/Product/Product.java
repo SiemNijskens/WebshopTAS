@@ -11,9 +11,7 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private Long productId;
-
-    private String imageURL;
+    private Long id;
 
     private String imageURL;
 
@@ -48,16 +46,8 @@ public class Product {
 //    public Product() {
 //    }
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public Long getId() {
+        return id;
     }
 
     public String getImageURL() {

@@ -5,7 +5,7 @@ export interface CartItemCreateDTO {
 
 export interface CartItemDTO {
     id: number;
-    product: Product;
+    productSummaryDTO: Product;
     amount: number;
 }
 
@@ -22,8 +22,7 @@ export interface ShoppingCartCreateDTO {
 
 export interface ShoppingCartDTO {
     id: number;
-    user: User;
-    cartItems: CartItem[];
+    cartItems: CartItemDTO[];
 }
 
 export interface ShoppingCartSummaryDTO {
@@ -38,6 +37,7 @@ export interface ProductBaseDTO {
     id: number,
     productCode: string,
     defaultImageURL: string,
+    category: string,
     name: string,
     description: string,
     productBrand: string,
@@ -47,6 +47,7 @@ export interface ProductBaseDTO {
 
 export interface ProductDTO {
     id: number,
+    imageURL: string,
     price: number,
     salePercentage: number,
     stock: number,
@@ -66,7 +67,19 @@ export interface LoginDTO {
     password: string,
 }
 
+export interface RegisterDTO {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    zipCode: string,
+    houseNumber: string,
+    streetName: string,
+    city: string,
+}
+
 export interface UserSummaryDTO {
+    id: number,
     firstName: string,
     lastName: string,
     roles: string[],
@@ -82,6 +95,7 @@ export interface UserDTO {
     houseNumber: string,
     streetName: string,
     city: string,
+    shoppingCarts: ShoppingCartDTO[],
 }
 
 export interface UserCreateDTO {
@@ -163,3 +177,20 @@ export interface ShoppingCart {
 }
 
 export type AttributeType = "PRODUCT" | "VARIANT";
+
+export type MutationError = {
+    message: string,
+    status?: number,
+}
+
+ export type SelectedAttributes = {
+    [attributeName: string]: string
+    }
+
+export type ProductFilters = {
+    categories: string[],
+    brands: string[],
+    // colors: string[],
+    sizes: string[],
+    onSale: boolean;
+}

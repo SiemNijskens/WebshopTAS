@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("shoppingcarts")
+@RequestMapping("/shoppingcarts")
 public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
@@ -36,7 +36,7 @@ public class ShoppingCartController {
     }
 
     @PostMapping
-    public ResponseEntity<ShoppingCartDTO> createShoppingCart(@PathVariable ShoppingCartCreateDTO shoppingCartCreateDTO) {
+    public ResponseEntity<ShoppingCartDTO> createShoppingCart(@RequestBody ShoppingCartCreateDTO shoppingCartCreateDTO) {
         ShoppingCartDTO newShoppingCartDTO = shoppingCartService.createShoppingCart(shoppingCartCreateDTO);
         return ResponseEntity.status(HttpStatus.OK).body(newShoppingCartDTO);
     }

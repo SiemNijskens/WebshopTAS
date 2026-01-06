@@ -1,0 +1,47 @@
+
+/* OLD: slide-in sidebar without overlay */
+/* .sidebar {
+    height: 100%;
+    width: 250px;
+    background-color: black;
+    color: white;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: -250px;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+.sidebar-open {
+    left: 0px;
+} */
+
+/* Replaced with sidebar with overlay to allow outside-click closing */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    background-color: black;
+    color: white;
+    position: fixed;
+    padding: 1rem;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1000;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    left: 250px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}

@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import type { ProductBaseDTO, ProductFilters } from "../types/models";
 import { API_URL } from "../App";
 import { useState } from "react";
-import ProductDetailPage from "./productDetailPage";
+// import ProductDetailPage from "./productDetailPage";
 import '../styles/card.css';
-import XPage from "./XPage";
+// import XPage from "./ProductDetailPage";
 import { useNavigate, useOutletContext } from "react-router";
  
  

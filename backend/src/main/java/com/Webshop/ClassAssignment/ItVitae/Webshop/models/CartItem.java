@@ -1,6 +1,7 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models;
 
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class CartItem {
     private Long id;
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     private Product product;
     private int amount;
     @ManyToOne

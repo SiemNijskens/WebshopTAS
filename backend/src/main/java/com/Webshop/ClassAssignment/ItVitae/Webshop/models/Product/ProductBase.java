@@ -18,8 +18,10 @@ public class ProductBase {
 
     private String defaultImageURL;
 
-    @Enumerated (EnumType.STRING)
-    private ProductType type;
+//    @Enumerated (EnumType.STRING)
+//    private ProductType type;
+
+    private String category;
 
     private String name;
 
@@ -40,20 +42,18 @@ public class ProductBase {
     @OneToMany(mappedBy = "productBase", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductAttribute> productAttributes = new ArrayList<>();
 
-    public ProductBase(Long id, String productCode, String defaultImageURL, ProductType type, String name, String description, String productBrand, List<Product> productVariants, List<ProductAttribute> productAttributes) {
-        this.id = id;
-        this.productCode = productCode;
-        this.defaultImageURL = defaultImageURL;
-        this.type = type;
-        this.name = name;
-        this.description = description;
-        this.productBrand = productBrand;
-        this.productVariants = productVariants;
-        this.productAttributes = productAttributes;
-    }
-
-    public ProductBase() {
-    }
+//    public ProductBase(Long id, String productCode, String name, String description, String productBrand, List<Product> productVariants, List<ProductAttribute> productAttributes) {
+//        this.id = id;
+//        this.productCode = productCode;
+//        this.name = name;
+//        this.description = description;
+//        this.productBrand = productBrand;
+//        this.productVariants = productVariants;
+//        this.productAttributes = productAttributes;
+//    }
+//
+//    public ProductBase() {
+//    }
 
     public Long getId() {
         return id;
@@ -69,22 +69,29 @@ public class ProductBase {
     public String getDefaultImageURL() {
         return defaultImageURL;
     }
-
     public void setDefaultImageURL(String defaultImageURL) {
         this.defaultImageURL = defaultImageURL;
     }
 
-    public ProductType getType() {
-        return type;
-    }
+//    public ProductType getType() {
+//        return type;
+//    }
+//    public void setType(ProductType type) {
+//        this.type = type;
+//    }
 
-    public void setType(ProductType type) {
-        this.type = type;
+
+    public String getCategory() {
+        return category;
+    }
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -92,6 +99,7 @@ public class ProductBase {
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -99,6 +107,7 @@ public class ProductBase {
     public String getProductBrand() {
         return productBrand;
     }
+
     public void setProductBrand(String productBrand) {
         this.productBrand = productBrand;
     }
@@ -106,6 +115,7 @@ public class ProductBase {
     public List<Product> getProductVariants() {
         return productVariants;
     }
+
     public void setProductVariants(List<Product> productVariants) {
         this.productVariants = productVariants;
     }
@@ -117,6 +127,7 @@ public class ProductBase {
     public List<ProductAttribute> getProductAttributes() {
         return productAttributes;
     }
+
     public void setProductAttributes(List<ProductAttribute> productAttributes) {
         this.productAttributes = productAttributes;
     }
@@ -129,11 +140,6 @@ public class ProductBase {
     public void addProductVariant(Product variant) {
         variant.setProductBase(this);
         productVariants.add(variant);
-    }
-
-
-    public void addProductAttribute(ProductAttribute productAttribute){
-        this.productAttributes.add(productAttribute);
     }
 
 }

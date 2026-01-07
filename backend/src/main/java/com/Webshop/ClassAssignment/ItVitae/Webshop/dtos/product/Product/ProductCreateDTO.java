@@ -8,6 +8,7 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductBase;
 import java.util.List;
 
 public record ProductCreateDTO(
+        String imageURL,
         float price,
         float salePercentage,
         int stock,
@@ -16,6 +17,7 @@ public record ProductCreateDTO(
 ) {
     public Product toEntity(){
         Product product = new Product();
+        product.setImageURL(this.imageURL);
         product.setPrice(this.price);
         product.setSalePercentage(this.salePercentage);
         product.setStock(this.stock);

@@ -11,7 +11,7 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private Long productId;
+    private Long id;
 
     private String imageURL;
 
@@ -33,27 +33,26 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductAttribute> productAttributes = new ArrayList<>();
 
-    public Product(Long productId, String imageURL, float price, float salePercentage, int stock, ProductBase productBase, List<ProductAttribute> productAttributes) {
-        this.productId = productId;
-        this.imageURL = imageURL;
-        this.price = price;
-        this.salePercentage = salePercentage;
-        this.stock = stock;
-        this.productBase = productBase;
-        this.productAttributes = productAttributes;
-    }
+//    public Product(Long id, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
+//        this.id = id;
+//        this.price = price;
+//        this.sale = sale;
+//        this.salePercentage = salePercentage;
+//        this.stock = stock;
+//        this.product = product;
+//        this.productVariantAttributes = productVariantAttributes;
+//    }
+//
+//    public Product() {
+//    }
 
-    public Product() {
-    }
-
-    public Long getProductId() {
-        return productId;
+    public Long getId() {
+        return id;
     }
 
     public String getImageURL() {
         return imageURL;
     }
-
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
@@ -61,7 +60,6 @@ public class Product {
     public float getPrice() {
         return price;
     }
-
     public void setPrice(float price) {
         this.price = price;
     }
@@ -69,7 +67,6 @@ public class Product {
     public float getSalePercentage() {
         return salePercentage;
     }
-
     public void setSalePercentage(float salePercentage) {
         this.salePercentage = salePercentage;
     }
@@ -77,7 +74,6 @@ public class Product {
     public int getStock() {
         return stock;
     }
-
     public void setStock(int stock) {
         this.stock = stock;
     }
@@ -85,7 +81,6 @@ public class Product {
     public ProductBase getProduct() {
         return productBase;
     }
-
     public void setProduct(ProductBase productBase) {
         this.productBase = productBase;
     }
@@ -93,13 +88,12 @@ public class Product {
     public List<ProductAttribute> getProductAttributes() {
         return productAttributes;
     }
-
     public void setProductAttributes(List<ProductAttribute> productAttributes) {
         this.productAttributes = productAttributes;
     }
 
-//    public void addProductAttribute(ProductAttribute productAttribute) {
-//        this.productAttributes.add(productAttribute);
+//    public void addProductVariantAttribute(ProductAttribute productAttribute) {
+//        this.productVariantAttributes.add(productAttribute);
 //    }
 
     public ProductBase getProductBase() {

@@ -9,6 +9,8 @@ import java.util.List;
 
 public record ProductBaseCreateDTO(
         String productCode,
+        String defaultImageURL,
+        String category,
         String name,
         String description,
         String productBrand,
@@ -18,6 +20,8 @@ public record ProductBaseCreateDTO(
     public ProductBase toEntity() {
         ProductBase productBase = new ProductBase();
         productBase.setProductCode(this.productCode);
+        productBase.setDefaultImageURL(this.defaultImageURL);
+        productBase.setCategory(this.category);
         productBase.setName(this.name);
         productBase.setDescription(this.description);
         productBase.setProductBrand(this.productBrand);

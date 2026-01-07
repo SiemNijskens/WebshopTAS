@@ -39,7 +39,7 @@ public class ShoppingCartService {
     public ShoppingCartDTO createShoppingCart(ShoppingCartCreateDTO shoppingCartCreateDTO) {
         User user = userRepository.findById(shoppingCartCreateDTO.userId()).orElseThrow(() -> new RuntimeException("Entity not found"));
         ShoppingCart shoppingCart = shoppingCartCreateDTO.toEntity();
-        user.addShoppingCart(shoppingCart);
+//        user.addShoppingCart(shoppingCart);
         shoppingCart.setUser(user);
         ShoppingCart savedCart = shoppingCartRepository.save(shoppingCart);
         return ShoppingCartDTO.fromEntity(savedCart);

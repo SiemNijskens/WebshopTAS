@@ -1,22 +1,38 @@
 import { NavLink } from "react-router";
-import SidebarLandingPage from "./SidebarLandingPage";
+import LoginIfno from "./loginInfo";
+import { useAuthStore } from "./stores/authStore";
+import { useCartStore } from "./stores/cartStore";
 
-const NavBar = () => {
-    
+interface BurgerProps {
+    showBurger: boolean;
+    onBurgerClick: () => void;
+}
+
+const NavBar = ( { showBurger, onBurgerClick }: BurgerProps) => {
+    const { user } = useAuthStore();
+    const { cart } = useCartStore();
+    const isCartEmpty = !cart || cart.cartItems.length === 0;
+
     return (
-        <>
-        <SidebarLandingPage/>
-        <>SVG aanpassen naar 3 stripes</>
-            <nav className="navbar">
-                <NavLink to="/" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> Landingpage </NavLink>
-                <NavLink to="/adminPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> AdminPage </NavLink>
-                <NavLink to="/shoppingCartPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> ShoppingcartPage 
-                </NavLink>
-                <NavLink to="/productDetailPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> ProductDetailPage </NavLink>
-                <NavLink to="/userPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> UserPage </NavLink>
-                <NavLink to="/checkOutPage" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> CheckoutPage </NavLink>
-            </ nav>
-        </>
+        <nav className="navbar">
+            <div className="navbar-left">
+                {showBurger && <img src="pngtree-a-krabby-parry-png-image_13066983.PNG" width="50" height="50" onClick={onBurgerClick} style={{ cursor: "pointer" }}/>}
+            </div>
+        
+            <div className="navbar-center">
+                <NavLink to="/" end className="nav-link">Home</NavLink>
+                <NavLink to="/products" className="nav-link">Products</NavLink>
+                <NavLink to="/shoppingcart" className={`nav-link ${isCartEmpty ? "disabled" : ""}`}>Shopping Cart </NavLink>
+                {/* <NavLink to="/productDetailPage" className="nav-link">ProductDetailPage</NavLink> */}
+                <NavLink to="/checkout" className="nav-link">Checkout</NavLink>
+                {user && <NavLink to="/users/me" className="nav-link">Profile</NavLink>}
+                {user?.roles.includes("ROLE_ADMIN") && <NavLink to="/admin" className="nav-link">Admin</NavLink>}
+            </div>
+
+            <div className="navbar-right">
+            <LoginIfno />
+            </div>
+        </nav>
     )
 }
 

@@ -1,5 +1,7 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product;
 
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeSummaryDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.Product;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductAttribute;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductBase;
@@ -7,23 +9,25 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductBase;
 import java.util.List;
 
 public record ProductSummaryDTO(
-        Long id,
+//        Long id,
+        String name,
+        String description,
+        String brand,
+        String imageURL,
         float price,
-        boolean sale,
-        float salePercentage,
-        int stock,
-        ProductBase product,
-        List<ProductAttribute> productVariantAttributes
+        List<ProductAttributeSummaryDTO> attributes
+
+//        List<ProductAttribute> productVariantAttributes
 ) {
-    public ProductSummaryDTO fromEntity(Product product) {
+    public static ProductSummaryDTO fromEntity(Product product) {
         return new ProductSummaryDTO(
-                product.getProductId(),
+//                product.getId(),
+                product.getProductBase().getName(),
+                product.getProductBase().getDescription(),
+                product.getProductBase().getProductBrand(),
+                product.getImageURL(),
                 product.getPrice(),
-                product.isSale(),
-                product.getSalePercentage(),
-                product.getStock(),
-                product.getProduct(),
-                product.getProductVariantAttributes()
+                product.getProductAttributes().stream().map(ProductAttributeSummaryDTO::fromEntity).toList()
         );
     }
 }

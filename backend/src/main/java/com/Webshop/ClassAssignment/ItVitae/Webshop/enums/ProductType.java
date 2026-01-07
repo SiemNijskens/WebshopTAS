@@ -1,6 +1,6 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.enums;
 
-public enum productType {
+public enum ProductType {
     TOP,
     BOTTOM,
     SHOE,

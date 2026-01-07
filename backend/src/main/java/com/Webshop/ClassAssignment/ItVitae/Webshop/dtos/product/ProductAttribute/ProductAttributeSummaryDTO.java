@@ -7,8 +7,8 @@ public record ProductAttributeSummaryDTO(
         String attribute,
         String value
 ) {
-    public ProductAttributeDTO fromEntity(ProductAttribute productAttribute){
-        return new ProductAttributeDTO(
+    public static ProductAttributeSummaryDTO fromEntity(ProductAttribute productAttribute){
+        return new ProductAttributeSummaryDTO(
                 productAttribute.getId(),
                 productAttribute.getAttribute(),
                 productAttribute.getValue()

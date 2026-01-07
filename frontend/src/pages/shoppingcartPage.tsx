@@ -1,10 +1,7 @@
-import NavBar from "../components/NavBar";
-
 const ShoppingcartPage = () => {
 
     return (
         <>
-            <NavBar />
             <>
                 cart list
                 <li>

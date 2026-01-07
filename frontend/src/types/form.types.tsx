@@ -23,3 +23,13 @@ export interface SignUpFormProps {
   onSubmit: (data: SignUpFormData) => void;
   onCancel?: () => void;
 }
+
+export interface productCreateDTO{
+  productdefaultImageURL: string;
+  productName: string;
+  productBrand: string;
+  productDescription: string;
+  productTypes: string;
+  uniqueAttributes: {string:string};
+  variants: {string:string}
+}

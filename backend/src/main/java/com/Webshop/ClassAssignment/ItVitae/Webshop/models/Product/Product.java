@@ -33,14 +33,14 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductAttribute> productAttributes = new ArrayList<>();
 
-    public Product(Long id, String imageURL, float price, boolean sale, float salePercentage, int stock, ProductBase product, List<ProductAttribute> productVariantAttributes) {
-        this.productId = id;
+    public Product(Long productId, String imageURL, float price, float salePercentage, int stock, ProductBase productBase, List<ProductAttribute> productAttributes) {
+        this.productId = productId;
+        this.imageURL = imageURL;
         this.price = price;
-        this.sale = sale;
         this.salePercentage = salePercentage;
         this.stock = stock;
-        this.product = product;
-        this.productVariantAttributes = productVariantAttributes;
+        this.productBase = productBase;
+        this.productAttributes = productAttributes;
     }
 
     public Product() {
@@ -61,6 +61,7 @@ public class Product {
     public float getPrice() {
         return price;
     }
+
     public void setPrice(float price) {
         this.price = price;
     }
@@ -84,6 +85,7 @@ public class Product {
     public ProductBase getProduct() {
         return productBase;
     }
+
     public void setProduct(ProductBase productBase) {
         this.productBase = productBase;
     }
@@ -91,12 +93,13 @@ public class Product {
     public List<ProductAttribute> getProductAttributes() {
         return productAttributes;
     }
+
     public void setProductAttributes(List<ProductAttribute> productAttributes) {
         this.productAttributes = productAttributes;
     }
 
-//    public void addProductVariantAttribute(ProductAttribute productAttribute) {
-//        this.productVariantAttributes.add(productAttribute);
+//    public void addProductAttribute(ProductAttribute productAttribute) {
+//        this.productAttributes.add(productAttribute);
 //    }
 
     public ProductBase getProductBase() {

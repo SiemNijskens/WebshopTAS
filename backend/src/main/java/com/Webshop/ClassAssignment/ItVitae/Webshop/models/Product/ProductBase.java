@@ -1,6 +1,6 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
-import com.Webshop.ClassAssignment.ItVitae.Webshop.enums.productType;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.enums.ProductType;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class ProductBase {
     private String defaultImageURL;
 
     @Enumerated (EnumType.STRING)
-    private productType type;
+    private ProductType type;
 
     private String name;
 
@@ -40,7 +40,7 @@ public class ProductBase {
     @OneToMany(mappedBy = "productBase", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductAttribute> productAttributes = new ArrayList<>();
 
-    public ProductBase(Long id, String productCode, String defaultImageURL, productType type, String name, String description, String productBrand, List<Product> productVariants, List<ProductAttribute> productAttributes) {
+    public ProductBase(Long id, String productCode, String defaultImageURL, ProductType type, String name, String description, String productBrand, List<Product> productVariants, List<ProductAttribute> productAttributes) {
         this.id = id;
         this.productCode = productCode;
         this.defaultImageURL = defaultImageURL;
@@ -74,11 +74,11 @@ public class ProductBase {
         this.defaultImageURL = defaultImageURL;
     }
 
-    public productType getType() {
+    public ProductType getType() {
         return type;
     }
 
-    public void setType(productType type) {
+    public void setType(ProductType type) {
         this.type = type;
     }
 

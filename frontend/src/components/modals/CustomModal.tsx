@@ -1,6 +1,6 @@
 // components/modal/CustomModal.tsx
 
-import "./CustomModal.css";
+import "../../styles/modals/CustomModal.css";
 import Modal from "react-modal";
 import type { ReactNode } from "react";
 import type { ModalSize, OverlayStyle } from "../../types/modal.types";

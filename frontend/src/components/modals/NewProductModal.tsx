@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap"
 import type { productCreateDTO } from "../../types/form.types"
+import CustomModal from "./CustomModal"
+import { API_URL } from "../../App"
 
 interface variant {
     key: number,
@@ -19,7 +21,7 @@ interface variantAttribute {
 
 const NewProductModal = () => {
 
-    const [formData, setFromData] = useState({
+    const [formData, setFormData] = useState({
         productDefaultImageURL: '',
         productName: '',
         productBrand: '',
@@ -28,6 +30,8 @@ const NewProductModal = () => {
         uniqueAttributes: {},
         variants: {}
     })
+
+    const [show, setShow] = useState(false)
 
     const [variants, setVariants] = useState<variant[]>([])
 
@@ -71,7 +75,7 @@ const NewProductModal = () => {
             // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             queryClient.invalidateQueries({ queryKey: ['products'] }),
                 console.log('products created successfully', data),
-                setFromData({
+                setFormData({
                     productDefaultImageURL: '',
                     productName: '',
                     productBrand: '',
@@ -164,13 +168,15 @@ const NewProductModal = () => {
         const { name, value } = event.target;
         const updatedVariants: variant[] = [...variants];
         updatedVariants[key] = { ...variants[key], [name]: value }
+        console.log(updatedVariants)
         setVariants(updatedVariants);
+        setFormData({...formData, variants:updatedVariants})
     }
     // console.log(variants)
 
     const handleChangeBaseProduct = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setFromData({ ...formData, [name]: value })
+        setFormData({ ...formData, [name]: value })
     }
 
     // (6)['material', 'cotton', 'neck type', 'v neck', 'attriubute 3', 'value 3']
@@ -187,7 +193,7 @@ const NewProductModal = () => {
             uniqueAttributesObject[key] = values[(i * 2 + 1)]
         }
         console.log(uniqueAttributesObject)
-        setFromData({ ...formData, uniqueAttributes: uniqueAttributesObject })
+        setFormData({ ...formData, uniqueAttributes: uniqueAttributesObject })
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -201,156 +207,166 @@ const NewProductModal = () => {
     //   console.log(formData.productType)
     //   console.log(formData.productDefaultImageURL)
 
+    // const showFormdata = ()=>{
+    //     console.log(formData)
+    //     console.log(JSON.stringify(formData))
+    // }
+
     return (
-        <>
-            <Form>
+        <div>
+            <Button as="input" variant="primary" defaultValue="create new product" onClick={() => setShow(true)}/>
+            <CustomModal show={show} handleSubmit={() => handleSubmit} setShow={() => setShow(false)} title="new product">
+                <Form>
+                    {/* style={{all: "unset"}} */}
+                    <Card > {/* all:unset stelt dat alle voorgaande CSS op default values word gereset */}
+                        <Form.Group className="mb-3">
+                            <Form.Label>product name</Form.Label>
+                            <Form.Control placeholder="basic t-shirt" value={formData.productName} type="text" id="productName" name="productName" onChange={() => handleChangeBaseProduct(event)} />
+
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>product brand</Form.Label>
+                            <Form.Control placeholder="nike" value={formData.productBrand} id="productBrand" name="productBrand" onChange={() => handleChangeBaseProduct(event)} />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>product description</Form.Label>
+                            <Form.Control as={"textarea"} rows={3} value={formData.productDescription} name="productDescription" placeholder="basic t-shirt" onChange={() => handleChangeBaseProduct(event)} />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>type product</Form.Label>
+                            <Form.Select aria-placeholder="type of product" value={formData.productType} name="productType" onChange={() => handleChangeBaseProduct(event)}>
+                                <option hidden value="">select a type</option>
+                                <option>top</option>
+                                <option>bottom</option>
+                                <option>shoes</option>
+                                <option>accessories</option>
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>base product image URL</Form.Label>
+                            <Form.Control placeholder="URL" value={formData.productDefaultImageURL} name="productDefaultImageURL" onChange={() => handleChangeBaseProduct(event)} />
+                        </Form.Group>
+                    </Card>
+                </Form>
+
+                <Form onSubmit={lockInUniqueAttributes}>
+                    <Card>
+                        <Form.Group className="mb-3" >
+                            <Form.Label>Unique attribute</Form.Label>
+                            {/* {console.log(numberOfUniqueAttributes)} */}
+                            {numberOfUniqueAttributes.map((index) => (
+                                <Row key={index}>
+                                    <Col> Attribute:<Form.Control placeholder="Attribute (eg. material)" type="text" name={"attribute" + index} /></Col>
+                                    <Col> Value:<Form.Control placeholder="Value (eg. cotton)" type="text" name={"value" + index} /> </Col>
+                                    <Col> <br />
+                                    </Col> </Row>
+                            ))}
+                            <Button variant="primary" onClick={addUniqueAttribute}>Add unique attribute</Button>
+                            <Button variant="primary" onClick={removeUniqueAttribute}>remove unique attribute</Button>
+                        </Form.Group>
+                        <br />
+                        <Button type="submit" variant="primary">lock in these unique attribute</Button>
+                    </Card>
+                </Form>
+
+                select number of variant attributes
+                <br />
+                <select value={numberOfVariants} onChange={changeNumberOfVariants}>
+                    <option value="1" >One</option>
+                    <option value="2" >Two</option>
+                </select>
                 <Card>
-                    <Form.Group className="mb-3">
-                        <Form.Label>product name</Form.Label>
-                        <Form.Control placeholder="basic t-shirt" value={formData.productName} type="text" id="productName" name="productName" onChange={() => handleChangeBaseProduct(event)} />
-
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>product brand</Form.Label>
-                        <Form.Control placeholder="nike" value={formData.productBrand} id="productBrand" name="productBrand" onChange={() => handleChangeBaseProduct(event)} />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>product description</Form.Label>
-                        <Form.Control as={"textarea"} rows={3} value={formData.productDescription} name="productDescription" placeholder="basic t-shirt" onChange={() => handleChangeBaseProduct(event)} />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>type product</Form.Label>
-                        <Form.Select aria-placeholder="type of product" value={formData.productType} name="productType" onChange={() => handleChangeBaseProduct(event)}>
-                            <option hidden value="">select a type</option>
-                            <option>top</option>
-                            <option>bottom</option>
-                            <option>shoes</option>
-                            <option>accessories</option>
-                        </Form.Select>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>base product image URL</Form.Label>
-                        <Form.Control placeholder="URL" value={formData.productDefaultImageURL} name="productDefaultImageURL" onChange={() => handleChangeBaseProduct(event)} />
-                    </Form.Group>
-                    <br />
-                </Card>
-            </Form>
-
-            <Form onSubmit={lockInUniqueAttributes}>
-                <Card>
-                    <Form.Group className="mb-3" >
-                        <Form.Label>Unique attribute</Form.Label>
-                        {/* {console.log(numberOfUniqueAttributes)} */}
-                        {numberOfUniqueAttributes.map((index) => (
-                            <Row key={index}>
-                                <Col> Attribute:<Form.Control placeholder="Attribute (eg. material)" type="text" name={"attribute" + index} /></Col>
-                                <Col> Value:<Form.Control placeholder="Value (eg. cotton)" type="text" name={"value" + index} /> </Col>
-                                <Col> <br />
-                                </Col> </Row>
-                        ))}
-                        <Button variant="primary" onClick={addUniqueAttribute}>Add unique attribute</Button>
-                        <Button variant="primary" onClick={removeUniqueAttribute}>remove unique attribute</Button>
-                    </Form.Group>
-                    <br />
-                    <Button type="submit" variant="primary">lock in these unique attribute</Button>
-                </Card>
-            </Form>
-
-            select number of variant attributes
-            <br />
-            <select value={numberOfVariants} onChange={changeNumberOfVariants}>
-                <option value="1" >One</option>
-                <option value="2" >Two</option>
-            </select>
-            <Card>
-                <Container style={{ border: "1px, solid, light gray" }}>
-                    <Row style={{ display: "flex", justifyContent: "center" }}>
-                        <Col>
-                            <Form onSubmit={addAttributeOne}>
-                                <Form.Group className="mb-3">
-                                    <Col>
-                                        <Form.Label>Variant attribute one</Form.Label>
+                    <Container style={{ border: "1px, solid, light gray" }}>
+                        <Row style={{ display: "flex", justifyContent: "center" }}>
+                            <Col>
+                                <Form onSubmit={addAttributeOne}>
+                                    <Form.Group className="mb-3">
                                         <Col>
-                                            <Form.Control placeholder="Attribute (eg. size)" type="text" name="attribute" /></Col>
+                                            <Form.Label>Variant attribute one</Form.Label>
+                                            <Col>
+                                                <Form.Control placeholder="Attribute (eg. size)" type="text" name="attribute" /></Col>
+
+                                            <div>
+                                                Values
+                                                {variantAttributeOne.map((index) => (
+                                                    <Col key={index}>
+                                                        <Form.Control placeholder="Value (eg. large)" type="text" name={"value" + index} />
+                                                    </Col>
+                                                ))}
+                                            </div>
+                                            <Row>
+                                                <Col> <Button variant="primary" onClick={addVariantAttributeOne}> Add value </Button> </Col>
+                                                <Col> <Button variant="primary" onClick={removeVariantAttributeOne}> Delete value </Button> </Col>
+                                            </Row>
+
+                                            <br />
+
+                                            <Button type="submit" variant="primary"> add this variant attribute </Button>
+
+                                        </Col>
+                                    </Form.Group>
+                                </Form>
+                            </Col>
+                            <Col hidden={variantTwoHidden}>
+                                <Form onSubmit={addAttributeTwo}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label >Variant attribute two</Form.Label>
+                                        <Col>
+                                            <Form.Control placeholder="Attribute (eg. color)" type="text" name="attribute" />
+                                        </Col>
 
                                         <div>
                                             Values
-                                            {variantAttributeOne.map((index) => (
+                                            {variantAttributeTwo.map((index) => (
                                                 <Col key={index}>
-                                                    <Form.Control placeholder="Value (eg. large)" type="text" name={"value" + index} />
+                                                    <Form.Control placeholder="Value (eg. blue)" type="text" name={"value" + index} />
                                                 </Col>
                                             ))}
                                         </div>
                                         <Row>
-                                            <Col> <Button variant="primary" onClick={addVariantAttributeOne}> Add value </Button> </Col>
-                                            <Col> <Button variant="primary" onClick={removeVariantAttributeOne}> Delete value </Button> </Col>
+                                            <Col> <Button variant="primary" onClick={addVariantAttributeTwo}> Add value </Button> </Col>
+                                            <Col> <Button variant="primary" onClick={removeVariantAttributeTwo}> Delete value </Button> </Col>
                                         </Row>
 
                                         <br />
 
                                         <Button type="submit" variant="primary"> add this variant attribute </Button>
+                                    </Form.Group>
+                                </Form>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Card >
 
-                                    </Col>
-                                </Form.Group>
-                            </Form>
-                        </Col>
-                        <Col hidden={variantTwoHidden}>
-                            <Form onSubmit={addAttributeTwo}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label >Variant attribute two</Form.Label>
-                                    <Col>
-                                        <Form.Control placeholder="Attribute (eg. color)" type="text" name="attribute" />
-                                    </Col>
-
-                                    <div>
-                                        Values
-                                        {variantAttributeTwo.map((index) => (
-                                            <Col key={index}>
-                                                <Form.Control placeholder="Value (eg. blue)" type="text" name={"value" + index} />
-                                            </Col>
-                                        ))}
-                                    </div>
-                                    <Row>
-                                        <Col> <Button variant="primary" onClick={addVariantAttributeTwo}> Add value </Button> </Col>
-                                        <Col> <Button variant="primary" onClick={removeVariantAttributeTwo}> Delete value </Button> </Col>
-                                    </Row>
-
-                                    <br />
-
-                                    <Button type="submit" variant="primary"> add this variant attribute </Button>
-                                </Form.Group>
-                            </Form>
-                        </Col>
-                    </Row>
-                </Container>
-            </Card >
-
-            <Button type="button" variant="primary" onClick={updateVariantTable}> update table </Button>
+                <Button type="button" variant="primary" onClick={updateVariantTable}> update table </Button>
 
 
-            {variants.map((variant) => (
-                <div key={variant.key}>
-                    {variant.variantAttributeOne.attribute}: {variant.variantAttributeOne.value}
-                    {variant.variantAttributeTwo.attribute}: {variant.variantAttributeTwo.value}
-                    <label htmlFor=" price"></label>
-                    <input placeholder="price" type="number" name="price" onChange={() => handleChange(variant.key, event)} />
-                    <label htmlFor="stock"></label>
-                    <input placeholder="stock" type="number" name="stock" onChange={() => handleChange(variant.key, event)} />
-                    <label htmlFor="imageURL"></label>
-                    <input placeholder="image url" type="text" name="imageURL" onChange={() => handleChange(variant.key, event)} />
-                    {/* <Button onClick={updateVariant(variant.key, variant.price, variant.stock, variant.imageURL)}> add</Button> */}
-                </div>
-            ))}
+                {variants.map((variant) => (
+                    <div key={variant.key}>
+                        {variant.variantAttributeOne.attribute}: {variant.variantAttributeOne.value}
+                        {variant.variantAttributeTwo.attribute}: {variant.variantAttributeTwo.value}
+                        <label htmlFor=" price"></label>
+                        <input placeholder="price" type="number" name="price" onChange={() => handleChange(variant.key, event)} />
+                        <label htmlFor="stock"></label>
+                        <input placeholder="stock" type="number" name="stock" onChange={() => handleChange(variant.key, event)} />
+                        <label htmlFor="imageURL"></label>
+                        <input placeholder="image url" type="text" name="imageURL" onChange={() => handleChange(variant.key, event)} />
+                        {/* <Button onClick={updateVariant(variant.key, variant.price, variant.stock, variant.imageURL)}> add</Button> */}
+                    </div>
+                ))}
 
-            <br />
-            <br />
-            <br />
-            <br />
+                <br />
+                <br />
+                <br />
+                <br />
 
-            <Form onSubmit={()=> handleSubmit}>
-                <Button type="submit" variant="primary">submit product and variants</Button>
-            </Form>
-        </>
+                <Form onSubmit={() => handleSubmit}>
+                    <Button type="submit" variant="primary">submit product and variants</Button>
+                </Form>
+                    {/* <Button variant="primary" onClick={showFormdata}>show formdata</Button> */}
+
+            </CustomModal>
+        </div>
     )
 }
 export default NewProductModal

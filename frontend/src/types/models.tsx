@@ -5,8 +5,24 @@ export interface CartItemCreateDTO {
 
 export interface CartItemDTO {
     id: number;
-    productSummaryDTO: Product;
+    product: productSummaryDTO;
     amount: number;
+}
+
+export interface productSummaryDTO {
+
+    name: string,
+    description: string,
+    brand: string
+    imageURL: string,
+    price: number,
+    attributes: ProductAttributeSummaryDTO[]
+}
+
+export interface ProductAttributeSummaryDTO {
+    id: number,
+    attribute: string,
+    value: string
 }
 
 export interface CartItemSummaryDTO {

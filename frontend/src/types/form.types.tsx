@@ -25,11 +25,11 @@ export interface SignUpFormProps {
 }
 
 export interface productCreateDTO{
-  productdefaultImageURL: string;
+  productDefaultImageURL: string;
   productName: string;
   productBrand: string;
   productDescription: string;
-  productTypes: string;
-  uniqueAttributes: {string:string};
-  variants: {string:string}
+  productType: string;
+  uniqueAttributes: object;
+  variants: object
 }

@@ -16,6 +16,7 @@ interface variant {
 interface variantAttribute {
     attribute: string,
     value: string | undefined
+    type: string
 }
 
 const NewProductModal = () => {
@@ -155,7 +156,7 @@ const NewProductModal = () => {
         let number = 0
         for (let i = 0; i < variantOneData.valuesOne.length; i++) {
             for (let j = 0; j < variantTwoData.valuesTwo.length; j++) {
-                variantsArray.push({variantAttributeOne: { attribute: variantOneData.attributeOne, value: variantOneData.valuesOne.at(i) }, variantAttributeTwo: { attribute: variantTwoData.attributeTwo, value: variantTwoData.valuesTwo.at(j) }, stock: NaN, price: NaN, imageURL: '' })
+                variantsArray.push({variantAttributeOne: { attribute: variantOneData.attributeOne, value: variantOneData.valuesOne.at(i), type: "VARIANT" }, variantAttributeTwo: { attribute: variantTwoData.attributeTwo, value: variantTwoData.valuesTwo.at(j), type: "VARIANT"}, stock: NaN, price: NaN, imageURL: '' })
                 number = number + 1
             }
         }
@@ -178,37 +179,26 @@ const NewProductModal = () => {
         setFormData({ ...formData, [name]: value })
     }
 
-    // (6)['material', 'cotton', 'neck type', 'v neck', 'attriubute 3', 'value 3']
-
     const lockInUniqueAttributes = (lockInEvent) => {
         lockInEvent.preventDefault()
+        
         const uniqueAttributesData = new FormData(lockInEvent.target)
         const data = Object.fromEntries(uniqueAttributesData.entries())
-        const uniqueAttributesObject = {};
-        const values = Object.values(data);
+        const values = Object.values(data)
 
-        for (let i = 0; i < numberOfUniqueAttributes.length; i++) {
-            const key = values[i * 2]
-            uniqueAttributesObject[key] = values[(i * 2 + 1)]
+        const productAttributesArray = []
+        for (let i = 0; i < ((Object.values(data).length/2)); i++) {
+            productAttributesArray.push({["productAttribute"+i]: {attribute: values[i*2], value: values[i*2+1], type: "PRODUCT"}})
         }
-        console.log(uniqueAttributesObject)
-        const productAttributes=[];
-        for (let j=0; j<Object.keys(uniqueAttributesObject).length; j++){
-            productAttributes.push(("Attribute"+j),uniqueAttributesObject)
-        }
-        setFormData({ ...formData, uniqueAttributes: uniqueAttributesObject })
+        console.log(productAttributesArray)
+
+        setFormData({ ...formData, uniqueAttributes: productAttributesArray })
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         createProduct.mutate(formData);
     }
-
-    //   console.log(formData.productName)
-    //   console.log(formData.productBrand)
-    //   console.log(formData.productDescription)
-    //   console.log(formData.productType)
-    //   console.log(formData.productDefaultImageURL)
 
     // const showFormdata = ()=>{
     //     console.log(formData)
@@ -369,6 +359,3 @@ const NewProductModal = () => {
     )
 }
 export default NewProductModal
-
-
-{/* {index} {element} <Form.Control placeholder="price" type="number" name="price" /> <Form.Control placeholder="stock" type="number" name="stock" /> */ }

@@ -6,7 +6,6 @@ import CustomModal from "./CustomModal"
 import { API_URL } from "../../App"
 
 interface variant {
-    key: number,
     variantAttributeOne: variantAttribute,
     variantAttributeTwo: variantAttribute,
     stock: number,
@@ -58,7 +57,7 @@ const NewProductModal = () => {
 
     const createProduct = useMutation({
         mutationFn: async (FormData: productCreateDTO) => {
-            const response = await fetch(`${API_URL}/product`, {
+            const response = await fetch(`${API_URL}/products/create`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(FormData)
@@ -128,7 +127,7 @@ const NewProductModal = () => {
         delete data.attribute;
         const valuesAttributeOne = Object.values(data)
 
-        setVariantOneData({ attributeOne: attributeOne, valuesOne: valuesAttributeOne })
+        setVariantOneData({ attributeOne: attributeOne, valuesOne: valuesAttributeOne, type: "VARIANT" })
     }
 
 
@@ -140,7 +139,7 @@ const NewProductModal = () => {
         delete attributeTwodata.attribute;
         const valuesAttributeTwo = Object.values(attributeTwodata)
 
-        setVariantTwoData({ attributeTwo: attributeTwo, valuesTwo: valuesAttributeTwo })
+        setVariantTwoData({ attributeTwo: attributeTwo, valuesTwo: valuesAttributeTwo, type: "VARIANT" })
     }
 
     const changeNumberOfVariants = (eventNumberOfVariants: { target: { value: string } }) => {
@@ -156,7 +155,7 @@ const NewProductModal = () => {
         let number = 0
         for (let i = 0; i < variantOneData.valuesOne.length; i++) {
             for (let j = 0; j < variantTwoData.valuesTwo.length; j++) {
-                variantsArray.push({ key: number, variantAttributeOne: { attribute: variantOneData.attributeOne, value: variantOneData.valuesOne.at(i) }, variantAttributeTwo: { attribute: variantTwoData.attributeTwo, value: variantTwoData.valuesTwo.at(j) }, stock: NaN, price: NaN, imageURL: '' })
+                variantsArray.push({variantAttributeOne: { attribute: variantOneData.attributeOne, value: variantOneData.valuesOne.at(i) }, variantAttributeTwo: { attribute: variantTwoData.attributeTwo, value: variantTwoData.valuesTwo.at(j) }, stock: NaN, price: NaN, imageURL: '' })
                 number = number + 1
             }
         }
@@ -172,7 +171,7 @@ const NewProductModal = () => {
         setVariants(updatedVariants);
         setFormData({...formData, variants:updatedVariants})
     }
-    // console.log(variants)
+    console.log(variants)
 
     const handleChangeBaseProduct = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -193,6 +192,10 @@ const NewProductModal = () => {
             uniqueAttributesObject[key] = values[(i * 2 + 1)]
         }
         console.log(uniqueAttributesObject)
+        const productAttributes=[];
+        for (let j=0; j<Object.keys(uniqueAttributesObject).length; j++){
+            productAttributes.push(("Attribute"+j),uniqueAttributesObject)
+        }
         setFormData({ ...formData, uniqueAttributes: uniqueAttributesObject })
     }
 
@@ -343,8 +346,7 @@ const NewProductModal = () => {
 
                 {variants.map((variant) => (
                     <div key={variant.key}>
-                        {variant.variantAttributeOne.attribute}: {variant.variantAttributeOne.value}
-                        {variant.variantAttributeTwo.attribute}: {variant.variantAttributeTwo.value}
+                        {variant.variantAttributeOne.attribute}: {variant.variantAttributeOne.value} {variant.variantAttributeTwo.attribute}: {variant.variantAttributeTwo.value}
                         <label htmlFor=" price"></label>
                         <input placeholder="price" type="number" name="price" onChange={() => handleChange(variant.key, event)} />
                         <label htmlFor="stock"></label>
@@ -355,9 +357,6 @@ const NewProductModal = () => {
                     </div>
                 ))}
 
-                <br />
-                <br />
-                <br />
                 <br />
 
                 <Form onSubmit={() => handleSubmit}>

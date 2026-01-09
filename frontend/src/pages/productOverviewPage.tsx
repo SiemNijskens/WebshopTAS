@@ -72,8 +72,9 @@ const productOverviewPage = () => {
                     {filteredProducts.map(product => (
                         <div key={product.id} onClick={() => setProductId(product.id)} className="card">
                             <h3 style={{}}>{product.name} from {product.productBrand}</h3>
-                            <p>{product.description}</p>
-                            <p>place img here</p>
+                            {/* <p>{product.description}</p> */}
+                            {/* <p>place img here</p> */}
+                            <img src={product.defaultImageURL} alt="product image"/>
                             <h4>attributes</h4>
                             {product.attributes.map(attribute => (
                                 <div key={attribute.id}>

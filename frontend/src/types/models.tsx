@@ -5,8 +5,20 @@ export interface CartItemCreateDTO {
 
 export interface CartItemDTO {
     id: number;
-    productSummaryDTO: Product;
+    product: CartProductDTO;
     amount: number;
+}
+
+export interface CartProductDTO {
+    productBaseId: number;
+    productVariantId: number;
+    name: string;
+    price: number;
+    salePercentage: number;
+    attributes: {
+        attribute: string;
+        value: string;
+    }[];
 }
 
 export interface CartItemSummaryDTO {
@@ -22,6 +34,12 @@ export interface ShoppingCartCreateDTO {
 
 export interface ShoppingCartDTO {
     id: number;
+    user?: {
+        id: number;
+        firstName: string;
+        lastName: string;
+        roles: string[];
+    } | null;
     cartItems: CartItemDTO[];
 }
 
@@ -95,7 +113,7 @@ export interface UserDTO {
     houseNumber: string,
     streetName: string,
     city: string,
-    shoppingCarts: ShoppingCartDTO[],
+    // shoppingCarts: ShoppingCartDTO[],
 }
 
 export interface UserCreateDTO {
@@ -140,7 +158,7 @@ export interface User {
     houseNumber: string;
     streetName: string;
     city: string;
-    shoppingCarts: ShoppingCart[];
+    // shoppingCarts: ShoppingCart[];
 }
 
 export interface CartItem {

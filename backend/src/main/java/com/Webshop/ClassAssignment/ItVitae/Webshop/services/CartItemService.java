@@ -18,16 +18,14 @@ import java.util.List;
 
 @Service
 @Transactional
-public class    CartItemService {
+public class CartItemService {
 
     private final CartItemRepository cartItemRepository;
-    private final ProductRepository productRepository;
     private final ShoppingCartRepository shoppingCartRepository;
 
     @Autowired
-    public CartItemService(CartItemRepository cartItemRepository, ProductRepository productRepository, ShoppingCartRepository shoppingCartRepository) {
+    public CartItemService(CartItemRepository cartItemRepository, ShoppingCartRepository shoppingCartRepository) {
         this.cartItemRepository = cartItemRepository;
-        this.productRepository = productRepository;
         this.shoppingCartRepository = shoppingCartRepository;
     }
 
@@ -40,13 +38,13 @@ public class    CartItemService {
         return cartItemRepository.findAll().stream().map(CartItemDTO::fromEntity).toList();
     }
 
-    public CartItemDTO createCartItem(CartItemCreateDTO cartItemCreateDTO) {
-        Product product = productRepository.findById(cartItemCreateDTO.productId()).orElseThrow(() -> new RuntimeException("Entity not found"));
-        CartItem cartItem = cartItemCreateDTO.toEntity();
-        cartItem.setProduct(product);
-        CartItem savedItem = cartItemRepository.save(cartItem);
-        return CartItemDTO.fromEntity(savedItem);
-    }
+//    public CartItemDTO createCartItem(CartItemCreateDTO cartItemCreateDTO) {
+//        Product product = productRepository.findById(cartItemCreateDTO.productId()).orElseThrow(() -> new RuntimeException("Entity not found"));
+//        CartItem cartItem = cartItemCreateDTO.toEntity();
+//        cartItem.setProduct(product);
+//        CartItem savedItem = cartItemRepository.save(cartItem);
+//        return CartItemDTO.fromEntity(savedItem);
+//    }
 
     public CartItemDTO updateCartItem(Long id, CartItemUpdateDTO cartItemUpdateDTO) {
         CartItem cartItem = cartItemRepository.findById(id).orElseThrow(() -> new RuntimeException("Entity not found"));
@@ -59,16 +57,16 @@ public class    CartItemService {
         cartItemRepository.deleteById(id);
     }
 
-    @Transactional
-    public ShoppingCartDTO addCartItemToShoppingCart(CartItemCreateDTO cartItemCreateDTO, Long shoppingCartId) {
-        Product product = productRepository.findById(cartItemCreateDTO.productId()).orElseThrow(() -> new RuntimeException("Entity not found"));
-        ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartId).orElseThrow(() -> new RuntimeException("Entity not found"));
-        CartItem newCartItem = cartItemCreateDTO.toEntity();
-        newCartItem.setProduct(product);
-        newCartItem.setShoppingCart(shoppingCart);
-        shoppingCart.addCartItem(newCartItem);
-        cartItemRepository.save(newCartItem);
-        shoppingCartRepository.save(shoppingCart);
-        return ShoppingCartDTO.fromEntity(shoppingCart);
-    }
+//    @Transactional
+//    public ShoppingCartDTO addCartItemToShoppingCart(CartItemCreateDTO cartItemCreateDTO, Long shoppingCartId) {
+//        Product product = productRepository.findById(cartItemCreateDTO.productId()).orElseThrow(() -> new RuntimeException("Entity not found"));
+//        ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartId).orElseThrow(() -> new RuntimeException("Entity not found"));
+//        CartItem newCartItem = cartItemCreateDTO.toEntity();
+//        newCartItem.setProduct(product);
+//        newCartItem.setShoppingCart(shoppingCart);
+//        shoppingCart.addCartItem(newCartItem);
+//        cartItemRepository.save(newCartItem);
+//        shoppingCartRepository.save(shoppingCart);
+//        return ShoppingCartDTO.fromEntity(shoppingCart);
+//    }
 }

@@ -5,7 +5,7 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.models.CartItem;
 import com.fasterxml.jackson.annotation.JsonAlias;
 
 public record CartItemCreateDTO(
-        @JsonAlias("product_id")
+//        @JsonAlias("product_id")
         Long productId,
         int amount
 ) {

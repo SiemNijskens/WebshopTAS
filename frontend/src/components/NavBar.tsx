@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import LoginIfno from "./loginInfo";
 import { useAuthStore } from "./stores/authStore";
-import { useCartStore } from "./stores/cartStore";
+// import { useCartStore } from "./stores/cartStore";
 
 interface BurgerProps {
     showBurger: boolean;
@@ -10,8 +10,8 @@ interface BurgerProps {
 
 const NavBar = ( { showBurger, onBurgerClick }: BurgerProps) => {
     const { user } = useAuthStore();
-    const { cart } = useCartStore();
-    const isCartEmpty = !cart || cart.cartItems.length === 0;
+    // const { cart } = useCartStore();
+    // const isCartEmpty = !cart?.cartItems || cart?.cartItems.length === 0;
 
     return (
         <nav className="navbar">
@@ -22,7 +22,8 @@ const NavBar = ( { showBurger, onBurgerClick }: BurgerProps) => {
             <div className="navbar-center">
                 <NavLink to="/" end className="nav-link">Home</NavLink>
                 <NavLink to="/products" className="nav-link">Products</NavLink>
-                <NavLink to="/shoppingcart" className={`nav-link ${isCartEmpty ? "disabled" : ""}`}>Shopping Cart </NavLink>
+                {/* <NavLink to="/shoppingcarts" className={`nav-link ${isCartEmpty ? "disabled" : ""}`}>Shopping Cart </NavLink> */}
+                <NavLink to="/shoppingcarts" className="nav-link">Shopping Cart </NavLink>
                 {/* <NavLink to="/productDetailPage" className="nav-link">ProductDetailPage</NavLink> */}
                 <NavLink to="/checkout" className="nav-link">Checkout</NavLink>
                 {user && <NavLink to="/users/me" className="nav-link">Profile</NavLink>}

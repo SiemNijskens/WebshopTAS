@@ -39,10 +39,10 @@ public class DataInitializer {
         userService.registerUser(new UserCreateDTO("Stefan","Webshop",List.of("ROLE_USER"), "stefan_webshop@webshop.nl","password123","4000XX","63","Borneolaan", "Amersfoort"));
         userService.registerUser(new UserCreateDTO("Arne","Webshop",List.of("ROLE_ADMIN", "ROLE_USER"), "arne_webshop@webshop.nl","password123","5000XX","419","Curacaogracht", "Amersfoort"));
 
-        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(1L));
-        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(2L));
-        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(3L));
-        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(4L));
+//        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(1L));
+//        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(2L));
+//        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(3L));
+//        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(4L));
 
         List<String> shirtSizes = List.of("S","M","L");
         List<String> shirtColors = List.of("White", "Blue", "Orange", "Black", "Red");
@@ -130,7 +130,7 @@ public class DataInitializer {
         for (String pantsSize : pantsSizes) {
             for (String pantsColor : pantsColors ) {
                 ProductCreateDTO variant = new ProductCreateDTO(
-                        "XXX",
+                        "/images/products/basic_pants_" + pantsColor.toLowerCase() + ".png",
                         39.99f,
                         0.7f,
                         20,
@@ -150,7 +150,7 @@ public class DataInitializer {
 
         ProductBaseCreateDTO pantsBase = new ProductBaseCreateDTO(
                 "P-200",
-                "XXX",
+                "/images/products/basic_pants_black.png",
                 "Pants",
                 "Basic Pants",
                 "100% Denim",
@@ -169,7 +169,7 @@ public class DataInitializer {
         for (String hoodieSize : hoodiesSizes) {
             for (String hoodieColor : hoodiesColors ) {
                 ProductCreateDTO variant = new ProductCreateDTO(
-                        "XXX",
+                        "/images/products/fancy_hoodie_" + hoodieColor.toLowerCase() + ".png",
                         24.99f,
                         1.0f,
                         5,
@@ -189,7 +189,7 @@ public class DataInitializer {
 
         ProductBaseCreateDTO hoodiesBase = new ProductBaseCreateDTO(
                 "H-50",
-                "XXX",
+                "/images/products/fancy_hoodie_black.png",
                 "Hoodies",
                 "Fancy Hoodie",
                 "Now with elastic cord to adjust your hood. Also with long sleeves.",
@@ -208,7 +208,7 @@ public class DataInitializer {
         for (String capSize : capsSizes) {
             for (String capColor : capsColors ) {
                 ProductCreateDTO variant = new ProductCreateDTO(
-                        "XXX",
+                        "/images/products/cool_cap_" + capColor.toLowerCase() + ".png",
                         14.99f,
                         1.0f,
                         5,
@@ -227,7 +227,7 @@ public class DataInitializer {
 
         ProductBaseCreateDTO capsBase = new ProductBaseCreateDTO(
                 "C-20",
-                "XXX",
+                "/images/products/cool_cap_black.png",
                 "Caps",
                 "Cool Cap",
                 "The best Cap to look slick.",
@@ -280,7 +280,7 @@ public class DataInitializer {
         for (String cheeseCountry : cheeseCountries) {
             for (String cheeseColor : cheeseColors ) {
                 ProductCreateDTO variant = new ProductCreateDTO(
-                        "XXX",
+                        "/images/products/incredible_cheese_" + cheeseColor.toLowerCase() + "_" + cheeseCountry.toLowerCase() + ".png",
                         124.99f,
                         1.0f,
                         2,
@@ -299,7 +299,7 @@ public class DataInitializer {
 
         ProductBaseCreateDTO cheeseBase = new ProductBaseCreateDTO(
                 "CH-48+",
-                "XXX",
+                "/images/products/incredible_cheese_yellow.png",
                 "Other",
                 "Incredible Cheese",
                 "The best cheese for sale in a clothing shop.",
@@ -310,7 +310,7 @@ public class DataInitializer {
         ProductBaseDTO savedCheeses = productService.createProduct(cheeseBase);
 
 
-        List<String> phoneModels = List.of("Orange Iphoney 16e","Orange Iphoney 16","Orange Iphoney 16plus");
+        List<String> phoneModels = List.of("Iphoney 16e","Iphoney 16","Iphoney 16plus");
         List<String> phoneColors = List.of("White", "Gray","Black");
 
         List<ProductCreateDTO> phones = new ArrayList<>();
@@ -318,7 +318,7 @@ public class DataInitializer {
         for (String phoneModel : phoneModels) {
             for (String phoneColor : phoneColors ) {
                 ProductCreateDTO variant = new ProductCreateDTO(
-                        "XXX",
+                        "/images/products/phone_" + phoneColor.toLowerCase() + ".png",
                         249.99f,
                         1.0f,
                         3,
@@ -337,7 +337,7 @@ public class DataInitializer {
 
         ProductBaseCreateDTO phoneBase = new ProductBaseCreateDTO(
                 "PH-00-",
-                "XXX",
+                "/images/products/phone_black.png",
                 "Other",
                 "Phone",
                 "A phone.",

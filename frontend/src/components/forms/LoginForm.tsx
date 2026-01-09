@@ -31,7 +31,7 @@ const LoginForm = () => {
       onSuccess: (user) => {
         login(user);
         // alert("Hi " + user.firstName + "!");
-        navigate("/");
+        navigate(-1);
       },
       onError: (error) => {
         setErrorMessage(error.message);

@@ -48,7 +48,7 @@ public class UserService {
 
         User user = userCreateDTO.toEntity();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setShoppingCarts(user.getShoppingCarts());
+//        user.setShoppingCarts(user.getShoppingCarts());
         User savedUser = userRepository.save(user);
         return UserDTO.fromEntity(savedUser);
     }

@@ -175,6 +175,7 @@
 
 .form-field input {
   padding: 0.5rem;
+  border-radius: 10px;
   font-size: 1rem;
   text-align: left;
 }

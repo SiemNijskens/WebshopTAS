@@ -26,19 +26,19 @@ public class CartItemController {
         this.cartItemService = cartItemService;
     }
 
-    @PostMapping
-    public ResponseEntity<CartItemDTO> createCartItem(@RequestBody CartItemCreateDTO cartItemCreateDTO) {
-        CartItemDTO newCartItem = cartItemService.createCartItem(cartItemCreateDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newCartItem);
-    }
+//    @PostMapping
+//    public ResponseEntity<CartItemDTO> createCartItem(@RequestBody CartItemCreateDTO cartItemCreateDTO) {
+//        CartItemDTO newCartItem = cartItemService.createCartItem(cartItemCreateDTO);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(newCartItem);
+//    }
 
-    @PostMapping("/{shoppingCartId}")
-    public ResponseEntity<ShoppingCartDTO> addCartItemToShoppingCart(
-            @RequestBody CartItemCreateDTO cartItemCreateDTO,
-            @PathVariable Long shoppingCartId) {
-        ShoppingCartDTO shoppingCartDTO = cartItemService.addCartItemToShoppingCart(cartItemCreateDTO, shoppingCartId);
-        return ResponseEntity.status(HttpStatus.OK).body(shoppingCartDTO);
-    }
+//    @PostMapping("/{shoppingCartId}")
+//    public ResponseEntity<ShoppingCartDTO> addCartItemToShoppingCart(
+//            @RequestBody CartItemCreateDTO cartItemCreateDTO,
+//            @PathVariable Long shoppingCartId) {
+//        ShoppingCartDTO shoppingCartDTO = cartItemService.addCartItemToShoppingCart(cartItemCreateDTO, shoppingCartId);
+//        return ResponseEntity.status(HttpStatus.OK).body(shoppingCartDTO);
+//    }
 
     //voor testing purposes
     @GetMapping

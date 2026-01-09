@@ -52,7 +52,7 @@ public class AuthService {
         user.setRoles(List.of("ROLE_USER"));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
-        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(user.getId()));
+//        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(user.getId()));
         userRepository.save(savedUser);
         return UserDTO.fromEntity(savedUser);
     }

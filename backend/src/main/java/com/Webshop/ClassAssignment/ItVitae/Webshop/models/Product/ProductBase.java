@@ -1,6 +1,5 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
-import com.Webshop.ClassAssignment.ItVitae.Webshop.enums.ProductType;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class ProductBase {
     @Id
     private Long id;
 
-    private String productCode;
+//    private String productCode;
 
     private String defaultImageURL;
 
@@ -59,12 +58,12 @@ public class ProductBase {
         return id;
     }
 
-    public String getProductCode() {
-        return productCode;
-    }
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
+//    public String getProductCode() {
+//        return productCode;
+//    }
+//    public void setProductCode(String productCode) {
+//        this.productCode = productCode;
+//    }
 
     public String getDefaultImageURL() {
         return defaultImageURL;

@@ -6,6 +6,7 @@ import CustomModal from "./CustomModal"
 import { API_URL } from "../../App"
 
 interface variant {
+    key: number,
     variantAttributeOne: variantAttribute,
     variantAttributeTwo: variantAttribute,
     stock: number,
@@ -21,19 +22,28 @@ interface variantAttribute {
 
 const NewProductModal = () => {
 
+        // String productCode,
+        // String defaultImageURL,
+        // String category,
+        // String name,
+        // String description,
+        // String productBrand,
+        // List<ProductCreateDTO> products,
+        // List<ProductAttributeCreateDTO> productAttributes
+
     const [formData, setFormData] = useState({
-        productDefaultImageURL: '',
-        productName: '',
+        defaultImageURL: '',
+        name: '',
         productBrand: '',
-        productDescription: '',
-        productType: '',
-        uniqueAttributes: {},
-        variants: {}
+        description: '',
+        category: '',
+        productAttributes: {},
+        products: {}
     })
 
     const [show, setShow] = useState(false)
 
-    const [variants, setVariants] = useState<variant[]>([])
+    const [products, setProducts] = useState<variant[]>([])
 
     const [variantOneData, setVariantOneData] = useState({
         attributeOne: "",
@@ -45,8 +55,8 @@ const NewProductModal = () => {
         valuesTwo: ['']
     })
 
-    const [numberOfVariants, setNumberOfVariants] = useState(1)
-    const [numberOfUniqueAttributes, setNumberOfUniqueAttributes] = useState([1])
+    const [numberOfProducts, setNumberOfProducts] = useState(1)
+    const [numberOfproductAttributes, setNumberOfproductAttributes] = useState([1])
 
     // const [AttributeOnedisabled, setAttributeOneDisabled] = useState(false)
     // const [AttributeTwoDisabled, setAttributeTwoDisabled] = useState(false)
@@ -76,13 +86,13 @@ const NewProductModal = () => {
             queryClient.invalidateQueries({ queryKey: ['products'] }),
                 console.log('products created successfully', data),
                 setFormData({
-                    productDefaultImageURL: '',
-                    productName: '',
+                    defaultImageURL: '',
+                    name: '',
                     productBrand: '',
-                    productDescription: '',
-                    productType: '',
-                    uniqueAttributes: {},
-                    variants: {}
+                    description: '',
+                    category: '',
+                    productAttributes: {},
+                    products: {}
                 });
         }
     })
@@ -108,16 +118,16 @@ const NewProductModal = () => {
     }
 
     const addUniqueAttribute = () => {
-        setNumberOfUniqueAttributes([...numberOfUniqueAttributes, numberOfUniqueAttributes.length + 1])
+        setNumberOfproductAttributes([...numberOfproductAttributes, numberOfproductAttributes.length + 1])
     }
 
     const removeUniqueAttribute = () => {
-        const length = numberOfUniqueAttributes.length
-        const updatedLength = numberOfUniqueAttributes.slice(0, (length - 1))
-        setNumberOfUniqueAttributes(updatedLength)
+        const length = numberOfproductAttributes.length
+        const updatedLength = numberOfproductAttributes.slice(0, (length - 1))
+        setNumberOfproductAttributes(updatedLength)
     }
 
-    // console.log("number of unique attributes", numberOfUniqueAttributes)
+    // console.log("number of unique attributes", numberOfproductAttributes)
 
     const addAttributeOne = (eventAttributeOne) => {
         eventAttributeOne.preventDefault()
@@ -143,56 +153,56 @@ const NewProductModal = () => {
         setVariantTwoData({ attributeTwo: attributeTwo, valuesTwo: valuesAttributeTwo, type: "VARIANT" })
     }
 
-    const changeNumberOfVariants = (eventNumberOfVariants: { target: { value: string } }) => {
-        setNumberOfVariants(parseInt(eventNumberOfVariants.target.value))
+    const changeNumberOfProducts = (eventNumberOfProducts: { target: { value: string } }) => {
+        setNumberOfProducts(parseInt(eventNumberOfProducts.target.value))
     }
 
     let variantTwoHidden = true
-    if (numberOfVariants === 2) { variantTwoHidden = false }
+    if (numberOfProducts === 2) { variantTwoHidden = false }
     else variantTwoHidden = true
 
     const updateVariantTable = () => {
-        const variantsArray: variant[] = [];
+        const productsArray: variant[] = [];
         let number = 0
         for (let i = 0; i < variantOneData.valuesOne.length; i++) {
             for (let j = 0; j < variantTwoData.valuesTwo.length; j++) {
-                variantsArray.push({variantAttributeOne: { attribute: variantOneData.attributeOne, value: variantOneData.valuesOne.at(i), type: "VARIANT" }, variantAttributeTwo: { attribute: variantTwoData.attributeTwo, value: variantTwoData.valuesTwo.at(j), type: "VARIANT"}, stock: NaN, price: NaN, imageURL: '' })
+                productsArray.push({key: number, variantAttributeOne: { attribute: variantOneData.attributeOne, value: variantOneData.valuesOne.at(i), type: "VARIANT" }, variantAttributeTwo: { attribute: variantTwoData.attributeTwo, value: variantTwoData.valuesTwo.at(j), type: "VARIANT"}, stock: NaN, price: NaN, imageURL: '' })
                 number = number + 1
             }
         }
-        setVariants(variantsArray)
-        console.log(variants[1])
+        setProducts(productsArray)
+        console.log(products[1])
     }
 
     const handleChange = (key: number, event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        const updatedVariants: variant[] = [...variants];
-        updatedVariants[key] = { ...variants[key], [name]: value }
-        console.log(updatedVariants)
-        setVariants(updatedVariants);
-        setFormData({...formData, variants:updatedVariants})
+        const updatedProducts: variant[] = [...products];
+        updatedProducts[key] = { ...products[key], [name]: value }
+        console.log(updatedProducts)
+        setProducts(updatedProducts);
+        setFormData({...formData, products:updatedProducts})
     }
-    console.log(variants)
+    // console.log(products)
 
     const handleChangeBaseProduct = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value })
     }
 
-    const lockInUniqueAttributes = (lockInEvent) => {
+    const lockInproductAttributes = (lockInEvent) => {
         lockInEvent.preventDefault()
         
-        const uniqueAttributesData = new FormData(lockInEvent.target)
-        const data = Object.fromEntries(uniqueAttributesData.entries())
+        const productAttributesData = new FormData(lockInEvent.target)
+        const data = Object.fromEntries(productAttributesData.entries())
         const values = Object.values(data)
 
         const productAttributesArray = []
         for (let i = 0; i < ((Object.values(data).length/2)); i++) {
-            productAttributesArray.push({["productAttribute"+i]: {attribute: values[i*2], value: values[i*2+1], type: "PRODUCT"}})
+            productAttributesArray.push({key: i, ["productAttribute"+i]: {attribute: values[i*2], value: values[i*2+1], type: "PRODUCT"}})
         }
         console.log(productAttributesArray)
 
-        setFormData({ ...formData, uniqueAttributes: productAttributesArray })
+        setFormData({ ...formData, productAttributes: productAttributesArray })
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -214,7 +224,7 @@ const NewProductModal = () => {
                     <Card > {/* all:unset stelt dat alle voorgaande CSS op default values word gereset */}
                         <Form.Group className="mb-3">
                             <Form.Label>product name</Form.Label>
-                            <Form.Control placeholder="basic t-shirt" value={formData.productName} type="text" id="productName" name="productName" onChange={() => handleChangeBaseProduct(event)} />
+                            <Form.Control placeholder="basic t-shirt" value={formData.name} type="text" id="name" name="name" onChange={() => handleChangeBaseProduct(event)} />
 
                         </Form.Group>
                         <Form.Group className="mb-3">
@@ -223,31 +233,31 @@ const NewProductModal = () => {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>product description</Form.Label>
-                            <Form.Control as={"textarea"} rows={3} value={formData.productDescription} name="productDescription" placeholder="basic t-shirt" onChange={() => handleChangeBaseProduct(event)} />
+                            <Form.Control as={"textarea"} rows={3} value={formData.description} name="description" placeholder="basic t-shirt" onChange={() => handleChangeBaseProduct(event)} />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>type product</Form.Label>
-                            <Form.Select aria-placeholder="type of product" value={formData.productType} name="productType" onChange={() => handleChangeBaseProduct(event)}>
-                                <option hidden value="">select a type</option>
+                            <Form.Control placeholder="type of product" type="text" value={formData.category} name="category" onChange={() => handleChangeBaseProduct(event)}>
+                                {/* <option hidden value="">select a type</option>
                                 <option>top</option>
                                 <option>bottom</option>
                                 <option>shoes</option>
-                                <option>accessories</option>
-                            </Form.Select>
+                                <option>accessories</option> */}
+                            </Form.Control>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>base product image URL</Form.Label>
-                            <Form.Control placeholder="URL" value={formData.productDefaultImageURL} name="productDefaultImageURL" onChange={() => handleChangeBaseProduct(event)} />
+                            <Form.Control placeholder="URL" value={formData.defaultImageURL} name="defaultImageURL" onChange={() => handleChangeBaseProduct(event)} />
                         </Form.Group>
                     </Card>
                 </Form>
 
-                <Form onSubmit={lockInUniqueAttributes}>
+                <Form onSubmit={lockInproductAttributes}>
                     <Card>
                         <Form.Group className="mb-3" >
                             <Form.Label>Unique attribute</Form.Label>
-                            {/* {console.log(numberOfUniqueAttributes)} */}
-                            {numberOfUniqueAttributes.map((index) => (
+                            {/* {console.log(numberOfproductAttributes)} */}
+                            {numberOfproductAttributes.map((index) => (
                                 <Row key={index}>
                                     <Col> Attribute:<Form.Control placeholder="Attribute (eg. material)" type="text" name={"attribute" + index} /></Col>
                                     <Col> Value:<Form.Control placeholder="Value (eg. cotton)" type="text" name={"value" + index} /> </Col>
@@ -264,7 +274,7 @@ const NewProductModal = () => {
 
                 select number of variant attributes
                 <br />
-                <select value={numberOfVariants} onChange={changeNumberOfVariants}>
+                <select value={numberOfProducts} onChange={changeNumberOfProducts}>
                     <option value="1" >One</option>
                     <option value="2" >Two</option>
                 </select>
@@ -334,7 +344,7 @@ const NewProductModal = () => {
                 <Button type="button" variant="primary" onClick={updateVariantTable}> update table </Button>
 
 
-                {variants.map((variant) => (
+                {products.map((variant) => (
                     <div key={variant.key}>
                         {variant.variantAttributeOne.attribute}: {variant.variantAttributeOne.value} {variant.variantAttributeTwo.attribute}: {variant.variantAttributeTwo.value}
                         <label htmlFor=" price"></label>

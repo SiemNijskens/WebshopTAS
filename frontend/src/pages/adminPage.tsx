@@ -1,3 +1,4 @@
+import NewProductModal from "../components/modals/NewProductModal";
 
 
 const AdminPage = () => {
@@ -24,6 +25,8 @@ const AdminPage = () => {
                     stock
                     <button>edit product</button>
                 </li>
+                <br />
+                    <NewProductModal />
             </>
         </>
     )

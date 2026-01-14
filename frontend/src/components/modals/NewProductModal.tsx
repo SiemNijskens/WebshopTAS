@@ -198,7 +198,7 @@ const NewProductModal = () => {
 
         const productAttributesArray = []
         for (let i = 0; i < ((Object.values(data).length/2)); i++) {
-            productAttributesArray.push({key: i, ["productAttribute"+i]: {attribute: values[i*2], value: values[i*2+1], type: "PRODUCT"}})
+            productAttributesArray.push({attribute: values[i*2], value: values[i*2+1], type: "PRODUCT"})
         }
         console.log(productAttributesArray)
 
@@ -236,7 +236,7 @@ const NewProductModal = () => {
                             <Form.Control as={"textarea"} rows={3} value={formData.description} name="description" placeholder="basic t-shirt" onChange={() => handleChangeBaseProduct(event)} />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>type product</Form.Label>
+                            <Form.Label>category</Form.Label>
                             <Form.Control placeholder="type of product" type="text" value={formData.category} name="category" onChange={() => handleChangeBaseProduct(event)}>
                                 {/* <option hidden value="">select a type</option>
                                 <option>top</option>

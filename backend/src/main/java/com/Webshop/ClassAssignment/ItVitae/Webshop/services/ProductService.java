@@ -3,6 +3,7 @@ package com.Webshop.ClassAssignment.ItVitae.Webshop.services;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductCreateDTOtwo;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.StockDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseCreateDTOtwo;
@@ -42,7 +43,6 @@ public class ProductService {
             productBase.addProductAttribute(productAttribute);
         }
 
-        // ProductCreateDTOtwo bevat wel de key
         for (ProductCreateDTO productCreateDTO : productBaseCreateDTO.products()) {
             Product product = productCreateDTO.toEntity();
             product.setProductBase(productBase);
@@ -62,16 +62,12 @@ public class ProductService {
 
     public ProductBaseDTO createProducts(ProductBaseCreateDTOtwo productBaseCreateDTO) {
         ProductBase productBase = productBaseCreateDTO.toEntity();
-        System.out.println(productBaseCreateDTO.toString());
 
         for (ProductAttributeCreateDTO productAttributeCreateDTO : productBaseCreateDTO.productAttributes()) {
             ProductAttribute productAttribute = productAttributeCreateDTO.toEntity();
             productAttribute.setType(AttributeType.PRODUCT);
-//            productAttribute.setValue(productAttributeCreateDTO.value());
-//            productAttribute.setAttribute(productAttributeCreateDTO.attribute());
+            productAttribute.setProductBase(productBase);
             productBase.addProductAttribute(productAttribute);
-            System.out.println("hoi ik ben een sout voor product attributes");
-            System.out.println(productAttributeCreateDTO.toString());
         }
 
         for (ProductCreateDTOtwo productCreateDTO : productBaseCreateDTO.products()) {
@@ -81,10 +77,6 @@ public class ProductService {
             ProductAttribute variantAttributeTwo = productCreateDTO.variantAttributeTwo().toEntity();
             product.addProductAttribute(variantAttributeOne);
             product.addProductAttribute(variantAttributeTwo);
-            System.out.println("Hoi ik ben een sout");
-            System.out.println(variantAttributeOne.getValue());
-            System.out.println(variantAttributeTwo.getValue());
-//            product.addProductAttribute(productCreateDTO.variantAttributeTwo().toEntity());
             product.setSalePercentage(1);
             productBase.addProductVariant(product);
         }
@@ -104,11 +96,11 @@ public class ProductService {
         return ProductBaseDTO.fromEntity(productBase);
     }
 
-    public ProductDTO updateStock(Long variantId, int stock) {
-        Product product = productRepository.findById(variantId)
-                .orElseThrow(() -> new ProductNotFoundException("Product not found with ID: " + variantId));
+    public ProductDTO updateStock(StockDTO stockDTO) {
+        Product product = productRepository.findById(stockDTO.variantId())
+                .orElseThrow(() -> new ProductNotFoundException("Product not found with ID: " + stockDTO.variantId()));
 
-        product.setStock(stock);
+        product.setStock(stockDTO.newStock());
         Product savedProduct = productRepository.save(product);
 
         return  ProductDTO.fromEntity(savedProduct);

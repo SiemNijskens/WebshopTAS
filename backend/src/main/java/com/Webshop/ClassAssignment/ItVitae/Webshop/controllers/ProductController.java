@@ -1,6 +1,7 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.controllers;
 
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.StockDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseCreateDTOtwo;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase.ProductBaseDTO;
@@ -48,9 +49,9 @@ public class ProductController {
         return ResponseEntity.ok(productService.findById(id));
     }
 
-    @PatchMapping("/{variantId}/stock")
-    public ResponseEntity<ProductDTO> updateStock(@PathVariable Long variantId, @RequestParam int stock) {
-        ProductDTO stockUpdate = productService.updateStock(variantId, stock);
+    @PatchMapping("/stock")
+    public ResponseEntity<ProductDTO> updateStock(@RequestBody StockDTO stockDTO) {
+        ProductDTO stockUpdate = productService.updateStock(stockDTO);
         return ResponseEntity.ok(stockUpdate);
     }
 }

@@ -1,6 +1,5 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product;
 
-import com.Webshop.ClassAssignment.ItVitae.Webshop.enums.ProductType;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class ProductBase {
     @Id
     private Long id;
 
-    private String productCode;
+//    private String productCode;
 
     private String defaultImageURL;
 
@@ -59,12 +58,12 @@ public class ProductBase {
         return id;
     }
 
-    public String getProductCode() {
-        return productCode;
-    }
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
+//    public String getProductCode() {
+//        return productCode;
+//    }
+//    public void setProductCode(String productCode) {
+//        this.productCode = productCode;
+//    }
 
     public String getDefaultImageURL() {
         return defaultImageURL;
@@ -91,6 +90,7 @@ public class ProductBase {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -98,6 +98,7 @@ public class ProductBase {
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -105,6 +106,7 @@ public class ProductBase {
     public String getProductBrand() {
         return productBrand;
     }
+
     public void setProductBrand(String productBrand) {
         this.productBrand = productBrand;
     }
@@ -112,6 +114,7 @@ public class ProductBase {
     public List<Product> getProductVariants() {
         return productVariants;
     }
+
     public void setProductVariants(List<Product> productVariants) {
         this.productVariants = productVariants;
     }
@@ -123,6 +126,7 @@ public class ProductBase {
     public List<ProductAttribute> getProductAttributes() {
         return productAttributes;
     }
+
     public void setProductAttributes(List<ProductAttribute> productAttributes) {
         this.productAttributes = productAttributes;
     }

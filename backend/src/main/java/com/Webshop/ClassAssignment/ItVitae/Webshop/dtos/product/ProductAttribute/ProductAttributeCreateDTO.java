@@ -5,7 +5,7 @@ import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.Product;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductAttribute;
 
 public record ProductAttributeCreateDTO(
-        Long id,
+//        int key,
         String attribute,
         String value,
         AttributeType type
@@ -18,3 +18,5 @@ public record ProductAttributeCreateDTO(
         return productAttribute;
     }
 }
+
+//"variantAttributeOne":{"attribute":"size","value":"small","type":"VARIANT"}

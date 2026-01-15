@@ -8,7 +8,7 @@ import java.util.List;
 
 public record ProductBaseSummaryDTO(
         Long id,
-        String productCode,
+//        String productCode,
         String defaultImageURL,
         String category,
         String name,
@@ -20,7 +20,7 @@ public record ProductBaseSummaryDTO(
     public ProductBaseSummaryDTO fromEntity(ProductBase productBase) {
         return new ProductBaseSummaryDTO(
                 productBase.getId(),
-                productBase.getProductCode(),
+//                productBase.getProductCode(),
                 productBase.getDefaultImageURL(),
                 productBase.getCategory(),
                 productBase.getName(),

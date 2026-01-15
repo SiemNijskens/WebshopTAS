@@ -65,6 +65,7 @@ public class UserService {
     public void deleteUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with " + id + " not found"));
+        user.clearShoppinCarts();
 
         userRepository.delete(user);
     }

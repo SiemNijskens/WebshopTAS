@@ -52,7 +52,7 @@ const productOverviewPage = () => {
     if (isLoading) { return <p>Loading products...</p> }
  
     if (error) { return <p>Error!</p> }
- 
+
     if (filteredProducts !== undefined) {
         return (
             <>

@@ -73,7 +73,6 @@ export interface ProductDTO {
     price: number,
     salePercentage: number,
     stock: number,
-    color: string,
     attributes: ProductAttributeDTO[],
 }
 

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import type { LoginDTO, MutationError} from "../../types/models";
 import { API_URL } from "../../App";
 import { login } from "../stores/authStore";
+import attachOrMergeCart from "../hooks/attachOrMergeCart";
+import syncCart from "../hooks/syncCart";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("thomas_webshop@webshop.nl");
@@ -17,6 +19,7 @@ const LoginForm = () => {
             method: 'POST',
             headers: { 'Content-Type' : 'application/json'},
             body: JSON.stringify(userData),
+            credentials: 'include',
           });
           if (!response.ok) {
             const errorBody = await response.json();
@@ -28,10 +31,20 @@ const LoginForm = () => {
           }
           return response.json();
       },
-      onSuccess: (user) => {
+      onSuccess: async (user) => {
         login(user);
-        // alert("Hi " + user.firstName + "!");
-        navigate("/");
+        
+        const guestCartId = localStorage.getItem("cartId");
+
+        if (guestCartId) {
+          console.log("[LOGIN] merging guest cart", guestCartId);
+          await attachOrMergeCart(Number(guestCartId));
+          localStorage.removeItem("cartId");
+        }
+
+        await syncCart(user);
+
+        navigate(-1);
       },
       onError: (error) => {
         setErrorMessage(error.message);

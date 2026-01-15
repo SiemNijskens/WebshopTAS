@@ -5,24 +5,23 @@ export interface CartItemCreateDTO {
 
 export interface CartItemDTO {
     id: number;
-    product: productSummaryDTO;
+    product: CartProductDTO;
     amount: number;
 }
 
-export interface productSummaryDTO {
-
-    name: string,
-    description: string,
-    brand: string
-    imageURL: string,
-    price: number,
-    attributes: ProductAttributeSummaryDTO[]
-}
-
-export interface ProductAttributeSummaryDTO {
-    id: number,
-    attribute: string,
-    value: string
+export interface CartProductDTO {
+    productBaseId: number;
+    productVariantId: number;
+    name: string;
+    imageURL: string;
+    description: string;
+    price: number;
+    salePercentage: number;
+    stock: number;
+    attributes: {
+        attribute: string;
+        value: string;
+    }[];
 }
 
 export interface CartItemSummaryDTO {
@@ -38,7 +37,14 @@ export interface ShoppingCartCreateDTO {
 
 export interface ShoppingCartDTO {
     id: number;
+    user?: {
+        id: number;
+        firstName: string;
+        lastName: string;
+        roles: string[];
+    } | null;
     cartItems: CartItemDTO[];
+    totalPrice: number;
 }
 
 export interface ShoppingCartSummaryDTO {
@@ -155,7 +161,7 @@ export interface User {
     houseNumber: string;
     streetName: string;
     city: string;
-    shoppingCarts: ShoppingCart[];
+    // shoppingCarts: ShoppingCart[];
 }
 
 export interface CartItem {
@@ -187,8 +193,7 @@ export interface ProductAttribute {
 export interface ShoppingCart {
     id: number;
     user: User;
- 
-   cartItemList: CartItem[];
+    cartItemList: CartItem[];
 }
 
 export type AttributeType = "PRODUCT" | "VARIANT";
@@ -208,4 +213,8 @@ export type ProductFilters = {
     // colors: string[],
     sizes: string[],
     onSale: boolean;
+}
+
+export interface CartItemAmountUpdateDTO {
+    quantity: number,
 }

@@ -1,16 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ProductBaseDTO, ProductFilters } from "../types/models";
 import { API_URL } from "../App";
-import { useState } from "react";
-// import ProductDetailPage from "./productDetailPage";
 import '../styles/card.css';
-// import XPage from "./ProductDetailPage";
 import { useNavigate, useOutletContext } from "react-router";
  
  
 const productOverviewPage = () => {
-    const [productId, setProductId] = useState(NaN);
-    console.log("current productId " + productId);
     const navigate = useNavigate();
     const { filters } = useOutletContext<{ filters: ProductFilters }>();
  
@@ -57,30 +52,16 @@ const productOverviewPage = () => {
     if (isLoading) { return <p>Loading products...</p> }
  
     if (error) { return <p>Error!</p> }
- 
-    if (productId) {
-        // return (
-        // <ProductDetailPage productId={productId} setProductId={setProductId}/>
-        // )
-        navigate(`/products/${productId}`);
-    }
- 
+
     if (filteredProducts !== undefined) {
         return (
             <>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
                     {filteredProducts.map(product => (
-                        <div key={product.id} onClick={() => setProductId(product.id)} className="card">
+                        <div key={product.id} onClick={() => navigate(`/products/${product.id}`)} className="card">
                             <h3 style={{}}>{product.name} from {product.productBrand}</h3>
-                            {/* <p>{product.description}</p> */}
-                            {/* <p>place img here</p> */}
-                            <img src={product.defaultImageURL} alt="product image"/>
-                            <h4>attributes</h4>
-                            {product.attributes.map(attribute => (
-                                <div key={attribute.id}>
-                                <p>{attribute.attribute}: {attribute.value}</p>
-                                </div>
-                            ))}
+                            <p>{product.description}</p>
+                            <img src={product.defaultImageURL} alt={product.name} style={{ height: 250 }}/>
                             {product.productVariants.some(variant => variant.salePercentage < 1 ) && <span className="sale-overview">SALE</span>}
                         </div>
                     ))

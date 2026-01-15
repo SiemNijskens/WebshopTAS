@@ -4,10 +4,12 @@ import type { ProductBaseDTO, SelectedAttributes } from "../types/models";
 import { API_URL } from "../App";
 import { useState } from "react";
 import '../styles/product.css'
+import { createCart, setCart, useCartStore } from "../components/stores/cartStore";
 
-const XPage = () => {
+const ProductDetailPage = () => {
     const { productId } = useParams<{ productId: string }>();
     const numericProductId = Number(productId);
+    const { cart } = useCartStore();
 
     const { data: product, isLoading, error } = useQuery<ProductBaseDTO>({
         queryKey: ['product', numericProductId],
@@ -21,31 +23,32 @@ const XPage = () => {
     });
 
     const addToCartMutation = useMutation({
-        mutationFn: async () => {
-            const response = await fetch(`${API_URL}/cartitems`, {
+        mutationFn: async ({
+            cartId,
+            productId,
+            amount,
+        }: {
+            cartId: number;
+            productId: number;
+            amount: number;
+        }) => {
+            const response = await fetch(`${API_URL}/shoppingcarts/${cartId}/items`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    productVariantId: selectedVariant?.id,
-                    quantity,
-                }),
+                body: JSON.stringify({ productId, amount }),
             });
             if (!response.ok) {
                 throw new Error("Failed to add product to cart");
             }
             return response.json();
+        },
+        onSuccess: (updatedCart) => {
+            setCart(updatedCart);
+            alert("item added to cart!");
         }
-        // onSuccess: () => {
-        //     //TODO: Logic to be implemented.
-        // }
     })
 
-    const handleAddToCart = () => {
-        addToCartMutation.mutate();
-    }
-
     const allAttributes = product?.productVariants.flatMap(variants => variants.attributes);
-    // console.log(allAttributes);
 
     const attributeMap = new Map<string, Set<string>>();
 
@@ -58,8 +61,6 @@ const XPage = () => {
         }
         attributeMap.get(name)!.add(value);
     })
-
-    // console.log(attributeMap);
 
     const [selectedAttributes, setSelectedAttributes] = useState<SelectedAttributes>({});
     const [quantity, setQuantity] = useState(1);
@@ -131,6 +132,31 @@ const XPage = () => {
 
     // const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
 
+    const handleAddToCart = async () => {
+        console.log("[ADD TO CART]", {
+        cart,
+        cartId: cart?.id,
+        selectedVariant,
+        quantity
+    });
+
+        if (!cart || !selectedVariant) {
+            console.warn("Blocked AddToCart");
+            return;
+        }
+
+        let activeCart = cart;
+        if (!activeCart) {
+            activeCart = await createCart();
+        }
+
+        addToCartMutation.mutate({
+            cartId: activeCart!.id,
+            productId: selectedVariant.id,
+            amount: quantity,
+        });
+    }
+
     if (isLoading) return <p>Loading product...</p>
 
     if (error) return <p>Error!</p>
@@ -179,15 +205,16 @@ const XPage = () => {
                     <p><b>Description:</b> {product?.description}</p>
                     <p><b>Brand:</b> {product?.productBrand}</p>
 
-                    <p><b>Price: </b>
-                        <div style={{ display: "inline-block" }} className={`price ${selectedVariant && selectedVariant.salePercentage < 1 ? "old-price" : ""}`}>
+                    <div>
+                        <b>Price: </b>
+                        <span style={{ display: "inline-block" }} className={`price ${selectedVariant && selectedVariant.salePercentage < 1 ? "old-price" : ""}`}>
                             {selectedVariant ? `€${(selectedVariant.price * quantity).toFixed(2)}` : "select options to see price"}
-                        </div>
-                        <div style={{ display: "inline-block", textIndent: 5 }}>
+                        </span>
+                        <span style={{ display: "inline-block", textIndent: 5 }}>
                             {selectedVariant && selectedVariant.salePercentage < 1 && <div className="sale-price">
                             €{(selectedVariant.price * selectedVariant.salePercentage * quantity).toFixed(2)}</div>}
-                        </div>
-                    </p>
+                        </span>
+                    </div>
                 </div>
 
                 <div className="details-attributes">
@@ -242,4 +269,4 @@ const XPage = () => {
     )
 }
 
-export default XPage;
+export default ProductDetailPage;

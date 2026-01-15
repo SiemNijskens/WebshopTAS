@@ -121,7 +121,7 @@ const SignUpForm = () => {
             <div className="form-actions">
             <button type="submit" disabled={registerMutiation.isPending}>
                 {registerMutiation.isPending ? "Signing up..." : "Sign Up"}</button>
-            <button type="button" onClick={() => navigate(-1)}>Back</button>
+            <button type="button" onClick={() => navigate("/")}>Back</button>
             </div>
         </form>
         </div>

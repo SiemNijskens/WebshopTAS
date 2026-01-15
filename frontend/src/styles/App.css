@@ -175,6 +175,7 @@
 
 .form-field input {
   padding: 0.5rem;
+  border-radius: 10px;
   font-size: 1rem;
   text-align: left;
 }
@@ -242,6 +243,29 @@
 
 .bold {
   font-weight: bold;
+}
+
+.container-cart {
+  position: relative;
+}
+
+.cart-circle {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  border: 1px solid red;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.cart-circle-amount {
+  position: relative;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
 }
 
 .modal, .overlay {

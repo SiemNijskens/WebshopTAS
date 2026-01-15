@@ -1,9 +1,11 @@
 package com.Webshop.ClassAssignment.ItVitae.Webshop.services;
 
+import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemAmountUpdateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.cardItem.CartItemUpdateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.shoppingCart.ShoppingCartDTO;
+import com.Webshop.ClassAssignment.ItVitae.Webshop.exceptions.CartItemNotFoundException;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.CartItem;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.Product;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.ShoppingCart;
@@ -53,8 +55,13 @@ public class CartItemService {
         return CartItemDTO.fromEntity(savedItem);
     }
 
-    public void deleteCartItem(Long id){
-        cartItemRepository.deleteById(id);
+    public ShoppingCart removeCartItem(Long id) {
+        CartItem cartItem = cartItemRepository.findById(id)
+                        .orElseThrow(() -> new CartItemNotFoundException("Cart Item not found with ID: " + id));
+
+        ShoppingCart shoppingCart = cartItem.getShoppingCart();
+        cartItemRepository.delete(cartItem);
+        return shoppingCart;
     }
 
 //    @Transactional
@@ -69,4 +76,26 @@ public class CartItemService {
 //        shoppingCartRepository.save(shoppingCart);
 //        return ShoppingCartDTO.fromEntity(shoppingCart);
 //    }
+
+    public ShoppingCart updateItemAmount(Long id, CartItemAmountUpdateDTO amountUpdateDTO) {
+        CartItem cartItem = cartItemRepository.findById(id)
+                .orElseThrow(() -> new CartItemNotFoundException("Cart Item with not found with ID: " + id));
+
+        int newAmount = cartItem.getAmount() + amountUpdateDTO.quantity();
+
+        if (newAmount > cartItem.getProduct().getStock()) {
+            throw new IllegalArgumentException("Not enough stock");
+        }
+
+        if (newAmount <= 0) {
+            ShoppingCart shoppingCart = cartItem.getShoppingCart();
+            cartItemRepository.delete(cartItem);
+            return shoppingCart;
+        }
+
+        cartItem.setAmount(newAmount);
+        cartItemRepository.save(cartItem);
+
+        return cartItem.getShoppingCart();
+    }
 }

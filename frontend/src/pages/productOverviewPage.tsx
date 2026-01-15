@@ -61,13 +61,7 @@ const productOverviewPage = () => {
                         <div key={product.id} onClick={() => navigate(`/products/${product.id}`)} className="card">
                             <h3 style={{}}>{product.name} from {product.productBrand}</h3>
                             <p>{product.description}</p>
-                            <img src={product.defaultImageURL} alt={product.name}/>
-                            {/* <h4>attributes</h4> */}
-                            {/* {product.attributes.map(attribute => (
-                                <div key={attribute.id}>
-                                <p>{attribute.attribute}: {attribute.value}</p>
-                                </div>
-                            ))} */}
+                            <img src={product.defaultImageURL} alt={product.name} style={{ height: 250 }}/>
                             {product.productVariants.some(variant => variant.salePercentage < 1 ) && <span className="sale-overview">SALE</span>}
                         </div>
                     ))

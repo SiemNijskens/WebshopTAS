@@ -6,10 +6,10 @@ const UserPage = () => {
     //const { id } = useParams<{ id : string }>();
 
     const { data, isLoading, error } = useQuery<UserDTO>({
-        queryKey: ["user"],
+        queryKey: ["user", "me"],
         queryFn: async () => {
             const response = await fetch(`${API_URL}/users/me`, {
-                //credentials: "include",
+                credentials: "include",
             });
             if (!response.ok) {
                 throw new Error("Failed to fetch user");

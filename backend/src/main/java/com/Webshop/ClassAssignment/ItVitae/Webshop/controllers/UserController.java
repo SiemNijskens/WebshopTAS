@@ -16,7 +16,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +57,10 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<UserDTO> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("AUTH = " + auth);
+        System.out.println("AUTHORITIES = " + auth.getAuthorities());
         return ResponseEntity.ok(authService.getCurrentUser(userDetails));
     }
 
@@ -83,4 +89,14 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+//    @GetMapping("/me/shoppingcart/total-price")
+//    public ResponseEntity<ShoppingCartDTO> getTotalPrice(@AuthenticationPrincipal UserDetails userDetails) {
+//        ShoppingCart shoppingCart = shoppingCartService
+//    }
+
+//    @PostMapping("/me/checkout")
+//    public ResponseEntity<ShoppingCartDTO> checkout(@AuthenticationPrincipal UserDetails userDetails) {
+//
+//    }
 }

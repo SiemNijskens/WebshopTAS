@@ -9,8 +9,11 @@ public record CartProductDTO(
         Long productBaseId,
         Long productId,
         String name,
+        String imageURL,
+        String description,
         float price,
         float salePercentage,
+        int stock,
         List<ProductAttributeSummaryDTO> attributes
 ) {
     public static CartProductDTO fromEntity(Product variant) {
@@ -18,8 +21,11 @@ public record CartProductDTO(
                 variant.getProductBase().getId(),
                 variant.getId(),
                 variant.getProductBase().getName(),
+                variant.getImageURL(),
+                variant.getProductBase().getDescription(),
                 variant.getPrice(),
                 variant.getSalePercentage(),
+                variant.getStock(),
                 variant.getProductAttributes().stream()
                         .map(ProductAttributeSummaryDTO::fromEntity)
                         .toList()

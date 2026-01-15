@@ -15,6 +15,7 @@ const Sidebar = ({ filters, setFilters, onApply, isOpen, onClose }: SideBarProps
 
     const location = useLocation();
     const isOverviewPage = location.pathname === "/products";
+    const hasActiveFilters = filters.categories.length > 0 || filters.brands.length > 0 || filters.sizes.length > 0 || filters.onSale === true;
 
     useEffect(() => {
         if (!isOpen) return;
@@ -30,6 +31,12 @@ const Sidebar = ({ filters, setFilters, onApply, isOpen, onClose }: SideBarProps
     const BRANDS = ["Generic", "Webshop", "In Da Hood", "Gramfel", "Mozza", "Iphoney", "Mike"]
     // const COLORS = ["Red", "Blue", "White", "Black", "Orange", "Gray", "Khaki"];
     // const SIZES = ["XS", "S", "M", "L", "XL"];
+    const EMPTY_FILTERS: ProductFilters = {
+        categories: [],
+        brands: [],
+        sizes: [],
+        onSale: false,
+    }
 
     const handleCheckboxChange = (
         group: "categories" | "brands" | "sizes",
@@ -49,6 +56,10 @@ const Sidebar = ({ filters, setFilters, onApply, isOpen, onClose }: SideBarProps
         onApply();
         onClose();
     };
+
+    const handleClearFilters = () => {
+        setFilters(EMPTY_FILTERS);
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -112,7 +123,8 @@ const Sidebar = ({ filters, setFilters, onApply, isOpen, onClose }: SideBarProps
                     />
                     <label>On Sale</label>
                     <br/>
-                    {!isOverviewPage && <button type="submit">Apply Filters</button>}
+                    {!isOverviewPage && hasActiveFilters && <button type="submit">Apply Filters</button>}
+                    {hasActiveFilters && <button type="button" onClick={handleClearFilters}>Clear Filters</button>}
                 </div>
             </div>)}
         </form>

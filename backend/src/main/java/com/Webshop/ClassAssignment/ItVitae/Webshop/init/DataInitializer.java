@@ -34,10 +34,10 @@ public class DataInitializer {
 
     @PostConstruct
     public void createData() {
-        userService.registerUser(new UserCreateDTO("Thomas","Webshop",List.of("ROLE_ADMIN","ROLE_USER"), "thomas_webshop@webshop.nl","password123","2000XX","4A","Javakade","Amersfoort"));
-        userService.registerUser(new UserCreateDTO("Siem","Webshop",List.of("ROLE_USER"), "siem_webshop@webshop.nl","password123","3000XX","80","Surinamestraat", "Amersfoort"));
-        userService.registerUser(new UserCreateDTO("Stefan","Webshop",List.of("ROLE_USER"), "stefan_webshop@webshop.nl","password123","4000XX","63","Borneolaan", "Amersfoort"));
-        userService.registerUser(new UserCreateDTO("Arne","Webshop",List.of("ROLE_ADMIN", "ROLE_USER"), "arne_webshop@webshop.nl","password123","5000XX","419","Curacaogracht", "Amersfoort"));
+        userService.registerUser(new UserCreateDTO("Thomas","Webshop",List.of("ADMIN","USER"), "thomas_webshop@webshop.nl","password123","2000XX","4A","Javakade","Amersfoort"));
+        userService.registerUser(new UserCreateDTO("Siem","Webshop",List.of("USER"), "siem_webshop@webshop.nl","password123","3000XX","80","Surinamestraat", "Amersfoort"));
+        userService.registerUser(new UserCreateDTO("Stefan","Webshop",List.of("USER"), "stefan_webshop@webshop.nl","password123","4000XX","63","Borneolaan", "Amersfoort"));
+        userService.registerUser(new UserCreateDTO("Arne","Webshop",List.of("ADMIN", "USER"), "arne_webshop@webshop.nl","password123","5000XX","419","Curacaogracht", "Amersfoort"));
 
 //        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(1L));
 //        shoppingCartService.createShoppingCart(new ShoppingCartCreateDTO(2L));
@@ -244,7 +244,7 @@ public class DataInitializer {
 
         for (String sockSize : sockSizes) {
                 ProductCreateDTO variant = new ProductCreateDTO(
-                        "XXX",
+                        "/images/products/gramfel_socks_white.png",
                         5.99f,
                         1.0f,
                         30,
@@ -261,7 +261,7 @@ public class DataInitializer {
 
         ProductBaseCreateDTO socksBase = new ProductBaseCreateDTO(
                 "S-20",
-                "XXX",
+                "/images/products/gramfel_socks_white.png",
                 "Socks",
                 "Gramfel socks",
                 "Gramfel socks for your feet.",
@@ -348,7 +348,7 @@ public class DataInitializer {
         ProductBaseDTO savedPhones = productService.createProduct(phoneBase);
 
 
-        List<String> shoeModels = List.of("Shoe");
+        List<String> shoeModels = List.of("Left Shoe");
         List<String> shoeColors = List.of("White");
         List<String> shoeConditions = List.of("Brand New", "Slightly Used");
 

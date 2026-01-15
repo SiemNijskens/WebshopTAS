@@ -24,6 +24,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -105,15 +106,29 @@ public class ShoppingCartService {
         Product product = productRepository.findById(cartItemCreateDTO.productId())
                 .orElseThrow(() -> new ProductNotFoundException("Product with ID: " + cartItemCreateDTO.productId() + " not found."));
 
-        CartItem cartItem = new CartItem();
-        cartItem.setProduct(product);
-        cartItem.setAmount(cartItemCreateDTO.amount());
-        cartItem.setShoppingCart(shoppingCart);
+        CartItem cartItem = cartItemRepository
+                .findByShoppingCartAndProduct(shoppingCart, product)
+                .orElseGet(() -> {
+                    CartItem newItem = new CartItem();
+                    newItem.setShoppingCart(shoppingCart);
+                    newItem.setProduct(product);
+                    newItem.setAmount(0);
+                    return newItem;
+                });
 
-        shoppingCart.addCartItem(cartItem);
+        cartItem.setAmount(cartItem.getAmount() + cartItemCreateDTO.amount());
         cartItemRepository.save(cartItem);
-        ShoppingCart savedShoppingCart = shoppingCartRepository.save(shoppingCart);
-        return ShoppingCartDTO.fromEntity(savedShoppingCart);
+
+//        CartItem cartItem = new CartItem();
+//        cartItem.setProduct(product);
+//        cartItem.setAmount(cartItemCreateDTO.amount());
+//        cartItem.setShoppingCart(shoppingCart);
+//
+//        shoppingCart.addCartItem(cartItem);
+//        cartItemRepository.save(cartItem);
+//        ShoppingCart savedShoppingCart = shoppingCartRepository.save(shoppingCart);
+//        return ShoppingCartDTO.fromEntity(savedShoppingCart);
+        return ShoppingCartDTO.fromEntity(shoppingCart);
     }
 
     public ShoppingCartDTO getOrCreateMyCart(UserDetails userDetails) {

@@ -50,7 +50,8 @@ export const fetchCart = async (cartId: number) => {
 export const createCart = async () => {
     console.log("[CREATE CART] called");
     const response = await fetch(`${API_URL}/shoppingcarts`, {
-        method: 'POST' });
+        method: 'POST',
+        credentials: 'include' });
     console.log("[CREATE CART] status=", response.status);
     if (!response.ok) throw new Error("Failed to create cart");
 

@@ -64,5 +64,11 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+    /* background-color: #1a1a1a;
+    transition: border-color 0.25s; */
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid;
+    cursor: pointer;
   }
 }

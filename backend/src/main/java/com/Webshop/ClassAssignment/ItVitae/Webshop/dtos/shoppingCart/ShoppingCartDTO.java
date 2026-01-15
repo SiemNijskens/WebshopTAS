@@ -13,9 +13,18 @@ import java.util.List;
 public record ShoppingCartDTO(
     Long id,
     UserSummaryDTO user,
-    List<CartItemDTO> cartItems
+    List<CartItemDTO> cartItems,
+    float totalPrice
 ) {
     public static ShoppingCartDTO fromEntity(ShoppingCart shoppingCart) {
+        float totalPrice = shoppingCart.getCartItemList().stream()
+                .map(item ->
+                        item.getProduct().getPrice()
+                        * item.getAmount()
+                        * item.getProduct().getSalePercentage()
+                )
+                .reduce(0F, Float::sum);
+
         return new ShoppingCartDTO(
                 shoppingCart.getId(),
                 shoppingCart.getUser() != null
@@ -23,7 +32,8 @@ public record ShoppingCartDTO(
                 : null,
                 shoppingCart.getCartItemList().stream()
                         .map(CartItemDTO::fromEntity)
-                        .toList()
+                        .toList(),
+                totalPrice
         );
     }
 }

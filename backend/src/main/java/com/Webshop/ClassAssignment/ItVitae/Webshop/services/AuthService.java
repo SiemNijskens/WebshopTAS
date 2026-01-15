@@ -33,14 +33,16 @@ public class AuthService {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final ShoppingCartService shoppingCartService;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
     public AuthService(UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder,
-                       ShoppingCartService shoppingCartService) {
+                       ShoppingCartService shoppingCartService, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.shoppingCartService = shoppingCartService;
+        this.authenticationManager = authenticationManager;
     }
 
     public UserDTO registerUser(RegisterDTO registerDTO) {
@@ -60,12 +62,21 @@ public class AuthService {
 
     public UserDTO loginUser(LoginDTO loginDTO) {
 
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginDTO.email(),
+                        loginDTO.password()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         User user = userRepository.findByEmail(loginDTO.email())
                 .orElseThrow(() -> new InvalidCredentialsException("Invalid credentials"));
 
-        if (!passwordEncoder.matches(loginDTO.password(), user.getPassword())) {
-            throw new InvalidCredentialsException("Invalid credentials");
-        }
+//        if (!passwordEncoder.matches(loginDTO.password(), user.getPassword())) {
+//            throw new InvalidCredentialsException("Invalid credentials");
+//        }
 
         return UserDTO.fromEntity(user);
     }

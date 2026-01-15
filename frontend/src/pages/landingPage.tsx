@@ -5,7 +5,7 @@ const LandingPage = () => {
     return (
         <>
             <>
-                <img src="proShirt.png" width="250" height="250" className="centerImage" /><br />
+                <img src="images/other/pro-shirt.png" width="250" height="250" className="centerImage" /><br />
                 <HeroComponant />
                 <>
                     <div className="container" >
@@ -20,7 +20,7 @@ const LandingPage = () => {
                         <div>Email:</div>
                         <div>webshop@notAscam.gh</div>
                     </div>
-                    <img src="logo.png" width={"100"} height={"100"}/>
+                    <img src="images/other/logo.png" width={"100"} height={"100"}/>
                 </>
             </>
         </>

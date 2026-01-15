@@ -13,8 +13,11 @@ export interface CartProductDTO {
     productBaseId: number;
     productVariantId: number;
     name: string;
+    imageURL: string;
+    description: string;
     price: number;
     salePercentage: number;
+    stock: number;
     attributes: {
         attribute: string;
         value: string;
@@ -41,6 +44,7 @@ export interface ShoppingCartDTO {
         roles: string[];
     } | null;
     cartItems: CartItemDTO[];
+    totalPrice: number;
 }
 
 export interface ShoppingCartSummaryDTO {
@@ -113,7 +117,7 @@ export interface UserDTO {
     houseNumber: string,
     streetName: string,
     city: string,
-    // shoppingCarts: ShoppingCartDTO[],
+    shoppingCarts: ShoppingCartDTO[],
 }
 
 export interface UserCreateDTO {
@@ -190,8 +194,7 @@ export interface ProductAttribute {
 export interface ShoppingCart {
     id: number;
     user: User;
- 
-   cartItemList: CartItem[];
+    cartItemList: CartItem[];
 }
 
 export type AttributeType = "PRODUCT" | "VARIANT";
@@ -211,4 +214,8 @@ export type ProductFilters = {
     // colors: string[],
     sizes: string[],
     onSale: boolean;
+}
+
+export interface CartItemAmountUpdateDTO {
+    quantity: number,
 }

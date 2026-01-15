@@ -57,8 +57,8 @@ public class DataInitializer {
                         1.0f,
                         10,
                         List.of(
-                                new ProductAttributeCreateDTO(null, "Size", size, AttributeType.VARIANT),
-                                new ProductAttributeCreateDTO(null, "Color", color, AttributeType.VARIANT)
+                                new ProductAttributeCreateDTO("Size", size, AttributeType.VARIANT),
+                                new ProductAttributeCreateDTO("Color", color, AttributeType.VARIANT)
                         )
                 );
                 feestShirts.add((variant));
@@ -66,12 +66,12 @@ public class DataInitializer {
         }
 
         List<ProductAttributeCreateDTO> shirtAttributes = List.of(
-                new ProductAttributeCreateDTO(null,"Material","Cotton", AttributeType.PRODUCT),
-                new ProductAttributeCreateDTO(null, "Fit","Slim Fit", AttributeType.PRODUCT)
+                new ProductAttributeCreateDTO("Material","Cotton", AttributeType.PRODUCT),
+                new ProductAttributeCreateDTO("Fit","Slim Fit", AttributeType.PRODUCT)
         );
 
         ProductBaseCreateDTO tShirtBase = new ProductBaseCreateDTO(
-                "TS-100",
+//                "TS-100",
                 "/images/products/generic_tshirt_print_HetIsFeest_white.png",
                 "T-Shirts",
                 "Basic T-Shirt",
@@ -96,8 +96,8 @@ public class DataInitializer {
                         1.0f,
                         10,
                         List.of(
-                                new ProductAttributeCreateDTO(null, "Size", webShirtSize, AttributeType.VARIANT),
-                                new ProductAttributeCreateDTO(null, "Color", webShirtColor, AttributeType.VARIANT)
+                                new ProductAttributeCreateDTO("Size", webShirtSize, AttributeType.VARIANT),
+                                new ProductAttributeCreateDTO("Color", webShirtColor, AttributeType.VARIANT)
                         )
                 );
                 webShirts.add((variant));
@@ -105,12 +105,12 @@ public class DataInitializer {
         }
 
         List<ProductAttributeCreateDTO> webShirtAttributes = List.of(
-                new ProductAttributeCreateDTO(null,"Material","Cotton", AttributeType.PRODUCT),
-                new ProductAttributeCreateDTO(null, "Fit","Slim Fit", AttributeType.PRODUCT)
+                new ProductAttributeCreateDTO("Material","Cotton", AttributeType.PRODUCT),
+                new ProductAttributeCreateDTO("Fit","Slim Fit", AttributeType.PRODUCT)
         );
 
         ProductBaseCreateDTO webShirtBase = new ProductBaseCreateDTO(
-                "TS-200",
+//                "TS-200",
                 "/images/products/generic_tshirt_print_Webshop_white.png",
                 "T-Shirts",
                 "Webshop T-Shirt",
@@ -135,8 +135,8 @@ public class DataInitializer {
                         0.7f,
                         20,
                         List.of(
-                                new ProductAttributeCreateDTO(null, "Size", pantsSize, AttributeType.VARIANT),
-                                new ProductAttributeCreateDTO(null, "Color", pantsColor, AttributeType.VARIANT)
+                                new ProductAttributeCreateDTO("Size", pantsSize, AttributeType.VARIANT),
+                                new ProductAttributeCreateDTO("Color", pantsColor, AttributeType.VARIANT)
                         )
                 );
                 pants.add((variant));
@@ -144,12 +144,12 @@ public class DataInitializer {
         }
 
         List<ProductAttributeCreateDTO> pantsAttributes = List.of(
-                new ProductAttributeCreateDTO(null,"Material","Denim", AttributeType.PRODUCT),
-                new ProductAttributeCreateDTO(null, "Fit","Slim Fit", AttributeType.PRODUCT)
+                new ProductAttributeCreateDTO("Material","Denim", AttributeType.PRODUCT),
+                new ProductAttributeCreateDTO("Fit","Slim Fit", AttributeType.PRODUCT)
         );
 
         ProductBaseCreateDTO pantsBase = new ProductBaseCreateDTO(
-                "P-200",
+//                "P-200",
                 "XXX",
                 "Pants",
                 "Basic Pants",
@@ -174,8 +174,8 @@ public class DataInitializer {
                         1.0f,
                         5,
                         List.of(
-                                new ProductAttributeCreateDTO(null, "Size", hoodieSize, AttributeType.VARIANT),
-                                new ProductAttributeCreateDTO(null, "Color", hoodieColor, AttributeType.VARIANT)
+                                new ProductAttributeCreateDTO("Size", hoodieSize, AttributeType.VARIANT),
+                                new ProductAttributeCreateDTO("Color", hoodieColor, AttributeType.VARIANT)
                         )
                 );
                 hoodies.add((variant));
@@ -183,12 +183,12 @@ public class DataInitializer {
         }
 
         List<ProductAttributeCreateDTO> hoodieAttributes = List.of(
-                new ProductAttributeCreateDTO(null,"Material","Wool", AttributeType.PRODUCT),
-                new ProductAttributeCreateDTO(null, "Hood","Adjustable", AttributeType.PRODUCT)
+                new ProductAttributeCreateDTO("Material","Wool", AttributeType.PRODUCT),
+                new ProductAttributeCreateDTO("Hood","Adjustable", AttributeType.PRODUCT)
         );
 
         ProductBaseCreateDTO hoodiesBase = new ProductBaseCreateDTO(
-                "H-50",
+//                "H-50",
                 "XXX",
                 "Hoodies",
                 "Fancy Hoodie",
@@ -213,8 +213,8 @@ public class DataInitializer {
                         1.0f,
                         5,
                         List.of(
-                                new ProductAttributeCreateDTO(null, "Size", capSize, AttributeType.VARIANT),
-                                new ProductAttributeCreateDTO(null, "Color", capColor, AttributeType.VARIANT)
+                                new ProductAttributeCreateDTO("Size", capSize, AttributeType.VARIANT),
+                                new ProductAttributeCreateDTO("Color", capColor, AttributeType.VARIANT)
                         )
                 );
                 caps.add((variant));
@@ -222,11 +222,11 @@ public class DataInitializer {
         }
 
         List<ProductAttributeCreateDTO> capAttributes = List.of(
-                new ProductAttributeCreateDTO(null,"Material","Gore-Tex", AttributeType.PRODUCT)
+                new ProductAttributeCreateDTO("Material","Gore-Tex", AttributeType.PRODUCT)
         );
 
         ProductBaseCreateDTO capsBase = new ProductBaseCreateDTO(
-                "C-20",
+//                "C-20",
                 "XXX",
                 "Caps",
                 "Cool Cap",
@@ -249,18 +249,18 @@ public class DataInitializer {
                         1.0f,
                         30,
                         List.of(
-                                new ProductAttributeCreateDTO(null, "Size", sockSize, AttributeType.VARIANT)
+                                new ProductAttributeCreateDTO("Size", sockSize, AttributeType.VARIANT)
                         )
                 );
                 socks.add((variant));
         }
 
         List<ProductAttributeCreateDTO> sockAttributes = List.of(
-                new ProductAttributeCreateDTO(null,"Material","Wool", AttributeType.PRODUCT)
+                new ProductAttributeCreateDTO("Material","Wool", AttributeType.PRODUCT)
         );
 
         ProductBaseCreateDTO socksBase = new ProductBaseCreateDTO(
-                "S-20",
+//                "S-20",
                 "XXX",
                 "Socks",
                 "Gramfel socks",
@@ -285,8 +285,8 @@ public class DataInitializer {
                         1.0f,
                         2,
                         List.of(
-                                new ProductAttributeCreateDTO(null, "Country", cheeseCountry, AttributeType.VARIANT),
-                                new ProductAttributeCreateDTO(null, "Color", cheeseColor, AttributeType.VARIANT)
+                                new ProductAttributeCreateDTO("Country", cheeseCountry, AttributeType.VARIANT),
+                                new ProductAttributeCreateDTO("Color", cheeseColor, AttributeType.VARIANT)
                         )
                 );
                 cheeses.add((variant));
@@ -294,11 +294,11 @@ public class DataInitializer {
         }
 
         List<ProductAttributeCreateDTO> cheeseAttributes = List.of(
-                new ProductAttributeCreateDTO(null,"Odor","Cheese smell", AttributeType.PRODUCT)
+                new ProductAttributeCreateDTO("Odor","Cheese smell", AttributeType.PRODUCT)
         );
 
         ProductBaseCreateDTO cheeseBase = new ProductBaseCreateDTO(
-                "CH-48+",
+//                "CH-48+",
                 "XXX",
                 "Other",
                 "Incredible Cheese",
@@ -323,8 +323,8 @@ public class DataInitializer {
                         1.0f,
                         3,
                         List.of(
-                                new ProductAttributeCreateDTO(null, "Model", phoneModel, AttributeType.VARIANT),
-                                new ProductAttributeCreateDTO(null, "Color", phoneColor, AttributeType.VARIANT)
+                                new ProductAttributeCreateDTO("Model", phoneModel, AttributeType.VARIANT),
+                                new ProductAttributeCreateDTO("Color", phoneColor, AttributeType.VARIANT)
                         )
                 );
                 phones.add((variant));
@@ -332,11 +332,11 @@ public class DataInitializer {
         }
 
         List<ProductAttributeCreateDTO> phoneAttributes = List.of(
-                new ProductAttributeCreateDTO(null,"Type","Phone", AttributeType.PRODUCT)
+                new ProductAttributeCreateDTO("Type","Phone", AttributeType.PRODUCT)
         );
 
         ProductBaseCreateDTO phoneBase = new ProductBaseCreateDTO(
-                "PH-00-",
+//                "PH-00-",
                 "XXX",
                 "Other",
                 "Phone",
@@ -363,9 +363,9 @@ public class DataInitializer {
                             1.0f,
                             1,
                             List.of(
-                                    new ProductAttributeCreateDTO(null, "Model", shoeModel, AttributeType.VARIANT),
-                                    new ProductAttributeCreateDTO(null, "Color", shoeColor, AttributeType.VARIANT),
-                                    new ProductAttributeCreateDTO(null, "Condition", shoeCondition, AttributeType.VARIANT)
+                                    new ProductAttributeCreateDTO("Model", shoeModel, AttributeType.VARIANT),
+                                    new ProductAttributeCreateDTO("Color", shoeColor, AttributeType.VARIANT),
+                                    new ProductAttributeCreateDTO("Condition", shoeCondition, AttributeType.VARIANT)
                             )
                     );
                     shoes.add((variant));
@@ -374,14 +374,14 @@ public class DataInitializer {
         }
 
         List<ProductAttributeCreateDTO> shoeAttributes = List.of(
-                new ProductAttributeCreateDTO(null,"Type","Left shoe", AttributeType.PRODUCT),
-                new ProductAttributeCreateDTO(null,"Foot","Left", AttributeType.PRODUCT),
-                new ProductAttributeCreateDTO(null,"Compatibility","Does NOT work with right feet", AttributeType.PRODUCT),
-                new ProductAttributeCreateDTO(null,"Pairing","Unpaired", AttributeType.PRODUCT)
+                new ProductAttributeCreateDTO("Type","Left shoe", AttributeType.PRODUCT),
+                new ProductAttributeCreateDTO("Foot","Left", AttributeType.PRODUCT),
+                new ProductAttributeCreateDTO("Compatibility","Does NOT work with right feet", AttributeType.PRODUCT),
+                new ProductAttributeCreateDTO("Pairing","Unpaired", AttributeType.PRODUCT)
         );
 
         ProductBaseCreateDTO shoeBase = new ProductBaseCreateDTO(
-                "SH-00-L",
+//                "SH-00-L",
                 "/images/products/mike_left_shoe_white.png",
                 "Shoes",
                 "Mike Air Almost",

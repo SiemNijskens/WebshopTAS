@@ -32,7 +32,7 @@ public class User {
     private String streetName;
     private String city;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ShoppingCart> shoppingCarts = new ArrayList<>();
 
     public Long getId() {
@@ -111,5 +111,10 @@ public class User {
 
     public void addShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCarts.add(shoppingCart);
+    }
+
+    public void clearShoppinCarts(){
+        this.shoppingCarts.clear();
+
     }
 }

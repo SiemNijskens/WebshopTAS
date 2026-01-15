@@ -3,20 +3,19 @@ package com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductBase;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductCreateDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.Product.ProductCreateDTOtwo;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeCreateDTO;
-import com.Webshop.ClassAssignment.ItVitae.Webshop.dtos.product.ProductAttribute.ProductAttributeDTO;
 import com.Webshop.ClassAssignment.ItVitae.Webshop.models.Product.ProductBase;
 
 import java.util.List;
 
-public record ProductBaseCreateDTO(
+public record ProductBaseCreateDTOtwo(
 //        String productCode,
         String defaultImageURL,
         String category,
         String name,
         String description,
         String productBrand,
-        List<ProductCreateDTO> products,
-        List<ProductAttributeCreateDTO> productAttributes
+        List<ProductAttributeCreateDTO> productAttributes,
+        List<ProductCreateDTOtwo> products
 ) {
     public ProductBase toEntity() {
         ProductBase productBase = new ProductBase();
